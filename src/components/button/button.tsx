@@ -10,17 +10,33 @@ interface ButtonProps {
 	className?: string;
 	startContent?: React.ReactNode | string;
 	endContent?: React.ReactNode | string;
+	isShowBackground: boolean;
 	children: React.ReactNode;
 }
 
-const Button = ({ color, variant, size, radius, className, startContent, endContent, children }: ButtonProps) => {
+const Button = ({
+	color,
+	variant,
+	size,
+	radius,
+	className,
+	startContent,
+	endContent,
+	isShowBackground,
+	children,
+}: ButtonProps) => {
 	const MapSolidButtonColor: Record<ButtonProps["color"], string> = {
-		default: "border border-default bg-default text-default-foreground",
-		primary: "border border-primary bg-primary text-primary-foreground",
-		secondary: "border border-secondary bg-secondary text-secondary-foreground",
-		danger: "border border-danger bg-danger text-danger-foreground",
-		success: "border border-success bg-success text-success-foreground",
-		warning: "border border-warning bg-warning text-warning-foreground",
+		default:
+			"border border-default bg-default text-default-foreground hover:bg-default-400 hover:border-default-400",
+		primary:
+			"border border-primary bg-primary text-primary-foreground hover:bg-primary-400 hover:border-primary-400",
+		secondary:
+			"border border-secondary bg-secondary text-secondary-foreground hover:bg-secondary-400 hover:border-secondary-400",
+		danger: "border border-danger bg-danger text-danger-foreground hover:bg-danger-400 hover:border-danger-400",
+		success:
+			"border border-success bg-success text-success-foreground hover:bg-success-400 hover:border-success-400",
+		warning:
+			"border border-warning bg-warning text-warning-foreground hover:bg-warning-400 hover:border-warning-400",
 	};
 
 	const MapBorderedButtonColor: Record<ButtonProps["color"], string> = {
@@ -34,12 +50,21 @@ const Button = ({ color, variant, size, radius, className, startContent, endCont
 	};
 
 	const MapLightButtonColor: Record<ButtonProps["color"], string> = {
-		default: "bg-transparent text-default",
-		primary: "bg-transparent text-primary",
-		secondary: "bg-transparent text-secondary",
-		danger: "bg-transparent text-danger",
-		success: "bg-transparent text-success",
-		warning: "bg-transparent text-warning",
+		default: "bg-transparent text-default hover:text-default-300",
+		primary: "bg-transparent text-primary hover:text-primary-300",
+		secondary: "bg-transparent text-secondary hover:text-secondary-300",
+		danger: "bg-transparent text-danger hover:text-danger-300",
+		success: "bg-transparent text-success hover:text-success-300",
+		warning: "bg-transparent text-warning hover:text-warning-300",
+	};
+
+	const MapLightButtonBackground: Record<ButtonProps["color"], string> = {
+		default: "hover:bg-default-100 hover:text-default",
+		primary: "hover:bg-primary-100 hover:text-primary",
+		secondary: "hover:bg-secondary-100 hover:text-secondary",
+		danger: "hover:bg-danger-100 hover:text-danger",
+		success: "hover:bg-success-100 hover:text-success",
+		warning: "hover:bg-warning-100 hover:text-warning",
 	};
 
 	const MapButtonSize: Record<ButtonProps["size"], string> = {
@@ -98,6 +123,7 @@ const Button = ({ color, variant, size, radius, className, startContent, endCont
 				MapButtonSize[size],
 				MapButtonTextSize[size],
 				radius && MapButtonRadius[radius],
+				isShowBackground && MapLightButtonBackground[color],
 				className
 			)}
 		>
@@ -112,6 +138,7 @@ Button.defaultProps = {
 	color: "default",
 	variant: "solid",
 	size: "md",
+	isShowBackground: true,
 };
 
 export default Button;
