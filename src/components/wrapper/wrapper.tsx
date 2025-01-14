@@ -1,12 +1,13 @@
 import clsx from "clsx";
+import { TBaseSize } from "../../types/general";
 
 interface WrapperProps {
-	size: "8xl" | "7xl" | "6xl" | "5xl" | "4xl" | "3xl" | "2xl" | "xl" | "lg" | "md" | "sm" | "xs";
+	size: TBaseSize;
 	centerX: boolean;
 	centerY: boolean;
 	orientation: "horizontal" | "vertical";
-	gapSize: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
-	children: React.ReactNode;
+	gapSize: Extract<TBaseSize, "xs" | "sm" | "md" | "lg" | "xl" | "2xl">;
+	children?: React.ReactNode;
 }
 
 const Wrapper = ({ size, centerX, centerY, orientation, gapSize, children }: WrapperProps) => {
