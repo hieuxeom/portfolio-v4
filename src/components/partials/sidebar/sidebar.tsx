@@ -1,6 +1,8 @@
 interface SidebarProps {}
 
-const Sidebar = (props: SidebarProps) => <div className="sidebar-component">Sidebar Component</div>;
+const Sidebar = (props: SidebarProps) => (
+	<div className={"w-1/4 py-8 sticky top-44 h-screen border-r border-r-dark/10"}>Sidebar Component</div>
+);
 
 Sidebar.defaultProps = {};
 

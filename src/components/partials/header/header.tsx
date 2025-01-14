@@ -11,7 +11,7 @@ const Header = (props: HeaderProps) => {
 	return (
 		<div
 			className={clsx(
-				"fixed flex justify-center w-full top-0 left-0 z-50 transition-all duration-300 ease-in-out",
+				"fixed bg-white flex justify-center w-full top-0 left-0 z-50 transition-all duration-300 ease-in-out",
 				{
 					"py-16": scrollPosition.top < 100,
 					"py-8 shadow-xl": scrollPosition.top >= 100,

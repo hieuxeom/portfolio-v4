@@ -9,20 +9,14 @@ const ClientLayout = (props: ClientLayoutProps) => {
 	return (
 		<div className={"relative"}>
 			<Header />
-			<div className={"w-screen min-h-screen h-max bg-light flex justify-center"}>
+			<div className={"mt-44 w-screen min-h-[150vh] h-max bg-white flex justify-center"}>
 				<Wrapper
 					centerX
-					centerY
-					orientation={"vertical"}
 					size={"7xl"}
 				>
-					<div className="w-full grid grid-cols-12">
-						<div className={"w-full col-span-2"}>
-							<Sidebar />
-						</div>
-						<div className={"w-full col-span-10"}>
-							<Outlet />
-						</div>
+					<Sidebar />
+					<div className={"w-full col-span-10"}>
+						<Outlet />
 					</div>
 				</Wrapper>
 			</div>

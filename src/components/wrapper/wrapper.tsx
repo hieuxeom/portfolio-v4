@@ -7,10 +7,11 @@ interface WrapperProps {
 	centerY: boolean;
 	orientation: "horizontal" | "vertical";
 	gapSize: Extract<TBaseSize, "xs" | "sm" | "md" | "lg" | "xl" | "2xl">;
+	className?: string;
 	children?: React.ReactNode;
 }
 
-const Wrapper = ({ size, centerX, centerY, orientation, gapSize, children }: WrapperProps) => {
+const Wrapper = ({ size, centerX, centerY, orientation, gapSize, className, children }: WrapperProps) => {
 	const GapSize: Record<WrapperProps["gapSize"], string> = {
 		xs: "gap-1",
 		sm: "gap-2",
@@ -37,7 +38,7 @@ const Wrapper = ({ size, centerX, centerY, orientation, gapSize, children }: Wra
 
 	return (
 		<div
-			className={clsx("w-full flex", WrapperSize[size], GapSize[gapSize], {
+			className={clsx("w-full flex", WrapperSize[size], GapSize[gapSize], className, {
 				"flex-row": orientation === "horizontal",
 				"flex-col": orientation !== "horizontal",
 				"justify-center": (orientation === "horizontal" && centerX) || (orientation === "vertical" && centerY),
