@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "../../App";
+import ClientLayout from "../../components/layout/client-layout";
+import Introduce from "../../pages/introduce";
 
 interface IndexRouterProps {}
 
@@ -8,8 +10,13 @@ const IndexRouter = (props: IndexRouterProps) => (
 		<Routes>
 			<Route
 				path={"/"}
-				element={<App />}
-			/>
+				element={<ClientLayout />}
+			>
+				<Route
+					index
+					element={<Introduce />}
+				/>
+			</Route>
 		</Routes>
 	</BrowserRouter>
 );
