@@ -123,7 +123,7 @@ const Button = ({
 				MapButtonSize[size],
 				MapButtonTextSize[size],
 				radius && MapButtonRadius[radius],
-				isShowBackground && MapLightButtonBackground[color],
+				variant === "light" && isShowBackground && MapLightButtonBackground[color],
 				className
 			)}
 		>
@@ -138,7 +138,7 @@ Button.defaultProps = {
 	color: "default",
 	variant: "solid",
 	size: "md",
-	isShowBackground: true,
+	isShowBackground: false,
 };
 
 export default Button;
