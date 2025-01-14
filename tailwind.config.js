@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     colors: {
+      white: "#ffffff",
       primary: {
         DEFAULT: '#163286',
         50: '#F7F8FE',
