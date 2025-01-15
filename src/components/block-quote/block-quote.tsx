@@ -1,0 +1,47 @@
+import clsx from "clsx";
+import { TBaseSize } from "../../types/general";
+
+interface BlockQuoteProps {
+	size: Extract<TBaseSize, "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl">;
+	customClass?: string;
+	children: React.ReactNode;
+}
+
+const BlockQuote = ({ size, customClass, children }: BlockQuoteProps) => {
+	const MapTextSize: Record<BlockQuoteProps["size"], string> = {
+		sm: "text-sm",
+		md: "text-md",
+		lg: "text-lg",
+		xl: "text-xl",
+		"2xl": "text-2xl",
+		"3xl": "text-3xl",
+		"4xl": "text-4xl",
+		"5xl": "text-5xl",
+		"6xl": "text-6xl",
+		"7xl": "text-7xl",
+	};
+
+	const MapBorderLeft: Record<BlockQuoteProps["size"], string> = {
+		sm: "border-l",
+		md: "border-l",
+		lg: "border-l",
+		xl: "border-l-2",
+		"2xl": "border-l-2",
+		"3xl": "border-l-[3px]",
+		"4xl": "border-l-[3px]",
+		"5xl": "border-l-4",
+		"6xl": "border-l-4",
+		"7xl": "border-l-4",
+	};
+	return (
+		<blockquote className={clsx("mt-6 pl-6 italic", MapBorderLeft[size], MapTextSize[size], customClass)}>
+			{children}
+		</blockquote>
+	);
+};
+
+BlockQuote.defaultProps = {
+	size: "md",
+};
+
+export default BlockQuote;
