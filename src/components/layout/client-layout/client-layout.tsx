@@ -15,9 +15,7 @@ const ClientLayout = (props: ClientLayoutProps) => {
 					size={"7xl"}
 				>
 					<Sidebar />
-					<div className={"w-full col-span-10"}>
-						<Outlet />
-					</div>
+					<Outlet />
 				</Wrapper>
 			</div>
 		</div>
