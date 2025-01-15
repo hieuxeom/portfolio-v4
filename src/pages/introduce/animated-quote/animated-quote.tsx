@@ -11,9 +11,7 @@ const AnimatedQuote = ({ renderText }: AnimatedQuoteProps) => {
 	const renderAnimated = useCallback(async () => {
 		for (let i = 0; i < renderText.length; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 50));
-			setCurrentText((prev) => `${renderText.slice(0, i + 1)}${i + 1 !== renderText.length ? "|" : ""}`);
-
-			console.log("is work");
+			setCurrentText(() => `${renderText.slice(0, i + 1)}${i + 1 !== renderText.length ? "|" : ""}`);
 		}
 	}, [renderText]);
 
@@ -24,7 +22,7 @@ const AnimatedQuote = ({ renderText }: AnimatedQuoteProps) => {
 	return (
 		<BlockQuote
 			size={"6xl"}
-			customClass={"font-cairo-play font-bold text-primary-600"}
+			customClass={"font-cairo-play font-bold text-primary-600 bg-primary-100/50 py-8"}
 		>
 			{currentText}
 		</BlockQuote>
