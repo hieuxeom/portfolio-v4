@@ -34,6 +34,7 @@ const Wrapper = ({ size, centerX, centerY, orientation, gapSize, className, chil
 		"6xl": "max-w-6xl",
 		"7xl": "max-w-7xl",
 		"8xl": "max-w-8xl",
+		full: "",
 	};
 
 	return (
