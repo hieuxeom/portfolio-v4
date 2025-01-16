@@ -84,7 +84,6 @@ const NewEmployment = (props: NewEmploymentProps) => {
 					</div>
 					<div className={"flex justify-end"}>
 						<Button
-							// className={"w-max"}
 							size={"lg"}
 							color={"primary"}
 						>

@@ -83,7 +83,6 @@ const NewEducation = (props: NewEducationProps) => {
 					</div>
 					<div className={"flex justify-end"}>
 						<Button
-							// className={"w-max"}
 							size={"lg"}
 							color={"primary"}
 						>
