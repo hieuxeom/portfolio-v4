@@ -13,20 +13,20 @@ const AchievementRow = ({ title, organization, time }: AchievementRowProps) => (
 				"before:content-[''] before:bg-dark before:-ml-4 before:h-1.5 before:w-1.5 before:rounded-full flex items-center gap-2"
 			}
 		>
-			<Typography type={"h4"}>{title}</Typography>
+			<Typography type={"h4"}>{title || "Title of the achievement"}</Typography>
 		</div>
 		<div className={"flex items-center gap-2"}>
-			<Typography>{organization}</Typography>
+			<Typography>{organization || "Organization"}</Typography>
 			<Typography>|</Typography>
-			<Typography className={"italic"}>{time}</Typography>
+			<Typography className={"italic"}>{time || "12/24"}</Typography>
 		</div>
 	</div>
 );
 
 AchievementRow.defaultProps = {
-	title: "-",
-	organization: "-",
-	time: "-",
+	title: "Title of the achievement",
+	organization: "Organization",
+	time: "12/24",
 };
 
 export default AchievementRow;
