@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { TBaseColors, TBaseRadius, TBaseSize, TBaseVariants } from "../../types/general";
 import { useEffect } from "react";
 
-interface ButtonProps {
+export interface ButtonProps {
 	color: TBaseColors;
 	variant: TBaseVariants;
 	size: Extract<TBaseSize, "2xl" | "xl" | "lg" | "md" | "sm">;
@@ -11,6 +11,7 @@ interface ButtonProps {
 	startContent?: React.ReactNode | string;
 	endContent?: React.ReactNode | string;
 	isShowBackground: boolean;
+	onClick?: () => void;
 	children: React.ReactNode;
 }
 
@@ -23,6 +24,7 @@ const Button = ({
 	startContent,
 	endContent,
 	isShowBackground,
+	onClick,
 	children,
 }: ButtonProps) => {
 	const MapSolidButtonColor: Record<ButtonProps["color"], string> = {
@@ -118,7 +120,7 @@ const Button = ({
 	return (
 		<button
 			className={clsx(
-				"inline-flex items-center gap-2 transition-all duration-300",
+				"inline-flex items-center justify-center gap-2 transition-all duration-300",
 				ButtonClasses[color],
 				MapButtonSize[size],
 				MapButtonTextSize[size],
@@ -126,6 +128,7 @@ const Button = ({
 				variant === "light" && isShowBackground && MapLightButtonBackground[color],
 				className
 			)}
+			onClick={onClick}
 		>
 			{startContent}
 			{children}
