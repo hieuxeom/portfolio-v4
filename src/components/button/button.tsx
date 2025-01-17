@@ -11,6 +11,8 @@ export interface ButtonProps {
 	startContent?: React.ReactNode | string;
 	endContent?: React.ReactNode | string;
 	isShowBackground: boolean;
+	type: "button" | "submit" | "reset";
+	isIconOnly: boolean;
 	onClick?: () => void;
 	children: React.ReactNode;
 }
@@ -24,6 +26,8 @@ const Button = ({
 	startContent,
 	endContent,
 	isShowBackground,
+	type,
+	isIconOnly,
 	onClick,
 	children,
 }: ButtonProps) => {
@@ -70,11 +74,26 @@ const Button = ({
 	};
 
 	const MapButtonSize: Record<ButtonProps["size"], string> = {
-		sm: "rounded-lg py-1 px-2",
-		md: "rounded-xl py-1 px-3",
-		lg: "rounded-xl py-1.5 px-4",
-		xl: "rounded-xl py-2 px-6",
-		"2xl": "rounded-xl py-2.5 px-8",
+		sm: clsx("rounded-lg", {
+			"py-1 px-2": !isIconOnly,
+			"p-1": isIconOnly,
+		}),
+		md: clsx("rounded-xl", {
+			"py-1 px-3": !isIconOnly,
+			"p-2": isIconOnly,
+		}),
+		lg: clsx("rounded-xl", {
+			"py-1.5 px-4": !isIconOnly,
+			"p-3": isIconOnly,
+		}),
+		xl: clsx("rounded-xl", {
+			"py-2 px-6": !isIconOnly,
+			"p-3.5": isIconOnly,
+		}),
+		"2xl": clsx("rounded-xl", {
+			"py-2.5 px-8": !isIconOnly,
+			"p-4": isIconOnly,
+		}),
 	};
 
 	const MapButtonTextSize: Record<ButtonProps["size"], string> = {
@@ -112,9 +131,6 @@ const Button = ({
 		return MapSolidButtonColor;
 	};
 
-	useEffect(() => {
-		console.log(radius);
-	}, []);
 	const ButtonClasses = getButtonClasses();
 
 	return (
@@ -129,6 +145,7 @@ const Button = ({
 				className
 			)}
 			onClick={onClick}
+			type={type}
 		>
 			{startContent}
 			{children}
@@ -142,6 +159,8 @@ Button.defaultProps = {
 	variant: "solid",
 	size: "md",
 	isShowBackground: false,
+	type: "button",
+	isIconOnly: false,
 };
 
 export default Button;

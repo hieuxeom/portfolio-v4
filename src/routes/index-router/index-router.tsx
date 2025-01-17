@@ -12,6 +12,7 @@ import Project from "../../pages/admin/project";
 import NewEducation from "../../pages/admin/education/new-education";
 import NewCertification from "../../pages/admin/certification/new-certification";
 import NewEmployment from "../../pages/admin/employment/new-employment";
+import NewProject from "../../pages/admin/project/new-project";
 
 interface IndexRouterProps {}
 
@@ -73,10 +74,16 @@ const IndexRouter = (props: IndexRouterProps) => (
 						element={<NewEmployment />}
 					/>
 				</Route>
-				<Route
-					path={"projects"}
-					element={<Project />}
-				/>
+				<Route path={"projects"}>
+					<Route
+						index
+						element={<Project />}
+					/>
+					<Route
+						path={"new"}
+						element={<NewProject />}
+					/>
+				</Route>
 			</Route>
 		</Routes>
 	</BrowserRouter>

@@ -6,7 +6,7 @@ import Typography from "../../typography";
 type BackButtonConfig = {
 	text: string;
 	href: string;
-} & Omit<ButtonProps, "children">;
+} & Omit<ButtonProps, "children" | "type" | "isIconOnly" | "isShowBackground">;
 
 interface AdminHeaderProps {
 	title: string;
