@@ -17,7 +17,7 @@ const NewCertification = (props: NewCertificationProps) => {
 		title: "",
 		issued_by: "",
 		issued_date: "",
-		img_path: "",
+		img_name: "",
 	});
 
 	return (
@@ -60,7 +60,7 @@ const NewCertification = (props: NewCertificationProps) => {
 						<Input
 							type={"text"}
 							label={"Image"}
-							value={newCertData.img_path}
+							value={newCertData.img_name}
 							onChange={(e) => setNewCertData({ ...newCertData, title: e.target.value })}
 							name={"cert-image"}
 							placeholder={"Upload certificate image..."}
