@@ -18,3 +18,9 @@ export type TBaseSize =
 	| "full";
 
 export type TBaseRadius = Extract<TBaseSize, "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"> | "none";
+
+export interface IAPIResponse<T = any> {
+	status: "success" | "fail" | "error";
+	message?: string;
+	results: T;
+}
