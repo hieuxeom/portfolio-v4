@@ -13,8 +13,8 @@ export type TTableHeader = {
 };
 
 export type TActionConfig = {
-	onEditAction?: () => void;
-	onDeleteAction?: () => void;
+	onEditAction?: (value: string | number) => void;
+	onDeleteAction?: (value: string | number) => void;
 	hideEditButton?: boolean;
 	hideDeleteButton?: boolean;
 };
@@ -80,7 +80,7 @@ const Table = ({ columns, data, haveActionColumns, actionConfig }: TableProps) =
 										size={"lg"}
 										color={"warning"}
 										isIconOnly
-										onClick={() => actionConfig.onEditAction && actionConfig.onEditAction()}
+										onClick={() => actionConfig.onEditAction && actionConfig.onEditAction(_v.id)}
 									>
 										<MdEdit />
 									</Button>
@@ -90,7 +90,9 @@ const Table = ({ columns, data, haveActionColumns, actionConfig }: TableProps) =
 										size={"lg"}
 										color={"danger"}
 										isIconOnly
-										onClick={() => actionConfig.onDeleteAction && actionConfig.onDeleteAction()}
+										onClick={() =>
+											actionConfig.onDeleteAction && actionConfig.onDeleteAction(_v.id)
+										}
 									>
 										<MdDelete />
 									</Button>
