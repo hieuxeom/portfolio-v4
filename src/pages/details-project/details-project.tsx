@@ -11,6 +11,7 @@ import { FaGithub } from "react-icons/fa6";
 import { FaGlobeAsia } from "react-icons/fa";
 import Divider from "../../components/divider";
 import { formatDate, getLastUpdatedTime } from "../../utils/convert-datetime";
+import BlockQuote from "../../components/block-quote";
 
 interface DetailsProjectProps {}
 
@@ -42,7 +43,7 @@ const DetailsProject = (props: DetailsProjectProps) => {
 			.then((response) => response.data)
 			.then((response) => {
 				console.log(response.results);
-				// setProjectDetails(response.results);
+				setProjectDetails(response.results);
 			});
 	};
 
@@ -51,7 +52,7 @@ const DetailsProject = (props: DetailsProjectProps) => {
 			return;
 		}
 
-		// getProjectDetails(projectId);
+		getProjectDetails(projectId);
 	}, []);
 
 	return (
@@ -67,6 +68,22 @@ const DetailsProject = (props: DetailsProjectProps) => {
 			>
 				{projectDetails.project_fullname}
 			</Typography>
+
+			{/* <Typography
+				type={"small"}
+				className={"italic"}
+			>
+				Posted on {formatDate(projectDetails.created_at, "onlyDate")}{" "}
+				{projectDetails.updated_at !== projectDetails.created_at
+					? ` - Updated ${getLastUpdatedTime(projectDetails.updated_at)}`
+					: ""}
+			</Typography> */}
+			<BlockQuote size={"md"}>
+				Posted on {formatDate(projectDetails.created_at, "onlyDate")}{" "}
+				{projectDetails.updated_at !== projectDetails.created_at
+					? ` - Updated ${getLastUpdatedTime(projectDetails.updated_at)}`
+					: ""}
+			</BlockQuote>
 			<img
 				src={projectDetails.project_thumbnail}
 				alt=""
@@ -95,17 +112,6 @@ const DetailsProject = (props: DetailsProjectProps) => {
 					>
 						Website
 					</Button>
-				</div>
-				<div className={"flex items-center gap-4"}>
-					<Typography
-						type={"small"}
-						className={"italic"}
-					>
-						Posted on {formatDate(projectDetails.created_at, "onlyDate")}{" "}
-						{projectDetails.updated_at !== projectDetails.created_at
-							? ` - Updated ${getLastUpdatedTime(projectDetails.updated_at)}`
-							: ""}
-					</Typography>
 				</div>
 			</div>
 		</Wrapper>

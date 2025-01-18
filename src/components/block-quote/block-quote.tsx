@@ -34,7 +34,7 @@ const BlockQuote = ({ size, customClass, children }: BlockQuoteProps) => {
 		"7xl": "border-l-4",
 	};
 	return (
-		<blockquote className={clsx("mt-6 pl-6 italic", MapBorderLeft[size], MapTextSize[size], customClass)}>
+		<blockquote className={clsx("pl-6 italic", MapBorderLeft[size], MapTextSize[size], customClass)}>
 			{children}
 		</blockquote>
 	);

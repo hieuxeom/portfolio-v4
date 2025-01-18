@@ -18,3 +18,5 @@ export type TNewProject = Pick<
 > & {
 	project_thumbnail: FileList | null;
 };
+
+export type TUpdateProject = TNewProject;

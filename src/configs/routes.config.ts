@@ -25,6 +25,12 @@ const ROUTE_PATH = {
 			EDIT: (projectId: string | number) => `/admin/projects/${projectId}/edit`,
 		},
 	},
+	CLIENT: {
+		PROJECT: {
+			INDEX: "/projects",
+			DETAILS: (projectId: string | number) => `/projects/${projectId}`,
+		},
+	},
 };
 
 export default ROUTE_PATH;

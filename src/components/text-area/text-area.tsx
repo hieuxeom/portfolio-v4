@@ -11,6 +11,7 @@ interface TextAreaProps {
 	isInvalid?: boolean;
 	errorMessage?: string;
 	disabled?: boolean;
+	maxLength?: number;
 	onChange?: ChangeEventHandler<HTMLTextAreaElement>;
 }
 
@@ -23,6 +24,7 @@ const TextArea = ({
 	isInvalid,
 	errorMessage,
 	disabled,
+	maxLength,
 	onChange,
 }: TextAreaProps) => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -53,20 +55,39 @@ const TextArea = ({
 				disabled={disabled}
 				rows={rows}
 			/>
-			{isInvalid && (
-				<Typography
-					type={"small"}
-					className="text-danger"
-				>
-					{errorMessage}
-				</Typography>
-			)}
+			<div
+				className={clsx("flex items-start", {
+					"justify-between": maxLength && isInvalid,
+					"justify-end": maxLength && !isInvalid,
+				})}
+			>
+				{isInvalid && (
+					<Typography
+						type={"small"}
+						className="text-danger"
+					>
+						{errorMessage}
+					</Typography>
+				)}
+				{maxLength && (
+					<Typography
+						type={"tiny"}
+						className={clsx({
+							"text-danger": value.toString().length > maxLength,
+							"text-success": value.toString().length <= maxLength,
+						})}
+					>
+						({value.toString().length}/{maxLength})
+					</Typography>
+				)}
+			</div>
 		</div>
 	);
 };
 
 TextArea.defaultProps = {
 	rows: 3,
+	maxLength: 255,
 };
 
 export default TextArea;

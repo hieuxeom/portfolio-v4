@@ -13,6 +13,7 @@ export type TTableHeader = {
 };
 
 export type TActionConfig = {
+	onClickRow?: (value: string | number) => void;
 	onEditAction?: (value: string | number) => void;
 	onDeleteAction?: (value: string | number) => void;
 	hideEditButton?: boolean;
@@ -61,46 +62,64 @@ const Table = ({ columns, data, haveActionColumns, actionConfig }: TableProps) =
 				}
 			/>
 			<tbody>
-				{data.map((_v) => (
-					<tr className={"border-b last:border-b-0 border-dark-50 hover:bg-dark/10"}>
-						{listColumnKeys.map((column) => {
-							if (column === "updated_at" || column === "created_at") {
-								return (
-									<TableCell>
-										<div className={"flex flex-col gap-1"}>{formatDate(_v[column])}</div>
-									</TableCell>
-								);
-							}
-							return <TableCell>{_v[column]}</TableCell>;
-						})}
-						<TableCell>
-							<div className={"flex justify-center items-center gap-1"}>
-								{!actionConfig.hideEditButton && (
-									<Button
-										size={"lg"}
-										color={"warning"}
-										isIconOnly
-										onClick={() => actionConfig.onEditAction && actionConfig.onEditAction(_v.id)}
-									>
-										<MdEdit />
-									</Button>
-								)}
-								{!actionConfig.hideDeleteButton && (
-									<Button
-										size={"lg"}
-										color={"danger"}
-										isIconOnly
-										onClick={() =>
-											actionConfig.onDeleteAction && actionConfig.onDeleteAction(_v.id)
-										}
-									>
-										<MdDelete />
-									</Button>
-								)}
-							</div>
+				{data.length > 0 ? (
+					data.map((_v) => (
+						<tr
+							className={"border-b last:border-b-0 border-dark-50 hover:bg-dark/10"}
+							onClick={() => actionConfig.onClickRow && actionConfig.onClickRow(_v.id)}
+						>
+							{listColumnKeys.map((column) => {
+								if (column === "updated_at" || column === "created_at") {
+									return (
+										<TableCell>
+											<div className={"flex flex-col gap-1"}>{formatDate(_v[column])}</div>
+										</TableCell>
+									);
+								}
+								return <TableCell>{_v[column]}</TableCell>;
+							})}
+							<TableCell>
+								<div className={"flex justify-center items-center gap-1"}>
+									{!actionConfig.hideEditButton && (
+										<Button
+											size={"lg"}
+											color={"warning"}
+											isIconOnly
+											onClick={() =>
+												actionConfig.onEditAction && actionConfig.onEditAction(_v.id)
+											}
+										>
+											<MdEdit />
+										</Button>
+									)}
+									{!actionConfig.hideDeleteButton && (
+										<Button
+											size={"lg"}
+											color={"danger"}
+											isIconOnly
+											onClick={() =>
+												actionConfig.onDeleteAction && actionConfig.onDeleteAction(_v.id)
+											}
+										>
+											<MdDelete />
+										</Button>
+									)}
+								</div>
+							</TableCell>
+						</tr>
+					))
+				) : (
+					<tr>
+						<TableCell colSpan={100}>
+							<Typography
+								type={"p"}
+								className={"text-center italic"}
+							>
+								No data found
+							</Typography>
 						</TableCell>
 					</tr>
-				))}
+				)}
 			</tbody>
 		</TableWrapper>
 	);

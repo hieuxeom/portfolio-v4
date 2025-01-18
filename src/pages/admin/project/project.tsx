@@ -28,6 +28,15 @@ const Project = (props: ProjectProps) => {
 			});
 	};
 
+	const handleDeleteProject = (projectId: string | number) => {
+		axios
+			.delete<IAPIResponse>(API_ROUTE.PROJECT.DELETE(projectId))
+			.then((response) => response.data)
+			.then((response) => {
+				getListProjects();
+			});
+	};
+
 	const listColumns = [
 		{
 			key: "id",
@@ -72,8 +81,9 @@ const Project = (props: ProjectProps) => {
 					onEditAction: (value: string | number) => {
 						navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(value));
 					},
-					onDeleteAction: () => {
-						navigate(ROUTE_PATH.ADMIN.PROJECT.NEW);
+					onDeleteAction: handleDeleteProject,
+					onClickRow: (value: string | number) => {
+						window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(value));
 					},
 				}}
 			/>

@@ -26,7 +26,8 @@
 	overflow-x: hidden;
 }
 
-.scrollable-content::-webkit-scrollbar {
+.scrollable-content::-webkit-scrollbar,
+.ql-editor::-webkit-scrollbar {
 	display: none;
 }
 

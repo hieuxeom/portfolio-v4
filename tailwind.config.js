@@ -120,6 +120,12 @@ export default {
     extend: {
       backgroundImage: {
         'client-gradient': 'linear-gradient(180deg, rgba(214,222,248,1) 0%, rgba(82,118,227,1) 46%, rgba(22,50,134,1) 78%, rgba(15,34,90,1) 100%)',
+        'scroll-box': `
+          linear-gradient(to top, white, white), 
+          linear-gradient(to top, white, white), 
+          linear-gradient(to top, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0)), 
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0))
+        `
       },
       maxWidth: {
         "8xl": "1440px"
