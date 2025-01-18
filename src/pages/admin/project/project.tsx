@@ -69,8 +69,8 @@ const Project = (props: ProjectProps) => {
 				data={listProjects}
 				haveActionColumns={true}
 				actionConfig={{
-					onEditAction: () => {
-						navigate(ROUTE_PATH.ADMIN.PROJECT.NEW);
+					onEditAction: (value: string | number) => {
+						navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(value));
 					},
 					onDeleteAction: () => {
 						navigate(ROUTE_PATH.ADMIN.PROJECT.NEW);

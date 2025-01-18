@@ -12,7 +12,7 @@ const Typography = ({ type, className, isParagraph, children }: TypographyProps)
 
 	const MapClassNames: Record<TypographyProps["type"], string> = {
 		h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
-		h2: "scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0",
+		h2: "scroll-m-20 text-3xl font-semibold tracking-tight",
 		h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
 		h4: "scroll-m-20 text-xl font-semibold tracking-tight",
 		h5: "scroll-m-20 text-lg font-semibold tracking-tight",
@@ -24,7 +24,7 @@ const Typography = ({ type, className, isParagraph, children }: TypographyProps)
 		tiny: "text-[12px] leading-none",
 	};
 	const MapParagraphClassNames: Record<TypographyProps["type"], string> = {
-		h1: "",
+		h1: "!leading-tight",
 		h2: "pb-4",
 		h3: "",
 		h4: "",
@@ -38,7 +38,7 @@ const Typography = ({ type, className, isParagraph, children }: TypographyProps)
 	};
 
 	return (
-		<TypoType className={clsx(MapClassNames[type], className, isParagraph && MapParagraphClassNames[type])}>
+		<TypoType className={clsx("", MapClassNames[type], className, isParagraph && MapParagraphClassNames[type])}>
 			{children}
 		</TypoType>
 	);

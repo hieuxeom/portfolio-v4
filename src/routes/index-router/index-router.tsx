@@ -13,6 +13,8 @@ import NewEducation from "../../pages/admin/education/new-education";
 import NewCertification from "../../pages/admin/certification/new-certification";
 import NewEmployment from "../../pages/admin/employment/new-employment";
 import NewProject from "../../pages/admin/project/new-project";
+import DetailsProject from "../../pages/details-project";
+import EditProject from "../../pages/admin/project/edit-project";
 
 interface IndexRouterProps {}
 
@@ -31,6 +33,16 @@ const IndexRouter = (props: IndexRouterProps) => (
 					path={"live-score"}
 					element={<Introduce />}
 				/>
+				<Route path={"projects"}>
+					<Route
+						index
+						element={<DetailsProject />}
+					/>
+					<Route
+						path={":projectId"}
+						element={<DetailsProject />}
+					/>
+				</Route>
 			</Route>
 			<Route
 				path={"/admin"}
@@ -83,6 +95,16 @@ const IndexRouter = (props: IndexRouterProps) => (
 						path={"new"}
 						element={<NewProject />}
 					/>
+					<Route path={":projectId"}>
+						<Route
+							index
+							element={<DetailsProject />}
+						/>
+						<Route
+							path={"edit"}
+							element={<EditProject />}
+						/>
+					</Route>
 				</Route>
 			</Route>
 		</Routes>

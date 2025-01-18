@@ -21,6 +21,8 @@ const ROUTE_PATH = {
 		PROJECT: {
 			INDEX: "/admin/projects",
 			NEW: "/admin/projects/new",
+			DETAILS: (projectId: string | number) => `/admin/projects/${projectId}`,
+			EDIT: (projectId: string | number) => `/admin/projects/${projectId}/edit`,
 		},
 	},
 };

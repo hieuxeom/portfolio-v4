@@ -1,5 +1,5 @@
 export type TProject = {
-	id: string;
+	id: string | number;
 	project_fullname: string;
 	project_shortname: string;
 	start_date: string;
@@ -9,7 +9,7 @@ export type TProject = {
 	article_body: string;
 	created_at: string;
 	updated_at: string;
-	is_deleted: boolean;
+	is_deleted: number;
 };
 
 export type TNewProject = Pick<

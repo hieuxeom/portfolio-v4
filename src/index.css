@@ -67,3 +67,17 @@
 .ql-container {
 	background-color: #ffffff;
 }
+
+h2 {
+	@apply scroll-m-20;
+	@apply text-3xl;
+	@apply font-medium;
+	@apply tracking-tight;
+	@apply py-8;
+}
+
+p {
+	@apply text-lg;
+	@apply leading-8;
+	@apply text-justify;
+}

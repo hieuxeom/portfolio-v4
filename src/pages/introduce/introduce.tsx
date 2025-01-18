@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import BlockQuote from "../../components/block-quote";
 import Divider from "../../components/divider";
 import Typography from "../../components/typography";
 import Wrapper from "../../components/wrapper";
+import useAxios from "../../hooks/useAxios";
 import AchievementRow from "./achievement-row";
 import AnimatedQuote from "./animated-quote";
 

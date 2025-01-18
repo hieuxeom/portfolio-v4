@@ -1,24 +1,22 @@
+import { useState, useEffect } from "react";
+import ReactQuill from "react-quill";
 import AdminHeader from "../../../../components/admin/admin-header";
-import Input from "../../../../components/input";
+import Button from "../../../../components/button";
+import FileInput from "../../../../components/file-input";
+import TextArea from "../../../../components/text-area";
 import Typography from "../../../../components/typography";
 import Wrapper from "../../../../components/wrapper";
-import ICON_CONFIG from "../../../../configs/icon.config";
-import ROUTE_PATH from "../../../../configs/routes.config";
-import { useEffect, useState } from "react";
-import "react-quill/dist/quill.snow.css";
-import ReactQuill from "react-quill";
-import TextArea from "../../../../components/text-area";
-import FileInput from "../../../../components/file-input";
-import { TNewProject } from "../../../../types/project";
-import Button from "../../../../components/button";
-import axios from "axios";
-import useAxios from "../../../../hooks/useAxios";
 import API_ROUTE from "../../../../configs/api.config";
-import { formats, modules } from "../../../../configs/quill.config";
+import ICON_CONFIG from "../../../../configs/icon.config";
+import { modules, formats } from "../../../../configs/quill.config";
+import ROUTE_PATH from "../../../../configs/routes.config";
+import useAxios from "../../../../hooks/useAxios";
+import { TNewProject } from "../../../../types/project";
+import Input from "../../../../components/input";
 
-interface NewProjectProps {}
+interface EditProjectProps {}
 
-const NewProject = (props: NewProjectProps) => {
+const EditProject = (props: EditProjectProps) => {
 	const axios = useAxios("multipart/form-data");
 
 	const [convertText, setConvertText] = useState<string>("Something...");
@@ -176,6 +174,6 @@ const NewProject = (props: NewProjectProps) => {
 	);
 };
 
-NewProject.defaultProps = {};
+EditProject.defaultProps = {};
 
-export default NewProject;
+export default EditProject;
