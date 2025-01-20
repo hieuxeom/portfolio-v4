@@ -5,12 +5,17 @@ import ICON_CONFIG from "../../../configs/icon.config";
 import ROUTE_PATH from "../../../configs/routes.config";
 import useAxios from "../../../hooks/useAxios";
 import API_ROUTE from "../../../configs/api.config";
-import Typography from "../../../components/typography";
 import { TProject } from "../../../types/project";
 import { IAPIResponse } from "../../../types/general";
-import clsx from "clsx";
-import Table from "../../../components/table/table";
 import { useNavigate } from "react-router";
+import TableWrapper from "../../../components/table/table-wrapper";
+import TableHeader from "../../../components/table/table-header";
+import TableCell from "../../../components/table/table-cell";
+import TableBody from "../../../components/table/table-body";
+import TableRow from "../../../components/table/table-row";
+import Button from "../../../components/button";
+import { MdEdit, MdDelete } from "react-icons/md";
+import { formatDate } from "../../../utils/convert-datetime";
 
 interface ProjectProps {}
 
@@ -50,6 +55,10 @@ const Project = (props: ProjectProps) => {
 			key: "created_at",
 			title: "Created At",
 		},
+		{
+			key: "action",
+			title: "Action",
+		},
 	];
 
 	useEffect(() => {
@@ -73,20 +82,48 @@ const Project = (props: ProjectProps) => {
 					href: ROUTE_PATH.ADMIN.PROJECT.NEW,
 				}}
 			/>
-			<Table
-				columns={listColumns}
-				data={listProjects}
-				haveActionColumns={true}
-				actionConfig={{
-					onEditAction: (value: string | number) => {
-						navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(value));
-					},
-					onDeleteAction: handleDeleteProject,
-					onClickRow: (value: string | number) => {
-						window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(value));
-					},
-				}}
-			/>
+			<TableWrapper>
+				<TableHeader>
+					{listColumns.map((column) => (
+						<TableCell
+							isHeader
+							key={column.key}
+						>
+							{column.title}
+						</TableCell>
+					))}
+				</TableHeader>
+				<TableBody>
+					{listProjects.map((project) => (
+						<TableRow onClick={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}>
+							<TableCell>{project.id}</TableCell>
+							<TableCell>{project.project_shortname}</TableCell>
+							<TableCell>{formatDate(project.created_at)}</TableCell>
+							<TableCell>
+								<div className={"flex justify-center items-center gap-1"}>
+									<Button
+										size={"lg"}
+										color={"warning"}
+										isIconOnly
+										onClick={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
+									>
+										<MdEdit />
+									</Button>
+
+									<Button
+										size={"lg"}
+										color={"danger"}
+										isIconOnly
+										onClick={() => handleDeleteProject(project.id)}
+									>
+										<MdDelete />
+									</Button>
+								</div>
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</TableWrapper>
 		</Wrapper>
 	);
 };

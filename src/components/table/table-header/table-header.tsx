@@ -3,27 +3,13 @@ import TableCell from "../table-cell";
 import "../table.css";
 import { TTableHeader } from "../table/table";
 interface TableHeaderProps {
-	columns: TTableHeader[];
+	children: React.ReactNode;
 }
 
-const TableHeader = ({ columns }: TableHeaderProps) => {
-	return (
-		<tr className={"border-b border-dark-50 bg-primary text-white"}>
-			{columns.map((column) => (
-				<TableCell
-					key={column.key}
-					isHeader
-				>
-					{/* <Typography>{column.title}</Typography> */}
-					{column.title}
-				</TableCell>
-			))}
-		</tr>
-	);
+const TableHeader = ({ children }: TableHeaderProps) => {
+	return <tr className={"border-b border-dark-50 bg-primary text-white"}>{children}</tr>;
 };
 
-TableHeader.defaultProps = {
-	foo: "bar",
-};
+TableHeader.defaultProps = {};
 
 export default TableHeader;
