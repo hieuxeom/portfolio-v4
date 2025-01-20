@@ -16,6 +16,7 @@ import Input from "../../../../components/input";
 import { useParams } from "react-router";
 import { IAPIResponse } from "../../../../types/general";
 import { formatDate } from "../../../../utils/convert-datetime";
+import toast from "react-hot-toast";
 
 interface EditProjectProps {}
 
@@ -48,12 +49,18 @@ const EditProject = (props: EditProjectProps) => {
 		formData.append("isChangeThumbnail", projectDetails.project_thumbnail ? "true" : "false");
 		formData.append("isChangeArticle", projectDetails.article_body !== initArticle ? "true" : "false");
 
-		axios
+		const promiseFn = axios
 			.patch(API_ROUTE.PROJECT.UPDATE(projectId), formData)
 			.then((response) => response.data)
 			.then((response) => {
 				console.log(response);
 			});
+
+		toast.promise(promiseFn, {
+			loading: "Updating...",
+			success: "Update project successfully",
+			error: (error) => error.response.data.message,
+		});
 	};
 
 	const getProjectDetails = (projectId: string) => {

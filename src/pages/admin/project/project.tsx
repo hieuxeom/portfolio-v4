@@ -16,6 +16,8 @@ import TableRow from "../../../components/table/table-row";
 import Button from "../../../components/button";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { formatDate } from "../../../utils/convert-datetime";
+import toast from "react-hot-toast";
+import { FaEye } from "react-icons/fa6";
 
 interface ProjectProps {}
 
@@ -25,21 +27,33 @@ const Project = (props: ProjectProps) => {
 	const [listProjects, setListProjects] = useState<TProject[]>([]);
 
 	const getListProjects = async () => {
-		axios
+		const promiseFn = axios
 			.get<IAPIResponse<TProject[]>>(API_ROUTE.PROJECT.GET_ALL)
 			.then((response) => response.data)
 			.then((response) => {
 				setListProjects(response.results);
 			});
+
+		toast.promise(promiseFn, {
+			loading: "Loading...",
+			success: "Fetch successfully",
+			error: (error) => error.response.data.message,
+		});
 	};
 
 	const handleDeleteProject = (projectId: string | number) => {
-		axios
+		const promiseFn = axios
 			.delete<IAPIResponse>(API_ROUTE.PROJECT.DELETE(projectId))
 			.then((response) => response.data)
 			.then((response) => {
 				getListProjects();
 			});
+
+		toast.promise(promiseFn, {
+			loading: "Deleting...",
+			success: "Delete successfully",
+			error: (error) => "Error when fetching",
+		});
 	};
 
 	const listColumns = [
@@ -95,12 +109,20 @@ const Project = (props: ProjectProps) => {
 				</TableHeader>
 				<TableBody>
 					{listProjects.map((project) => (
-						<TableRow onClick={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}>
+						<TableRow>
 							<TableCell>{project.id}</TableCell>
 							<TableCell>{project.project_shortname}</TableCell>
 							<TableCell>{formatDate(project.created_at)}</TableCell>
 							<TableCell>
 								<div className={"flex justify-center items-center gap-1"}>
+									<Button
+										size={"lg"}
+										color={"secondary"}
+										isIconOnly
+										onClick={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
+									>
+										<FaEye />
+									</Button>
 									<Button
 										size={"lg"}
 										color={"warning"}

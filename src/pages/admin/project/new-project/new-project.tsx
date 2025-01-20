@@ -15,11 +15,14 @@ import axios from "axios";
 import useAxios from "../../../../hooks/useAxios";
 import API_ROUTE from "../../../../configs/api.config";
 import { formats, modules } from "../../../../configs/quill.config";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 interface NewProjectProps {}
 
 const NewProject = (props: NewProjectProps) => {
 	const axios = useAxios("multipart/form-data");
+	const navigate = useNavigate();
 
 	const [convertText, setConvertText] = useState<string>("Something...");
 	const [newProjectData, setNewProjectData] = useState<TNewProject>({
@@ -38,12 +41,18 @@ const NewProject = (props: NewProjectProps) => {
 		const formData = new FormData(e.target as HTMLFormElement);
 		formData.append("article_body", convertText);
 
-		axios
+		const promiseFn = axios
 			.post(API_ROUTE.PROJECT.NEW, formData)
 			.then((response) => response.data)
 			.then((response) => {
-				console.log(response);
+				navigate(ROUTE_PATH.ADMIN.PROJECT.INDEX);
 			});
+
+		toast.promise(promiseFn, {
+			loading: "Adding...",
+			success: "Add new project successfully",
+			error: (error) => error.response.data.message,
+		});
 	};
 
 	useEffect(() => {
@@ -168,8 +177,6 @@ const NewProject = (props: NewProjectProps) => {
 					>
 						Display Result
 					</Typography>
-					{/* <div dangerouslySetInnerHTML={{ __html: convertText }}></div>
-					<div>{convertText}</div> */}
 				</div>
 			</div>
 		</Wrapper>
