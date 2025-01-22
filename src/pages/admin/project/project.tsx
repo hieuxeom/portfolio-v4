@@ -118,9 +118,9 @@ const Project = (props: ProjectProps) => {
 								<TableCellAction
 									mode={project.is_deleted === 1}
 									showViewButton
-									handleEdit={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
-									handleSoftDelete={() => handleDeleteProject(project.id)}
-									handleViewDetails={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
+									onEdit={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
+									onSoftDelete={() => handleDeleteProject(project.id)}
+									onViewDetails={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
 									// handlePermanentDelete={() => handleDeleteProject(project.id)}
 									// handleRecover={() => handleRecover(education.id)}
 								/>

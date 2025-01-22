@@ -20,6 +20,7 @@ const ROUTE_PATH = {
 		EMPLOYMENT: {
 			INDEX: "/admin/employment",
 			NEW: "/admin/employment/new",
+			DETAILS: (employmentId: string | number) => `/admin/employment/${employmentId}`,
 		},
 		PROJECT: {
 			INDEX: "/admin/projects",

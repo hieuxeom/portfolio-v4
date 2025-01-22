@@ -189,10 +189,10 @@ const Education = (props: EducationProps) => {
 								<TableCell>
 									<TableCellAction
 										mode={education.is_deleted === 1}
-										handleEdit={() => navigate(ROUTE_PATH.ADMIN.EDUCATION.UPDATE(education.id))}
-										handleSoftDelete={() => handleSoftDelete(education.id)}
-										handlePermanentDelete={() => handlePermanentDelete(education.id)}
-										handleRecover={() => handleRecover(education.id)}
+										onEdit={() => navigate(ROUTE_PATH.ADMIN.EDUCATION.UPDATE(education.id))}
+										onSoftDelete={() => handleSoftDelete(education.id)}
+										onPermanentDelete={() => handlePermanentDelete(education.id)}
+										onRecover={() => handleRecover(education.id)}
 									/>
 								</TableCell>
 							</TableRow>

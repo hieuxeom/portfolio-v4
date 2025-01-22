@@ -4,21 +4,21 @@ import Button from "../../button";
 interface TableCellActionProps {
 	mode: boolean;
 	showViewButton: boolean;
-	handleRecover?: () => void;
-	handlePermanentDelete?: () => void;
-	handleSoftDelete?: () => void;
-	handleEdit?: () => void;
-	handleViewDetails?: () => void;
+	onRecover?: () => void;
+	onPermanentDelete?: () => void;
+	onSoftDelete?: () => void;
+	onEdit?: () => void;
+	onViewDetails?: () => void;
 }
 
 const TableCellAction = ({
 	mode,
 	showViewButton,
-	handleRecover,
-	handleSoftDelete,
-	handlePermanentDelete,
-	handleEdit,
-	handleViewDetails,
+	onRecover,
+	onSoftDelete,
+	onPermanentDelete,
+	onEdit,
+	onViewDetails,
 }: TableCellActionProps) => (
 	<div className={"flex justify-center items-center gap-1"}>
 		{mode ? (
@@ -27,7 +27,7 @@ const TableCellAction = ({
 					size={"lg"}
 					color={"success"}
 					isIconOnly
-					onClick={handleRecover}
+					onClick={onRecover}
 				>
 					{ICON_CONFIG.RECOVER}
 				</Button>
@@ -36,7 +36,7 @@ const TableCellAction = ({
 					size={"lg"}
 					color={"danger"}
 					isIconOnly
-					onClick={handlePermanentDelete}
+					onClick={onPermanentDelete}
 				>
 					{ICON_CONFIG.PERMANENT_DELETE}
 				</Button>
@@ -48,7 +48,7 @@ const TableCellAction = ({
 						size={"lg"}
 						color={"secondary"}
 						isIconOnly
-						onClick={handleViewDetails}
+						onClick={onViewDetails}
 					>
 						{ICON_CONFIG.VIEW}
 					</Button>
@@ -57,7 +57,7 @@ const TableCellAction = ({
 					size={"lg"}
 					color={"warning"}
 					isIconOnly
-					onClick={handleEdit}
+					onClick={onEdit}
 				>
 					{ICON_CONFIG.EDIT}
 				</Button>
@@ -66,7 +66,7 @@ const TableCellAction = ({
 					size={"lg"}
 					color={"danger"}
 					isIconOnly
-					onClick={handleSoftDelete}
+					onClick={onSoftDelete}
 				>
 					{ICON_CONFIG.SOFT_DELETE}
 				</Button>

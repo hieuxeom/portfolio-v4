@@ -1,31 +1,35 @@
+import clsx from "clsx";
+import { useEffect, useState } from "react";
+import { DateRange, DayPicker } from "react-day-picker";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router";
 import AdminHeader from "../../../../components/admin/admin-header";
-import Button from "../../../../components/button";
 import Input from "../../../../components/input";
 import Typography from "../../../../components/typography";
 import Wrapper from "../../../../components/wrapper";
+import API_ROUTE from "../../../../configs/api.config";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
-import AchievementRow from "../../../introduce/achievement-row";
-import { TEmployment, TNewEmployment } from "../../../../types/employment";
-import { useState } from "react";
 import useAxios from "../../../../hooks/useAxios";
-import { useNavigate } from "react-router";
+import { TNewEmployment } from "../../../../types/employment";
 import { IAPIResponse } from "../../../../types/general";
-import toast from "react-hot-toast";
-import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
-import { DateRange, DayPicker } from "react-day-picker";
-import clsx from "clsx";
 import { formatDate } from "../../../../utils/convert-datetime";
-import API_ROUTE from "../../../../configs/api.config";
+import { dayPickerWrapperClassnames, dayPickerCustomClassnames } from "../../../../utils/day-picker.classnames";
+import AchievementRow from "../../../introduce/achievement-row";
+import Button from "../../../../components/button";
 
-interface NewEmploymentProps {}
+interface EmploymentDetailsProps {
+	foo: string;
+}
 
-const NewEmployment = (props: NewEmploymentProps) => {
+const EmploymentDetails = (props: EmploymentDetailsProps) => {
+	const { employmentId } = useParams();
+
 	const axios = useAxios();
 
 	const navigate = useNavigate();
 
-	const [newEmploymentData, setNewEmploymentData] = useState<TNewEmployment>({
+	const [employmentDetails, setEmploymentDetails] = useState<TNewEmployment>({
 		title: "",
 		organization: "",
 		time_start: "",
@@ -38,21 +42,6 @@ const NewEmployment = (props: NewEmploymentProps) => {
 		to: new Date(),
 	});
 
-	const handleSubmitNewEmployment = () => {
-		const myFn = axios
-			.post<IAPIResponse>(API_ROUTE.EMPLOYMENT.NEW, newEmploymentData)
-			.then((response) => response.data)
-			.then((response) => {
-				navigate(ROUTE_PATH.ADMIN.EMPLOYMENT.INDEX);
-			});
-
-		toast.promise(myFn, {
-			loading: "Adding...",
-			success: "Successfully add new employment history",
-			error: (error) => error.response.data.message,
-		});
-	};
-
 	const handleDayRangePickerSelect = (value: DateRange | undefined) => {
 		if (!value) {
 			return;
@@ -60,12 +49,64 @@ const NewEmployment = (props: NewEmploymentProps) => {
 
 		setSelectTime(value);
 
-		setNewEmploymentData((prev) => ({
+		setEmploymentDetails((prev) => ({
 			...prev,
 			time_start: value.from ? formatDate(value.from, "onlyDateReverse") : prev.time_start,
 			time_end: value.to ? formatDate(value.to, "onlyDateReverse") : prev.time_end,
 		}));
 	};
+
+	const getEmploymentHistoryDetails = (employmentId: string) => {
+		const myFn = axios
+			.get<IAPIResponse<TNewEmployment>>(API_ROUTE.EMPLOYMENT.GET_ONE(employmentId))
+			.then((response) => response.data)
+			.then((response) => {
+				setEmploymentDetails(() => ({
+					...response.results,
+					time_start: formatDate(response.results.time_start, "onlyDateReverse"),
+					time_end: formatDate(response.results.time_end, "onlyDateReverse"),
+				}));
+
+				setCurrentMonth(new Date(response.results.time_end));
+				setSelectTime({
+					from: new Date(response.results.time_start),
+					to: new Date(response.results.time_end),
+				});
+			});
+
+		toast.promise(myFn, {
+			loading: "Fetching...",
+			success: "Successfully fetched employment history details",
+			error: (error) => error.response.data.message,
+		});
+	};
+
+	const handleUpdateEmployment = () => {
+		if (!employmentId) {
+			return;
+		}
+
+		const myFn = axios
+			.patch<IAPIResponse>(API_ROUTE.EMPLOYMENT.UPDATE(employmentId), employmentDetails)
+			.then((response) => response.data)
+			.then((response) => {
+				getEmploymentHistoryDetails(employmentId);
+			});
+
+		toast.promise(myFn, {
+			loading: "Updating...",
+			success: "Successfully updated employment history",
+			error: (error) => error.response.data.message,
+		});
+	};
+
+	useEffect(() => {
+		if (!employmentId) {
+			return;
+		}
+
+		getEmploymentHistoryDetails(employmentId);
+	}, []);
 
 	return (
 		<Wrapper
@@ -75,7 +116,7 @@ const NewEmployment = (props: NewEmploymentProps) => {
 			gapSize={"lg"}
 		>
 			<AdminHeader
-				title={"Add new Employment History"}
+				title={"Update Employment History"}
 				backButton={{
 					color: "default",
 					size: "xl",
@@ -98,17 +139,17 @@ const NewEmployment = (props: NewEmploymentProps) => {
 							type={"text"}
 							label={"Title"}
 							name={"title"}
-							value={newEmploymentData.title}
-							onChange={(e) => setNewEmploymentData((prev) => ({ ...prev, title: e.target.value }))}
+							value={employmentDetails.title}
+							onChange={(e) => setEmploymentDetails((prev) => ({ ...prev, title: e.target.value }))}
 							placeholder={"Enter title..."}
 						/>
 						<Input
 							type={"text"}
 							label={"Organization"}
 							name={"organization"}
-							value={newEmploymentData.organization}
+							value={employmentDetails.organization}
 							onChange={(e) =>
-								setNewEmploymentData((prev) => ({ ...prev, organization: e.target.value }))
+								setEmploymentDetails((prev) => ({ ...prev, organization: e.target.value }))
 							}
 							placeholder={"Enter organization..."}
 						/>
@@ -118,7 +159,7 @@ const NewEmployment = (props: NewEmploymentProps) => {
 								type={"text"}
 								label={"From"}
 								name={"time_start"}
-								value={newEmploymentData.time_start}
+								value={employmentDetails.time_start}
 								placeholder={"Start from..."}
 								readOnly
 							/>
@@ -126,7 +167,7 @@ const NewEmployment = (props: NewEmploymentProps) => {
 								type={"text"}
 								label={"To"}
 								name={"time_end"}
-								value={newEmploymentData.time_end}
+								value={employmentDetails.time_end}
 								placeholder={"to..."}
 								readOnly
 							/>
@@ -149,7 +190,7 @@ const NewEmployment = (props: NewEmploymentProps) => {
 						<Button
 							size={"lg"}
 							color={"primary"}
-							onClick={handleSubmitNewEmployment}
+							onClick={handleUpdateEmployment}
 						>
 							Submit
 						</Button>
@@ -163,9 +204,9 @@ const NewEmployment = (props: NewEmploymentProps) => {
 						Display Result
 					</Typography>
 					<AchievementRow
-						title={newEmploymentData.title}
-						organization={newEmploymentData.organization}
-						time={`${newEmploymentData.time_start} - ${newEmploymentData.time_end}`}
+						title={employmentDetails.title}
+						organization={employmentDetails.organization}
+						time={`${employmentDetails.time_start} - ${employmentDetails.time_end}`}
 					/>
 				</div>
 			</div>
@@ -173,6 +214,8 @@ const NewEmployment = (props: NewEmploymentProps) => {
 	);
 };
 
-NewEmployment.defaultProps = {};
+EmploymentDetails.defaultProps = {
+	foo: "bar",
+};
 
-export default NewEmployment;
+export default EmploymentDetails;

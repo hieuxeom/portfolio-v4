@@ -21,9 +21,7 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { TUpdateCertification } from "../../../../types/certification";
 
-interface CertificationDetailsProps {
-	foo: string;
-}
+interface CertificationDetailsProps {}
 
 const CertificationDetails = (props: CertificationDetailsProps) => {
 	const { certId } = useParams();
@@ -203,7 +201,12 @@ const CertificationDetails = (props: CertificationDetailsProps) => {
 					</form>
 				</div>
 				<div className={"col-span-1 w-full h-max bg-white rounded-2xl shadow-lg p-4 flex flex-col gap-4"}>
-					<Typography type={"h2"}>Display Result</Typography>
+					<Typography
+						type={"h2"}
+						className={"text-primary"}
+					>
+						Display Result
+					</Typography>
 					<AchievementRow
 						title={certDetails.title}
 						organization={certDetails.issued_by}

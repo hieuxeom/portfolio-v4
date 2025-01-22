@@ -26,6 +26,15 @@ const API_ROUTE = {
 		RECOVER: (certId: string | number) => `/certification/${certId}/recover`,
 		PERMANENT_DELETE: (certId: string | number) => `/certification/${certId}`,
 	},
+	EMPLOYMENT: {
+		GET_ALL: "/employment",
+		GET_ONE: (employmentId: string | number) => `/employment/${employmentId}`,
+		NEW: "/employment",
+		UPDATE: (employmentId: string | number) => `/employment/${employmentId}`,
+		SOFT_DELETE: (employmentId: string | number) => `/employment/${employmentId}/delete`,
+		RECOVER: (employmentId: string | number) => `/employment/${employmentId}/recover`,
+		PERMANENT_DELETE: (employmentId: string | number) => `/employment/${employmentId}`,
+	},
 };
 
 export default API_ROUTE;

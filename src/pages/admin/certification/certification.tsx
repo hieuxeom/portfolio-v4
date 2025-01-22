@@ -177,10 +177,10 @@ const Certification = (props: CertificationProps) => {
 								<TableCell>
 									<TableCellAction
 										mode={cert.is_deleted === 1}
-										handleEdit={() => navigate(ROUTE_PATH.ADMIN.CERTIFICATION.DETAILS(cert.id))}
-										handleSoftDelete={() => handleSoftDelete(cert.id)}
-										handleRecover={() => handleRecover(cert.id)}
-										handlePermanentDelete={() => handlePermanentDelete(cert.id)}
+										onEdit={() => navigate(ROUTE_PATH.ADMIN.CERTIFICATION.DETAILS(cert.id))}
+										onSoftDelete={() => handleSoftDelete(cert.id)}
+										onRecover={() => handleRecover(cert.id)}
+										onPermanentDelete={() => handlePermanentDelete(cert.id)}
 									/>
 								</TableCell>
 							</TableRow>
