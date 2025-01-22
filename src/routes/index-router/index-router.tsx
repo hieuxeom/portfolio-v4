@@ -16,6 +16,7 @@ import NewProject from "../../pages/admin/project/new-project";
 import DetailsProject from "../../pages/details-project";
 import EditProject from "../../pages/admin/project/edit-project";
 import UpdateEducation from "../../pages/admin/education/update-education";
+import CertificationDetails from "../../pages/admin/certification/certification-details";
 
 interface IndexRouterProps {}
 
@@ -85,6 +86,10 @@ const IndexRouter = (props: IndexRouterProps) => (
 					<Route
 						path={"new"}
 						element={<NewCertification />}
+					/>
+					<Route
+						path={":certId"}
+						element={<CertificationDetails />}
 					/>
 				</Route>
 				<Route path={"employment"}>

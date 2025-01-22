@@ -1,34 +1,40 @@
-import { FaPlus } from "react-icons/fa6";
+import { useState, FormEvent, useEffect } from "react";
+
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router";
 import AdminHeader from "../../../../components/admin/admin-header";
-import Wrapper from "../../../../components/wrapper";
-import ICON_CONFIG from "../../../../configs/icon.config";
-import ROUTE_PATH from "../../../../configs/routes.config";
+import FileInput from "../../../../components/file-input";
 import Input from "../../../../components/input";
 import Typography from "../../../../components/typography";
-import Button from "../../../../components/button";
-import { FormEvent, useState } from "react";
-import { TNewCertification } from "../../../../types/certification";
-import AchievementRow from "../../../introduce/achievement-row";
-import FileInput from "../../../../components/file-input";
-import useAxios from "../../../../hooks/useAxios";
+import Wrapper from "../../../../components/wrapper";
 import API_ROUTE from "../../../../configs/api.config";
+import ICON_CONFIG from "../../../../configs/icon.config";
+import ROUTE_PATH from "../../../../configs/routes.config";
+import useAxios from "../../../../hooks/useAxios";
+
 import { IAPIResponse } from "../../../../types/general";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import AchievementRow from "../../../introduce/achievement-row";
+import Button from "../../../../components/button";
+import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import { DayPicker } from "react-day-picker";
-import clsx from "clsx";
-import { dayPickerWrapperClassnames, dayPickerCustomClassnames } from "../../../../utils/day-picker.classnames";
 import { formatDate } from "../../../../utils/convert-datetime";
+import clsx from "clsx";
+import { TUpdateCertification } from "../../../../types/certification";
 
-interface NewCertificationProps {}
+interface CertificationDetailsProps {
+	foo: string;
+}
 
-const NewCertification = (props: NewCertificationProps) => {
+const CertificationDetails = (props: CertificationDetailsProps) => {
+	const { certId } = useParams();
+
 	const axios = useAxios("multipart/form-data");
 	const navigate = useNavigate();
 
-	const [newCertData, setNewCertData] = useState<TNewCertification>({
+	const [certDetails, setCertDetails] = useState<TUpdateCertification>({
 		title: "",
 		cert_image: null,
+		image_url: "",
 		issued_by: "",
 		issued_date: "",
 	});
@@ -36,24 +42,49 @@ const NewCertification = (props: NewCertificationProps) => {
 	const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
 	const [selectedDay, setSelectedDay] = useState<Date>(new Date());
 
-	const handleSubmitNewCertification = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		console.log(e.target);
-
-		const formData = new FormData(e.target as HTMLFormElement);
-
+	const getCertificaitonDetails = (certId: string) => {
 		const myFn = axios
-			.post<IAPIResponse<{ newCertId: string }>>(API_ROUTE.CERTIFICATION.NEW, formData)
+			.get<IAPIResponse<TUpdateCertification>>(API_ROUTE.CERTIFICATION.GET_ONE(certId))
 			.then((response) => response.data)
 			.then((response) => {
-				navigate(ROUTE_PATH.ADMIN.CERTIFICATION.INDEX);
+				setCertDetails(() => ({
+					...response.results,
+					cert_image: null,
+					isChangeCertImage: false,
+					issued_date: formatDate(new Date(response.results.issued_date), "onlyDateReverse"),
+				}));
+				setSelectedDay(new Date(response.results.issued_date));
+				setCurrentMonth(new Date(response.results.issued_date));
 			});
 
 		toast.promise(myFn, {
-			loading: "Adding...",
-			success: "Successfully added new certification",
-			error: "Failed to add new certification",
+			loading: "Fetching...",
+			success: "Successfully fetched certification details",
+			error: (error) => error.response.data.message,
+		});
+	};
+
+	const handleSubmitUpdateCertification = (e: FormEvent<HTMLFormElement>) => {
+		if (!certId) {
+			return;
+		}
+		e.preventDefault();
+
+		const formData = new FormData(e.target as HTMLFormElement);
+
+		formData.append("isChangeCertImage", certDetails.cert_image ? "true" : "false");
+
+		const myFn = axios
+			.patch<IAPIResponse>(API_ROUTE.CERTIFICATION.UPDATE(certId), formData)
+			.then((response) => response.data)
+			.then((response) => {
+				getCertificaitonDetails(certId);
+			});
+
+		toast.promise(myFn, {
+			loading: "Updating...",
+			success: "Successfully updated certification details",
+			error: "Failed to update certification",
 		});
 	};
 
@@ -64,11 +95,18 @@ const NewCertification = (props: NewCertificationProps) => {
 
 		setSelectedDay(value);
 
-		setNewCertData((prev) => ({
+		setCertDetails((prev) => ({
 			...prev,
 			issued_date: value ? formatDate(value, "onlyDateReverse") : prev.issued_date,
 		}));
 	};
+
+	useEffect(() => {
+		if (!certId) {
+			return;
+		}
+		getCertificaitonDetails(certId);
+	}, []);
 
 	return (
 		<Wrapper
@@ -78,7 +116,7 @@ const NewCertification = (props: NewCertificationProps) => {
 			gapSize={"lg"}
 		>
 			<AdminHeader
-				title={"Add new Certification"}
+				title={"Update Certification Details"}
 				backButton={{
 					color: "default",
 					size: "xl",
@@ -99,14 +137,14 @@ const NewCertification = (props: NewCertificationProps) => {
 					</Typography>
 					<form
 						className="grid grid-cols-2 gap-4"
-						onSubmit={handleSubmitNewCertification}
+						onSubmit={handleSubmitUpdateCertification}
 					>
 						<div className={"w-full col-span-2"}>
 							<Input
 								type={"text"}
 								label={"Title"}
-								value={newCertData.title}
-								onChange={(e) => setNewCertData({ ...newCertData, title: e.target.value })}
+								value={certDetails.title}
+								onChange={(e) => setCertDetails({ ...certDetails, title: e.target.value })}
 								name={"title"}
 								placeholder={"Enter certificate title..."}
 							/>
@@ -114,17 +152,17 @@ const NewCertification = (props: NewCertificationProps) => {
 						<Input
 							type={"text"}
 							label={"Issued By"}
-							value={newCertData.issued_by}
-							onChange={(e) => setNewCertData({ ...newCertData, issued_by: e.target.value })}
+							value={certDetails.issued_by}
+							onChange={(e) => setCertDetails({ ...certDetails, issued_by: e.target.value })}
 							name={"issued_by"}
 							placeholder={"Enter organization issuing..."}
 						/>
 						<FileInput
 							title={"Certfication Image"}
 							name={"cert_image"}
-							value={newCertData.cert_image}
+							value={certDetails.cert_image}
 							onChange={(e) => {
-								setNewCertData((prev) => ({
+								setCertDetails((prev) => ({
 									...prev,
 									cert_image: e.target.files && e.target.files.length > 0 ? e.target.files : null,
 								}));
@@ -134,8 +172,8 @@ const NewCertification = (props: NewCertificationProps) => {
 						<Input
 							type={"text"}
 							label={"Issued Date"}
-							value={newCertData.issued_date}
-							onChange={(e) => setNewCertData({ ...newCertData, issued_date: e.target.value })}
+							value={certDetails.issued_date}
+							onChange={(e) => setCertDetails({ ...certDetails, issued_date: e.target.value })}
 							name={"issued_date"}
 							placeholder={"Enter date issued..."}
 							readOnly
@@ -167,16 +205,17 @@ const NewCertification = (props: NewCertificationProps) => {
 				<div className={"col-span-1 w-full h-max bg-white rounded-2xl shadow-lg p-4 flex flex-col gap-4"}>
 					<Typography type={"h2"}>Display Result</Typography>
 					<AchievementRow
-						title={newCertData.title}
-						organization={newCertData.issued_by}
-						time={newCertData.issued_date}
+						title={certDetails.title}
+						organization={certDetails.issued_by}
+						time={certDetails.issued_date}
 					/>
+					<img src={certDetails.image_url} />
 				</div>
 			</div>
 		</Wrapper>
 	);
 };
 
-NewCertification.defaultProps = {};
+CertificationDetails.defaultProps = {};
 
-export default NewCertification;
+export default CertificationDetails;

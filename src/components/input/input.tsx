@@ -45,7 +45,7 @@ const Input = ({
 					"text-dark border-dark": value !== "" || isFocus,
 					"text-dark/25 border-dark/25": value === "" && !isFocus,
 					"bg-dark/20 border-dark/10 text-dark/50": disabled,
-					"bg-dark/5": readOnly,
+					"bg-dark/5 cursor-default": readOnly,
 				})}
 				onFocus={() => setIsFocus(true)}
 				onBlur={() => setIsFocus(false)}

@@ -15,6 +15,7 @@ const ROUTE_PATH = {
 		CERTIFICATION: {
 			INDEX: "/admin/certification",
 			NEW: "/admin/certification/new",
+			DETAILS: (certId: string | number) => `/admin/certification/${certId}`,
 		},
 		EMPLOYMENT: {
 			INDEX: "/admin/employment",
