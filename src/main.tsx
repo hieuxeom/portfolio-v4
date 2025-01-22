@@ -12,15 +12,37 @@ createRoot(document.getElementById("root")!).render(
 			position="top-center"
 			reverseOrder={false}
 			gutter={8}
-			containerClassName=""
-			containerStyle={{}}
 			toastOptions={{
-				// Define default options
-				className: "",
 				duration: 2000,
 				style: {
-					background: "#363636",
-					color: "#fff",
+					color: "#1f2937",
+				},
+				loading: {
+					duration: 5000,
+					style: {
+						backgroundColor: "#406D96",
+						color: "#FCFAFA",
+					},
+				},
+				success: {
+					iconTheme: {
+						primary: "#ffffff",
+						secondary: "#53DD6C",
+					},
+					style: {
+						backgroundColor: "#53DD6C",
+						color: "#FCFAFA",
+					},
+				},
+				error: {
+					iconTheme: {
+						primary: "#ffffff",
+						secondary: "#C1292E",
+					},
+					style: {
+						backgroundColor: "#C1292E",
+						color: "#FCFAFA",
+					},
 				},
 			}}
 		/>
