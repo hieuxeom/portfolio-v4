@@ -17,6 +17,9 @@ import { useParams } from "react-router";
 import { IAPIResponse } from "../../../../types/general";
 import { formatDate } from "../../../../utils/convert-datetime";
 import toast from "react-hot-toast";
+import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
+import { dayPickerRangeClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
+import clsx from "clsx";
 
 interface EditProjectProps {}
 
@@ -36,6 +39,26 @@ const EditProject = (props: EditProjectProps) => {
 		short_description: "",
 		article_body: "",
 	});
+
+	const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+	const [selectedTime, setSelectTime] = useState<DateRange>({
+		from: new Date(),
+		to: new Date(),
+	});
+
+	const handleDayRangePickerSelect = (value: DateRange | undefined) => {
+		if (!value) {
+			return;
+		}
+
+		setSelectTime(value);
+
+		setProjectDetails((prev) => ({
+			...prev,
+			start_date: value.from ? formatDate(value.from, "onlyDateReverse") : prev.start_date,
+			end_date: value.to ? formatDate(value.to, "onlyDateReverse") : prev.end_date,
+		}));
+	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -76,6 +99,10 @@ const EditProject = (props: EditProjectProps) => {
 				});
 				setConvertText(response.results.article_body);
 				setInitArticle(response.results.article_body);
+				setSelectTime({
+					from: new Date(response.results.start_date),
+					to: new Date(response.results.end_date),
+				});
 			});
 	};
 
@@ -132,7 +159,7 @@ const EditProject = (props: EditProjectProps) => {
 									setProjectDetails((prev) => ({ ...prev, project_fullname: e.target.value }))
 								}
 							/>
-							<div className={"grid grid-cols-2 gap-2"}>
+							<div className={"grid grid-cols-2 gap-4"}>
 								<Input
 									label={"Short project name"}
 									type={"text"}
@@ -154,27 +181,37 @@ const EditProject = (props: EditProjectProps) => {
 										}));
 									}}
 								/>
-
-								<Input
-									label={"start date"}
-									type={"text"}
-									value={projectDetails.start_date}
-									name={"start_date"}
-									placeholder={""}
-									onChange={(e) =>
-										setProjectDetails((prev) => ({ ...prev, start_date: e.target.value }))
-									}
-								/>
-								<Input
-									label={"end date"}
-									type={"text"}
-									value={projectDetails.end_date}
-									name={"end_date"}
-									placeholder={""}
-									onChange={(e) =>
-										setProjectDetails((prev) => ({ ...prev, end_date: e.target.value }))
-									}
-								/>
+								<div className={"flex flex-col gap-4"}>
+									<Input
+										label={"start date"}
+										type={"text"}
+										value={projectDetails.start_date}
+										name={"start_date"}
+										placeholder={""}
+										readOnly={true}
+									/>
+									<Input
+										label={"end date"}
+										type={"text"}
+										value={projectDetails.end_date}
+										name={"end_date"}
+										placeholder={""}
+										readOnly={true}
+									/>
+								</div>
+								<div className={clsx("flex justify-center items-center", dayPickerWrapperClassnames)}>
+									<DayPicker
+										captionLayout="dropdown"
+										classNames={dayPickerRangeClassnames}
+										required={false}
+										month={currentMonth}
+										onMonthChange={setCurrentMonth}
+										mode="range"
+										selected={selectedTime}
+										onSelect={(e) => handleDayRangePickerSelect(e)}
+										showOutsideDays
+									/>
+								</div>
 							</div>
 							<TextArea
 								label={"Description"}

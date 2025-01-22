@@ -1,6 +1,6 @@
 type TDateFormat = "fullDate" | "onlyTime" | "onlyDate" | "onlyDateReverse" | "onlyMonthYear";
 
-export function formatDate(isoString: string, format: TDateFormat = "fullDate") {
+export function formatDate(isoString: string | Date, format: TDateFormat = "fullDate") {
 	const date = new Date(isoString);
 
 	const pad = (num: number) => num.toString().padStart(2, "0");
