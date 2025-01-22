@@ -18,6 +18,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { formatDate } from "../../../utils/convert-datetime";
 import toast from "react-hot-toast";
 import { FaEye } from "react-icons/fa6";
+import TableCellAction from "../../../components/table/table-cell-action";
 
 interface ProjectProps {}
 
@@ -114,33 +115,15 @@ const Project = (props: ProjectProps) => {
 							<TableCell>{project.project_shortname}</TableCell>
 							<TableCell>{formatDate(project.created_at)}</TableCell>
 							<TableCell>
-								<div className={"flex justify-center items-center gap-1"}>
-									<Button
-										size={"lg"}
-										color={"secondary"}
-										isIconOnly
-										onClick={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
-									>
-										{ICON_CONFIG.VIEW}
-									</Button>
-									<Button
-										size={"lg"}
-										color={"warning"}
-										isIconOnly
-										onClick={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
-									>
-										{ICON_CONFIG.EDIT}
-									</Button>
-
-									<Button
-										size={"lg"}
-										color={"danger"}
-										isIconOnly
-										onClick={() => handleDeleteProject(project.id)}
-									>
-										{ICON_CONFIG.SOFT_DELETE}
-									</Button>
-								</div>
+								<TableCellAction
+									mode={project.is_deleted === 1}
+									showViewButton
+									handleEdit={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
+									handleSoftDelete={() => handleDeleteProject(project.id)}
+									handleViewDetails={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
+									// handlePermanentDelete={() => handleDeleteProject(project.id)}
+									// handleRecover={() => handleRecover(education.id)}
+								/>
 							</TableCell>
 						</TableRow>
 					))}

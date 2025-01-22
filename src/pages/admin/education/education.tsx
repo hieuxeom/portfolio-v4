@@ -22,6 +22,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import Button from "../../../components/button";
 import toast from "react-hot-toast";
 import Loading from "../../../components/loading";
+import TableCellAction from "../../../components/table/table-cell-action";
 
 interface EducationProps {}
 
@@ -186,51 +187,13 @@ const Education = (props: EducationProps) => {
 								<TableCell>{formatDate(education.time_end, "onlyDate")}</TableCell>
 								<TableCell>{formatDate(education.created_at)}</TableCell>
 								<TableCell>
-									<div className={"flex justify-center items-center gap-1"}>
-										{education.is_deleted === 1 ? (
-											<>
-												<Button
-													size={"lg"}
-													color={"success"}
-													isIconOnly
-													onClick={() => handleRecover(education.id)}
-												>
-													{ICON_CONFIG.RECOVER}
-												</Button>
-
-												<Button
-													size={"lg"}
-													color={"danger"}
-													isIconOnly
-													onClick={() => handlePermanentDelete(education.id)}
-												>
-													{ICON_CONFIG.PERMANENT_DELETE}
-												</Button>
-											</>
-										) : (
-											<>
-												<Button
-													size={"lg"}
-													color={"warning"}
-													isIconOnly
-													onClick={() =>
-														navigate(ROUTE_PATH.ADMIN.EDUCATION.UPDATE(education.id))
-													}
-												>
-													{ICON_CONFIG.EDIT}
-												</Button>
-
-												<Button
-													size={"lg"}
-													color={"danger"}
-													isIconOnly
-													onClick={() => handleSoftDelete(education.id)}
-												>
-													{ICON_CONFIG.SOFT_DELETE}
-												</Button>
-											</>
-										)}
-									</div>
+									<TableCellAction
+										mode={education.is_deleted === 1}
+										handleEdit={() => navigate(ROUTE_PATH.ADMIN.EDUCATION.UPDATE(education.id))}
+										handleSoftDelete={() => handleSoftDelete(education.id)}
+										handlePermanentDelete={() => handlePermanentDelete(education.id)}
+										handleRecover={() => handleRecover(education.id)}
+									/>
 								</TableCell>
 							</TableRow>
 						))
