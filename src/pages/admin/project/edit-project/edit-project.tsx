@@ -18,7 +18,7 @@ import { IAPIResponse } from "../../../../types/general";
 import { formatDate } from "../../../../utils/convert-datetime";
 import toast from "react-hot-toast";
 import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
-import { dayPickerRangeClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
+import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import clsx from "clsx";
 
 interface EditProjectProps {}
@@ -202,7 +202,7 @@ const EditProject = (props: EditProjectProps) => {
 								<div className={clsx("flex justify-center items-center", dayPickerWrapperClassnames)}>
 									<DayPicker
 										captionLayout="dropdown"
-										classNames={dayPickerRangeClassnames}
+										classNames={dayPickerCustomClassnames}
 										required={false}
 										month={currentMonth}
 										onMonthChange={setCurrentMonth}

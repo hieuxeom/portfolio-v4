@@ -20,7 +20,7 @@ import { useNavigate } from "react-router";
 import { DateRange, DayPicker } from "react-day-picker";
 import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
-import { dayPickerRangeClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
+import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 
 interface NewProjectProps {}
 
@@ -167,7 +167,7 @@ const NewProject = (props: NewProjectProps) => {
 								<div className={clsx("flex justify-center items-center", dayPickerWrapperClassnames)}>
 									<DayPicker
 										captionLayout="dropdown"
-										classNames={dayPickerRangeClassnames}
+										classNames={dayPickerCustomClassnames}
 										required={false}
 										month={currentMonth}
 										onMonthChange={setCurrentMonth}

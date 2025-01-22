@@ -1,8 +1,8 @@
 import { ClassNames, DeprecatedUI, getDefaultClassNames } from "react-day-picker";
 
-export const dayPickerWrapperClassnames = `p-4 border border-dark/10 shadow-xl rounded-xl`;
+export const dayPickerWrapperClassnames = `h-max p-4 border border-dark/10 shadow-xl rounded-xl`;
 
-export const dayPickerRangeClassnames: Partial<ClassNames> = {
+export const dayPickerCustomClassnames: Partial<ClassNames> = {
 	chevron: "fill-primary",
 	dropdown: `${getDefaultClassNames().dropdown} text-base px-4`,
 	today: "bg-secondary/50 text-white",

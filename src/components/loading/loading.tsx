@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { TBaseColors } from "../../types/general";
+import Typography from "../typography";
 
 interface LoadingProps {
 	size: "sm" | "md" | "lg" | "xl";
@@ -36,7 +37,6 @@ const Loading = ({ size, color }: LoadingProps) => {
 							fill="currentFill"
 						/>
 					</svg>
-					<span className="sr-only">Loading...</span>
 				</div>
 			);
 		case "md":
@@ -58,7 +58,6 @@ const Loading = ({ size, color }: LoadingProps) => {
 							fill="currentFill"
 						/>
 					</svg>
-					<span className="sr-only">Loading...</span>
 				</div>
 			);
 		case "lg":
@@ -80,7 +79,6 @@ const Loading = ({ size, color }: LoadingProps) => {
 							fill="currentFill"
 						/>
 					</svg>
-					<span className="sr-only">Loading...</span>
 				</div>
 			);
 		case "xl":
@@ -102,7 +100,6 @@ const Loading = ({ size, color }: LoadingProps) => {
 							fill="currentFill"
 						/>
 					</svg>
-					<span className="sr-only">Loading...</span>
 				</div>
 			);
 	}

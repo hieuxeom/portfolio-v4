@@ -121,7 +121,7 @@ const Project = (props: ProjectProps) => {
 										isIconOnly
 										onClick={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
 									>
-										<FaEye />
+										{ICON_CONFIG.VIEW}
 									</Button>
 									<Button
 										size={"lg"}
@@ -129,7 +129,7 @@ const Project = (props: ProjectProps) => {
 										isIconOnly
 										onClick={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
 									>
-										<MdEdit />
+										{ICON_CONFIG.EDIT}
 									</Button>
 
 									<Button
@@ -138,7 +138,7 @@ const Project = (props: ProjectProps) => {
 										isIconOnly
 										onClick={() => handleDeleteProject(project.id)}
 									>
-										<MdDelete />
+										{ICON_CONFIG.SOFT_DELETE}
 									</Button>
 								</div>
 							</TableCell>

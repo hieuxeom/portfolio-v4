@@ -16,7 +16,7 @@ const TableRow = ({ isEmpty, onClick, children }: TableRowProps) => {
 						type={"p"}
 						className={"text-center italic"}
 					>
-						No data found
+						{children || "No date found"}
 					</Typography>
 				</TableCell>
 			</tr>

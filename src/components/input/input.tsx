@@ -11,10 +11,22 @@ interface InputProps {
 	isInvalid?: boolean;
 	errorMessage?: string;
 	disabled?: boolean;
+	readOnly?: boolean;
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, label, value, name, placeholder, isInvalid, errorMessage, disabled, onChange }: InputProps) => {
+const Input = ({
+	type,
+	label,
+	value,
+	name,
+	placeholder,
+	isInvalid,
+	errorMessage,
+	disabled,
+	readOnly,
+	onChange,
+}: InputProps) => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
 
 	return (
@@ -32,6 +44,8 @@ const Input = ({ type, label, value, name, placeholder, isInvalid, errorMessage,
 				className={clsx("min-w-64 border-2 rounded-xl px-4 py-2 outline-none transition-all duration-300", {
 					"text-dark border-dark": value !== "" || isFocus,
 					"text-dark/25 border-dark/25": value === "" && !isFocus,
+					"bg-dark/20 border-dark/10 text-dark/50": disabled,
+					"bg-dark/5": readOnly,
 				})}
 				onFocus={() => setIsFocus(true)}
 				onBlur={() => setIsFocus(false)}
@@ -42,6 +56,7 @@ const Input = ({ type, label, value, name, placeholder, isInvalid, errorMessage,
 				placeholder={placeholder}
 				onChange={onChange}
 				disabled={disabled}
+				readOnly={readOnly}
 			/>
 			{isInvalid && (
 				<Typography

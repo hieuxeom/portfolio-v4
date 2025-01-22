@@ -9,6 +9,8 @@ const ROUTE_PATH = {
 		EDUCATION: {
 			INDEX: "/admin/education",
 			NEW: "/admin/education/new",
+			DETAILS: (educationId: string | number) => `/admin/education/${educationId}`,
+			UPDATE: (educationId: string | number) => `/admin/education/${educationId}/update`,
 		},
 		CERTIFICATION: {
 			INDEX: "/admin/certification",

@@ -9,16 +9,77 @@ import AdminHeader from "../../../../components/admin/admin-header";
 import { FaAngleLeft } from "react-icons/fa6";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
+import useAxios from "../../../../hooks/useAxios";
+import API_ROUTE from "../../../../configs/api.config";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import { formatDate } from "../../../../utils/convert-datetime";
+import clsx from "clsx";
+import { DayPicker, getDefaultClassNames } from "react-day-picker";
+import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 
 interface NewEducationProps {}
 
 const NewEducation = (props: NewEducationProps) => {
+	const axios = useAxios();
+	const navigate = useNavigate();
+
 	const [newEduData, setNewEduData] = useState<TNewEducation>({
 		title: "",
 		organization: "",
 		time_start: "",
 		time_end: "",
 	});
+
+	const [currentMonth, setCurrentMonth] = useState<{ start: Date; end: Date }>({
+		start: new Date(),
+		end: new Date(),
+	});
+
+	const [selectedTimeStart, setSelectTimeStart] = useState<Date>(new Date());
+	const [selectedTimeEnd, setSelectTimeEnd] = useState<Date>(new Date());
+
+	const handleDayRangePickerSelect = (value: Date | undefined, timePosition: "start" | "end") => {
+		if (!value) {
+			return;
+		}
+
+		switch (timePosition) {
+			case "start":
+				setSelectTimeStart(value);
+				setNewEduData((prev) => ({
+					...prev,
+					time_start: value ? formatDate(value, "onlyDateReverse") : prev.time_start,
+				}));
+				break;
+
+			case "end":
+				setSelectTimeEnd(value);
+				setNewEduData((prev) => ({
+					...prev,
+					time_end: value ? formatDate(value, "onlyDateReverse") : prev.time_end,
+				}));
+				break;
+
+			default:
+				break;
+		}
+	};
+
+	const handleAddNewEducation = () => {
+		const promiseFn = axios
+			.post(API_ROUTE.EDUCATION.NEW, newEduData)
+			.then((response) => response.data)
+			.then((response) => {
+				navigate(ROUTE_PATH.ADMIN.EDUCATION.INDEX);
+			});
+
+		toast.promise(promiseFn, {
+			loading: "Adding...",
+			success: "Add new education successfully",
+			error: (error) => error.response.data.message,
+		});
+	};
 
 	return (
 		<Wrapper
@@ -33,7 +94,6 @@ const NewEducation = (props: NewEducationProps) => {
 					color: "default",
 					size: "xl",
 					variant: "solid",
-					isShowBackground: false,
 					startContent: ICON_CONFIG.BACK,
 					text: "Back",
 					href: ROUTE_PATH.ADMIN.EDUCATION.INDEX,
@@ -80,11 +140,48 @@ const NewEducation = (props: NewEducationProps) => {
 							onChange={(e) => setNewEduData((prev) => ({ ...prev, time_end: e.target.value }))}
 							placeholder={"to..."}
 						/>
+						<div className={clsx("flex justify-center", dayPickerWrapperClassnames)}>
+							<DayPicker
+								captionLayout="dropdown"
+								classNames={dayPickerCustomClassnames}
+								required={false}
+								month={currentMonth.start}
+								onMonthChange={(e) =>
+									setCurrentMonth((prev) => ({
+										...prev,
+										start: new Date(e),
+									}))
+								}
+								mode="single"
+								selected={selectedTimeStart}
+								onSelect={(e) => handleDayRangePickerSelect(e, "start")}
+								showOutsideDays
+							/>
+						</div>
+						<div className={clsx("flex justify-center", dayPickerWrapperClassnames)}>
+							<DayPicker
+								captionLayout="dropdown"
+								classNames={dayPickerCustomClassnames}
+								required={false}
+								month={currentMonth.end}
+								onMonthChange={(e) =>
+									setCurrentMonth((prev) => ({
+										...prev,
+										end: new Date(e),
+									}))
+								}
+								mode="single"
+								selected={selectedTimeEnd}
+								onSelect={(e) => handleDayRangePickerSelect(e, "end")}
+								showOutsideDays
+							/>
+						</div>
 					</div>
 					<div className={"flex justify-end"}>
 						<Button
 							size={"lg"}
 							color={"primary"}
+							onClick={handleAddNewEducation}
 						>
 							Submit
 						</Button>
