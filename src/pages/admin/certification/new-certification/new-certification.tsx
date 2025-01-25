@@ -165,7 +165,12 @@ const NewCertification = (props: NewCertificationProps) => {
 					</form>
 				</div>
 				<div className={"col-span-1 w-full h-max bg-white rounded-2xl shadow-lg p-4 flex flex-col gap-4"}>
-					<Typography type={"h2"}>Display Result</Typography>
+					<Typography
+						type={"h2"}
+						className={"text-primary"}
+					>
+						Display Result
+					</Typography>
 					<AchievementRow
 						title={newCertData.title}
 						organization={newCertData.issued_by}

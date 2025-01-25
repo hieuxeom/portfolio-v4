@@ -4,8 +4,8 @@ import { useCookies } from "react-cookie";
 type TContentType = "application/json" | "multipart/form-data";
 
 const useAxios = (contentType: TContentType = "application/json") => {
-	const [cookies] = useCookies(["refreshToken"]);
-	const { refreshToken } = cookies;
+	const [cookies] = useCookies(["refresh_token"]);
+	const { refresh_token } = cookies;
 
 	const axiosClient = axios.create({
 		baseURL: import.meta.env.VITE_BASE_URL,
@@ -13,7 +13,7 @@ const useAxios = (contentType: TContentType = "application/json") => {
 			"Access-Control-Allow-Origin": "*",
 			"Cache-Control": "no-cache",
 			"Content-Type": contentType,
-			"x-rftk": refreshToken,
+			"x-rftk": refresh_token,
 		},
 	});
 

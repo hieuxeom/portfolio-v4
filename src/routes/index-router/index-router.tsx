@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-
 import ClientLayout from "../../components/layout/client-layout";
 import Introduce from "../../pages/introduce";
 import AdminLayout from "../../components/layout/admin-layout";
@@ -19,6 +18,9 @@ import UpdateEducation from "../../pages/admin/education/update-education";
 import CertificationDetails from "../../pages/admin/certification/certification-details";
 import EmploymentDetails from "../../pages/admin/employment/employment-details";
 import EditEmployment from "../../pages/admin/employment/edit-employment";
+import SignUp from "../../pages/auth/sign-up";
+import SignIn from "../../pages/auth/sign-in";
+import SignOut from "../../pages/auth/sign-out";
 
 interface IndexRouterProps {}
 
@@ -135,6 +137,18 @@ const IndexRouter = (props: IndexRouterProps) => (
 					</Route>
 				</Route>
 			</Route>
+			<Route
+				path={"sign-up"}
+				element={<SignUp />}
+			/>
+			<Route
+				path={"sign-in"}
+				element={<SignIn />}
+			/>
+			<Route
+				path={"sign-out"}
+				element={<SignOut />}
+			/>
 		</Routes>
 	</BrowserRouter>
 );

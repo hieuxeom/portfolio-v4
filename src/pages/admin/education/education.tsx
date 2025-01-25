@@ -23,11 +23,13 @@ import Button from "../../../components/button";
 import toast from "react-hot-toast";
 import Loading from "../../../components/loading";
 import TableCellAction from "../../../components/table/table-cell-action";
+import useAxiosServer from "../../../hooks/useAxiosServer";
 
 interface EducationProps {}
 
 const Education = (props: EducationProps) => {
-	const axios = useAxios();
+	// const axios = useAxios();
+	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
 	const [listEducation, setListEducation] = useState<TEducation[]>([]);

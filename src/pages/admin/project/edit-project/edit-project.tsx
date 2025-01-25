@@ -126,7 +126,7 @@ const EditProject = (props: EditProjectProps) => {
 			gapSize={"lg"}
 		>
 			<AdminHeader
-				title={"Add new Project"}
+				title={"Edit Project Information"}
 				backButton={{
 					color: "default",
 					size: "xl",
@@ -181,6 +181,20 @@ const EditProject = (props: EditProjectProps) => {
 										}));
 									}}
 								/>
+								<div className={"w-full col-span-2"}>
+									<TextArea
+										label={"Description"}
+										value={projectDetails.short_description}
+										name={"short_description"}
+										placeholder={""}
+										onChange={(e) =>
+											setProjectDetails((prev) => ({
+												...prev,
+												short_description: e.target.value,
+											}))
+										}
+									/>
+								</div>
 								<div className={"flex flex-col gap-4"}>
 									<Input
 										label={"start date"}
@@ -213,15 +227,6 @@ const EditProject = (props: EditProjectProps) => {
 									/>
 								</div>
 							</div>
-							<TextArea
-								label={"Description"}
-								value={projectDetails.short_description}
-								name={"short_description"}
-								placeholder={""}
-								onChange={(e) =>
-									setProjectDetails((prev) => ({ ...prev, short_description: e.target.value }))
-								}
-							/>
 						</div>
 						<div
 							className={"flex justify-end"}

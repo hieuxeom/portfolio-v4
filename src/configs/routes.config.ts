@@ -30,10 +30,19 @@ const ROUTE_PATH = {
 		},
 	},
 	CLIENT: {
+		INDEX: "/",
 		PROJECT: {
 			INDEX: "/projects",
 			DETAILS: (projectId: string | number) => `/projects/${projectId}`,
 		},
+	},
+	AUTH: {
+		LOGIN: "/sign-in",
+		SIGN_UP: "/sign-up",
+		SIGN_OUT: "/sign-out",
+		RESET_PASSWORD: "/reset-password",
+		CHANGE_PASSWORD: "/change-password",
+		VERIFY_EMAIL: "/verify-email",
 	},
 };
 

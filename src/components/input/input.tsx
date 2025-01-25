@@ -13,6 +13,7 @@ interface InputProps {
 	disabled?: boolean;
 	readOnly?: boolean;
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({
@@ -26,6 +27,7 @@ const Input = ({
 	disabled,
 	readOnly,
 	onChange,
+	onKeyDown,
 }: InputProps) => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
 
@@ -49,6 +51,7 @@ const Input = ({
 				})}
 				onFocus={() => setIsFocus(true)}
 				onBlur={() => setIsFocus(false)}
+				onKeyDown={onKeyDown}
 				type={type}
 				id={label}
 				value={value}
@@ -70,6 +73,8 @@ const Input = ({
 	);
 };
 
-Input.defaultProps = {};
+Input.defaultProps = {
+	type: "text",
+};
 
 export default Input;

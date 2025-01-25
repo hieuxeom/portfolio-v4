@@ -35,6 +35,17 @@ const API_ROUTE = {
 		RECOVER: (employmentId: string | number) => `/employment/${employmentId}/recover`,
 		PERMANENT_DELETE: (employmentId: string | number) => `/employment/${employmentId}`,
 	},
+	ACCOUNT: {
+		GET_ALL: "/accounts",
+		GET_ONE: (accountId: string | number) => `/accounts/${accountId}`,
+		SIGN_UP: "/accounts/sign-up",
+		SIGN_IN: "/accounts/sign-in",
+		RFTK: "/accounts/rftk",
+		// UPDATE: (accountId: string | number) => `/accounts/${accountId}`,
+		// SOFT_DELETE: (accountId: string | number) => `/accounts/${accountId}/delete`,
+		// RECOVER: (accountId: string | number) => `/accounts/${accountId}/recover`,
+		// PERMANENT_DELETE: (accountId: string | number) => `/accounts/${accountId}`,
+	},
 };
 
 export default API_ROUTE;

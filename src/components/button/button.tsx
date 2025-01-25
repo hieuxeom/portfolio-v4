@@ -14,6 +14,7 @@ export interface ButtonProps {
 	type: "button" | "submit" | "reset";
 	isIconOnly: boolean;
 	onClick?: () => void;
+	onKeyDown?: (e: KeyboardEvent) => void;
 	children: React.ReactNode;
 }
 
@@ -65,12 +66,12 @@ const Button = ({
 	};
 
 	const MapLightButtonBackground: Record<ButtonProps["color"], string> = {
-		default: "hover:bg-default-100 hover:text-default",
-		primary: "hover:bg-primary-100 hover:text-primary",
-		secondary: "hover:bg-secondary-100 hover:text-secondary",
-		danger: "hover:bg-danger-100 hover:text-danger",
-		success: "hover:bg-success-100 hover:text-success",
-		warning: "hover:bg-warning-100 hover:text-warning",
+		default: "hover:bg-default-100 hover:!text-default",
+		primary: "hover:bg-primary-100 hover:!text-primary",
+		secondary: "hover:bg-secondary-100 hover:!text-secondary",
+		danger: "hover:bg-danger-50 hover:!text-danger",
+		success: "hover:bg-success-100 hover:!text-success",
+		warning: "hover:bg-warning-100 hover:!text-warning",
 	};
 
 	const MapButtonSize: Record<ButtonProps["size"], string> = {

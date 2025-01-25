@@ -75,6 +75,7 @@ const TextArea = ({
 						className={clsx({
 							"text-danger": value.toString().length > maxLength,
 							"text-success": value.toString().length <= maxLength,
+							"text-dark-100": value.toString().length === 0,
 						})}
 					>
 						({value.toString().length}/{maxLength})

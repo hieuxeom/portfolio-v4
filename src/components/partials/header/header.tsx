@@ -2,11 +2,24 @@ import clsx from "clsx";
 import useScroll from "../../../hooks/useScroll";
 import Button from "../../button";
 import Typography from "../../typography";
+import ICON_CONFIG from "../../../configs/icon.config";
+import { useNavigate } from "react-router";
+import ROUTE_PATH from "../../../configs/routes.config";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 interface HeaderProps {}
 
 const Header = (props: HeaderProps) => {
 	const { scrollDir, scrollPosition } = useScroll();
+
+	const navigate = useNavigate();
+
+	const [cookies, setCookie, removeCookie] = useCookies(["refresh_token"]);
+
+	useEffect(() => {
+		console.log(cookies);
+	}, [cookies]);
 
 	return (
 		<div
@@ -35,6 +48,16 @@ const Header = (props: HeaderProps) => {
 						className={"px-4"}
 					>
 						hello@hieutn.dev
+					</Button>
+					<Button
+						size={"xl"}
+						variant={"light"}
+						isIconOnly
+						onClick={() =>
+							navigate(cookies.refresh_token ? ROUTE_PATH.ADMIN.ACCOUNT.INDEX : ROUTE_PATH.AUTH.LOGIN)
+						}
+					>
+						{cookies.refresh_token ? ICON_CONFIG.AUTH : ICON_CONFIG.UNAUTH}
 					</Button>
 				</div>
 			</div>
