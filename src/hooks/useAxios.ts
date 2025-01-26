@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useCookies } from "react-cookie";
-
-type TContentType = "application/json" | "multipart/form-data";
+import { TContentType } from "../types/general";
 
 const useAxios = (contentType: TContentType = "application/json") => {
 	const [cookies] = useCookies(["refresh_token"]);

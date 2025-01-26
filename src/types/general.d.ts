@@ -24,3 +24,5 @@ export interface IAPIResponse<T = any> {
 	message?: string;
 	results: T;
 }
+
+export type TContentType = "application/json" | "multipart/form-data";

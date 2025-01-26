@@ -3,15 +3,16 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import useRefreshToken from "./useRefreshToken";
 import ROUTE_PATH from "../configs/routes.config";
+import { TContentType } from "../types/general";
 
-const useAxiosServer = () => {
+const useAxiosServer = (contentType: TContentType = "application/json") => {
 	const getRefreshToken = useRefreshToken();
 	const [cookies, , removeCookie] = useCookies(["refresh_token", "access_token"]);
 
 	const axiosStaffServer = axios.create({
 		baseURL: import.meta.env.VITE_BASE_URL,
 		headers: {
-			"Content-Type": "application/json",
+			"Content-Type": contentType,
 		},
 	});
 

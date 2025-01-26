@@ -11,7 +11,6 @@ import TextArea from "../../../../components/text-area";
 import FileInput from "../../../../components/file-input";
 import { TNewProject } from "../../../../types/project";
 import Button from "../../../../components/button";
-import axios from "axios";
 import useAxios from "../../../../hooks/useAxios";
 import API_ROUTE from "../../../../configs/api.config";
 import { formats, modules } from "../../../../configs/quill.config";
@@ -21,11 +20,12 @@ import { DateRange, DayPicker } from "react-day-picker";
 import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
 
 interface NewProjectProps {}
 
 const NewProject = (props: NewProjectProps) => {
-	const axios = useAxios("multipart/form-data");
+	const axios = useAxiosServer("multipart/form-data");
 	const navigate = useNavigate();
 
 	const [convertText, setConvertText] = useState<string>("Something...");
