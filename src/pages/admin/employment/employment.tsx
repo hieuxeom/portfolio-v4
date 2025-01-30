@@ -17,6 +17,7 @@ import TableCellAction from "../../../components/table/table-cell-action";
 import API_ROUTE from "../../../configs/api.config";
 import { IAPIResponse } from "../../../types/general";
 import toast from "react-hot-toast";
+import useAxiosServer from "../../../hooks/useAxiosServer";
 
 interface EmploymentProps {}
 
@@ -44,7 +45,7 @@ const Employment = (props: EmploymentProps) => {
 		},
 	];
 
-	const axios = useAxios();
+	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
 	const [isFetching, setIsFetching] = useState(true);
@@ -163,7 +164,7 @@ const Employment = (props: EmploymentProps) => {
 						<TableRow isEmpty>
 							<Loading size={"xl"} />
 						</TableRow>
-					) : (
+					) : listEmploymentHistory.length > 0 ? (
 						listEmploymentHistory.map((employment) => (
 							<TableRow>
 								<TableCell>{employment.id}</TableCell>
@@ -184,6 +185,8 @@ const Employment = (props: EmploymentProps) => {
 								</TableCell>
 							</TableRow>
 						))
+					) : (
+						<TableRow isEmpty>No employment history have been added yet</TableRow>
 					)}
 				</TableBody>
 			</TableWrapper>

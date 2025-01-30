@@ -20,13 +20,14 @@ import { DayPicker } from "react-day-picker";
 import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { TUpdateCertification } from "../../../../types/certification";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
 
 interface CertificationDetailsProps {}
 
 const CertificationDetails = (props: CertificationDetailsProps) => {
 	const { certId } = useParams();
 
-	const axios = useAxios("multipart/form-data");
+	const axios = useAxiosServer("multipart/form-data");
 	const navigate = useNavigate();
 
 	const [certDetails, setCertDetails] = useState<TUpdateCertification>({

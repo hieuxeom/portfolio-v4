@@ -179,7 +179,7 @@ const Education = (props: EducationProps) => {
 						<TableRow isEmpty>
 							<Loading size={"xl"} />
 						</TableRow>
-					) : (
+					) : listEducation.length > 0 ? (
 						listEducation.map((education) => (
 							<TableRow>
 								<TableCell>{education.id}</TableCell>
@@ -199,6 +199,8 @@ const Education = (props: EducationProps) => {
 								</TableCell>
 							</TableRow>
 						))
+					) : (
+						<TableRow isEmpty>No education have been added yet</TableRow>
 					)}
 				</TableBody>
 			</TableWrapper>

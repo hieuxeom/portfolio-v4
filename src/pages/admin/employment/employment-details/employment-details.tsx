@@ -17,15 +17,14 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import { dayPickerWrapperClassnames, dayPickerCustomClassnames } from "../../../../utils/day-picker.classnames";
 import AchievementRow from "../../../introduce/achievement-row";
 import Button from "../../../../components/button";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface EmploymentDetailsProps {
-	foo: string;
-}
+interface EmploymentDetailsProps {}
 
 const EmploymentDetails = (props: EmploymentDetailsProps) => {
 	const { employmentId } = useParams();
 
-	const axios = useAxios();
+	const axios = useAxiosServer();
 
 	const navigate = useNavigate();
 
@@ -214,8 +213,6 @@ const EmploymentDetails = (props: EmploymentDetailsProps) => {
 	);
 };
 
-EmploymentDetails.defaultProps = {
-	foo: "bar",
-};
+EmploymentDetails.defaultProps = {};
 
 export default EmploymentDetails;

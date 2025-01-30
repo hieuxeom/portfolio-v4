@@ -17,11 +17,12 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
 
 interface NewEducationProps {}
 
 const NewEducation = (props: NewEducationProps) => {
-	const axios = useAxios();
+	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
 	const [newEduData, setNewEduData] = useState<TNewEducation>({
@@ -197,7 +198,10 @@ const NewEducation = (props: NewEducationProps) => {
 					<AchievementRow
 						title={newEduData.title}
 						organization={newEduData.organization}
-						time={`${newEduData.time_start} - ${newEduData.time_end}`}
+						time={`${formatDate(selectedTimeStart, "onlyMonthYear")} - ${formatDate(
+							selectedTimeEnd,
+							"onlyMonthYear"
+						)}`}
 					/>
 				</div>
 			</div>

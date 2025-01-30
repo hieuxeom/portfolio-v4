@@ -17,11 +17,12 @@ import { DateRange, DayPicker } from "react-day-picker";
 import clsx from "clsx";
 import { formatDate } from "../../../../utils/convert-datetime";
 import API_ROUTE from "../../../../configs/api.config";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
 
 interface NewEmploymentProps {}
 
 const NewEmployment = (props: NewEmploymentProps) => {
-	const axios = useAxios();
+	const axios = useAxiosServer();
 
 	const navigate = useNavigate();
 

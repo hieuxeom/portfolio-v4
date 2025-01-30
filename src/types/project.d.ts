@@ -12,11 +12,29 @@ export type TProject = {
 	is_deleted: number;
 };
 
+export type TProjectResponse = TProject &
+	Pick<TProjectGroup, "group_title"> & {
+		group_id: string | number | null;
+	};
+
+export type TProjectGroup = {
+	group_id: string | number;
+	group_title: string;
+};
+
 export type TNewProject = Pick<
-	TProject,
-	"project_fullname" | "project_shortname" | "start_date" | "end_date" | "short_description" | "article_body"
+	TProjectResponse,
+	| "project_fullname"
+	| "project_shortname"
+	| "start_date"
+	| "end_date"
+	| "short_description"
+	| "article_body"
+	| "group_id"
 > & {
 	project_thumbnail: FileList | null;
 };
 
 export type TUpdateProject = TNewProject;
+
+export type TNewGroup = Pick<TProjectGroup, "group_title">;

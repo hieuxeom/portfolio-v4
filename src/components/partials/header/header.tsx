@@ -17,6 +17,17 @@ const Header = (props: HeaderProps) => {
 
 	const [cookies, setCookie, removeCookie] = useCookies(["refresh_token"]);
 
+	const headerConfig = [
+		{
+			path: ROUTE_PATH.CLIENT.INDEX,
+			label: "Introduce",
+		},
+		{
+			path: ROUTE_PATH.CLIENT.MY_APPS,
+			label: "My Apps",
+		},
+	];
+
 	useEffect(() => {
 		console.log(cookies);
 	}, [cookies]);
@@ -32,17 +43,27 @@ const Header = (props: HeaderProps) => {
 			)}
 		>
 			<div className={"w-full flex items-center justify-between max-w-8xl "}>
-				<div className={"max-w-80"}>
+				<div
+					className={"max-w-80"}
+					onClick={() => navigate(ROUTE_PATH.CLIENT.INDEX)}
+				>
 					<img
 						src="/logow_b.png"
 						alt=""
 					/>
 				</div>
 
-				<div className={"flex items-center gap-4 "}>
-					<Typography type={"large"}>Homepage</Typography>
-					<Typography type={"large"}>Projects</Typography>
-					<Typography type={"large"}>Photos</Typography>
+				<div className={"flex items-center"}>
+					{headerConfig.map((item, index) => (
+						<Button
+							key={index}
+							variant={"light"}
+							onClick={() => navigate(item.path)}
+							className={"px-4"}
+						>
+							{item.label}
+						</Button>
+					))}
 					<Button
 						size={"lg"}
 						className={"px-4"}

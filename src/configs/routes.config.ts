@@ -25,12 +25,17 @@ const ROUTE_PATH = {
 		PROJECT: {
 			INDEX: "/admin/projects",
 			NEW: "/admin/projects/new",
+			NEW_GROUP: "/admin/projects/new-group",
 			DETAILS: (projectId: string | number) => `/admin/projects/${projectId}`,
 			EDIT: (projectId: string | number) => `/admin/projects/${projectId}/edit`,
+		},
+		APP: {
+			INDEX: "/admin/apps",
 		},
 	},
 	CLIENT: {
 		INDEX: "/",
+		MY_APPS: "/my-apps",
 		PROJECT: {
 			INDEX: "/projects",
 			DETAILS: (projectId: string | number) => `/projects/${projectId}`,

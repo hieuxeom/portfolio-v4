@@ -50,6 +50,11 @@ const AdminSidebar = (props: AdminSidebarProps) => {
 					title={"Projects"}
 					path={ROUTE_PATH.ADMIN.PROJECT.INDEX}
 				/>
+				<SidebarItem
+					icon={<FaFileCode />}
+					title={"Apps"}
+					path={ROUTE_PATH.ADMIN.APP.INDEX}
+				/>
 			</div>
 			<Button
 				startContent={ICON_CONFIG.LOG_OUT}

@@ -18,11 +18,12 @@ import TableRow from "../../../components/table/table-row";
 import Loading from "../../../components/loading";
 import { formatDate } from "../../../utils/convert-datetime";
 import TableCellAction from "../../../components/table/table-cell-action";
+import useAxiosServer from "../../../hooks/useAxiosServer";
 
 interface CertificationProps {}
 
 const Certification = (props: CertificationProps) => {
-	const axios = useAxios();
+	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
 	const columns = [
@@ -166,7 +167,7 @@ const Certification = (props: CertificationProps) => {
 						<TableRow isEmpty>
 							<Loading size={"xl"} />
 						</TableRow>
-					) : (
+					) : listCert.length > 0 ? (
 						listCert.map((cert) => (
 							<TableRow>
 								<TableCell>{cert.id}</TableCell>
@@ -185,6 +186,8 @@ const Certification = (props: CertificationProps) => {
 								</TableCell>
 							</TableRow>
 						))
+					) : (
+						<TableRow isEmpty>No certification have been added yet</TableRow>
 					)}
 				</TableBody>
 			</TableWrapper>

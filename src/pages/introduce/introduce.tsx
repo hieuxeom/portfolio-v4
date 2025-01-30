@@ -6,6 +6,11 @@ import Wrapper from "../../components/wrapper";
 import useAxios from "../../hooks/useAxios";
 import AchievementRow from "./achievement-row";
 import AnimatedQuote from "./animated-quote";
+import Education from "../admin/education";
+import EducationSection from "./education-section";
+import Certification from "../admin/certification";
+import CertificationSection from "./certification-section";
+import EmploymentSection from "./employment-section";
 
 interface IntroduceProps {}
 
@@ -41,58 +46,21 @@ const Introduce = (props: IntroduceProps) => (
 			</Typography>
 			<AnimatedQuote />
 		</Wrapper>
+
 		<Divider />
-		<Wrapper
-			size={"full"}
-			orientation={"vertical"}
-		>
-			<Typography
-				type={"h2"}
-				isParagraph
-			>
-				🎓 Education
-			</Typography>
-			<ul className={"flex flex-col gap-8 list-disc"}>
-				{Array.from({ length: 3 }).map((_, index) => (
-					<AchievementRow key={index} />
-				))}
-			</ul>
-		</Wrapper>
+
+		<EducationSection />
+
 		<Divider />
-		<Wrapper
-			size={"full"}
-			orientation={"vertical"}
-		>
-			<Typography
-				type={"h2"}
-				isParagraph
-			>
-				📜 Certification
-			</Typography>
-			<ul className={"flex flex-col gap-8 list-disc"}>
-				{Array.from({ length: 3 }).map((_, index) => (
-					<AchievementRow key={index} />
-				))}
-			</ul>
-		</Wrapper>
+
+		<CertificationSection />
+
 		<Divider />
-		<Wrapper
-			size={"full"}
-			orientation={"vertical"}
-		>
-			<Typography
-				type={"h2"}
-				isParagraph
-			>
-				🏢 Employment History
-			</Typography>
-			<ul className={"flex flex-col gap-8 list-disc"}>
-				{Array.from({ length: 3 }).map((_, index) => (
-					<AchievementRow key={index} />
-				))}
-			</ul>
-		</Wrapper>
+
+		<EmploymentSection />
+
 		<Divider />
+
 		<Wrapper
 			size={"full"}
 			orientation={"vertical"}
@@ -103,11 +71,11 @@ const Introduce = (props: IntroduceProps) => (
 			>
 				🤹🏼 Technical Skills
 			</Typography>
-			<ul className={"flex flex-col gap-8 list-disc"}>
+			{/* <ul className={"flex flex-col gap-8 list-disc"}>
 				{Array.from({ length: 3 }).map((_, index) => (
 					<AchievementRow key={index} />
 				))}
-			</ul>
+			</ul> */}
 		</Wrapper>
 	</Wrapper>
 );

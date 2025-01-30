@@ -23,7 +23,7 @@ const AdminLayout = (props: AdminLayoutProps) => {
 	}, [cookies]);
 
 	return (
-		<div className={"w-screen min-h-screen h-max bg-light flex items-start"}>
+		<div className={"relative w-screen min-h-screen h-max bg-light flex items-start"}>
 			<AdminSidebar />
 			<div className={"w-5/6"}>
 				<Outlet />

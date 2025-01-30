@@ -9,7 +9,7 @@ import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import TextArea from "../../../../components/text-area";
 import FileInput from "../../../../components/file-input";
-import { TNewProject } from "../../../../types/project";
+import { TNewProject, TProjectGroup } from "../../../../types/project";
 import Button from "../../../../components/button";
 import useAxios from "../../../../hooks/useAxios";
 import API_ROUTE from "../../../../configs/api.config";
@@ -21,6 +21,9 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
+import { FaChevronDown } from "react-icons/fa6";
+import Dropdown from "../../../../components/dropdown";
+import { IAPIResponse } from "../../../../types/general";
 
 interface NewProjectProps {}
 
@@ -37,6 +40,7 @@ const NewProject = (props: NewProjectProps) => {
 		project_thumbnail: null,
 		short_description: "",
 		article_body: "",
+		group_id: null,
 	});
 
 	const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -44,6 +48,7 @@ const NewProject = (props: NewProjectProps) => {
 		from: new Date(),
 		to: new Date(),
 	});
+	const [listProjectGroups, setListProjectGroups] = useState<TProjectGroup[]>([]);
 
 	const handleDayRangePickerSelect = (value: DateRange | undefined) => {
 		if (!value) {
@@ -64,6 +69,7 @@ const NewProject = (props: NewProjectProps) => {
 
 		const formData = new FormData(e.target as HTMLFormElement);
 		formData.append("article_body", convertText);
+		formData.append("group_id", newProjectData.group_id?.toString() || "null");
 
 		const promiseFn = axios
 			.post(API_ROUTE.PROJECT.NEW, formData)
@@ -79,9 +85,22 @@ const NewProject = (props: NewProjectProps) => {
 		});
 	};
 
+	const getListProjectGroup = async () => {
+		axios
+			.get<IAPIResponse<TProjectGroup[]>>(API_ROUTE.PROJECT.GET_ALL_GROUP)
+			.then((response) => response.data)
+			.then((response) => {
+				setListProjectGroups(response.results);
+			});
+	};
+
 	useEffect(() => {
 		setNewProjectData((prev) => ({ ...prev, article_body: convertText }));
 	}, [convertText]);
+
+	useEffect(() => {
+		getListProjectGroup();
+	}, []);
 
 	return (
 		<Wrapper
@@ -142,6 +161,20 @@ const NewProject = (props: NewProjectProps) => {
 										setNewProjectData((prev) => ({ ...prev, project_thumbnail: e.target.files }));
 									}}
 								/>
+								<div className={"col-span-2"}>
+									<TextArea
+										label={"Description"}
+										value={newProjectData.short_description}
+										name={"short_description"}
+										placeholder={""}
+										onChange={(e) =>
+											setNewProjectData((prev) => ({
+												...prev,
+												short_description: e.target.value,
+											}))
+										}
+									/>
+								</div>
 								<div className={"flex flex-col gap-4"}>
 									<Input
 										label={"start date"}
@@ -163,8 +196,22 @@ const NewProject = (props: NewProjectProps) => {
 											setNewProjectData((prev) => ({ ...prev, end_date: e.target.value }))
 										}
 									/>
+
+									<Dropdown
+										data={listProjectGroups.map((_v) => ({
+											key: _v.group_id.toString(),
+											value: _v.group_id.toString(),
+											textValue: _v.group_title,
+										}))}
+										position={"top"}
+										label={"Select Group"}
+										value={newProjectData.group_id?.toString() || ""}
+										onValueChange={(value) => {
+											setNewProjectData((prev) => ({ ...prev, group_id: value }));
+										}}
+									/>
 								</div>
-								<div className={clsx("flex justify-center items-center", dayPickerWrapperClassnames)}>
+								<div className={clsx("flex justify-center h-max", dayPickerWrapperClassnames)}>
 									<DayPicker
 										captionLayout="dropdown"
 										classNames={dayPickerCustomClassnames}
@@ -178,20 +225,8 @@ const NewProject = (props: NewProjectProps) => {
 									/>
 								</div>
 							</div>
-							<TextArea
-								label={"Description"}
-								value={newProjectData.short_description}
-								name={"short_description"}
-								placeholder={""}
-								onChange={(e) =>
-									setNewProjectData((prev) => ({ ...prev, short_description: e.target.value }))
-								}
-							/>
 						</div>
-						<div
-							className={"flex justify-end"}
-							// onClick={() => handleSubmit()}
-						>
+						<div className={"flex justify-end"}>
 							<Button
 								size={"lg"}
 								type={"submit"}
@@ -200,22 +235,16 @@ const NewProject = (props: NewProjectProps) => {
 							</Button>
 						</div>
 					</div>
-
-					<ReactQuill
-						modules={modules}
-						formats={formats}
-						value={convertText}
-						onChange={setConvertText}
-					/>
 				</form>
-				<div className="col-span-1 w-full flex flex-col gap-4 bg-white shadow-xl p-4 rounded-2xl">
-					<Typography
-						type={"h2"}
-						className={"text-primary"}
-					>
-						Display Result
-					</Typography>
-				</div>
+				<ReactQuill
+					modules={modules}
+					formats={formats}
+					value={convertText}
+					onChange={setConvertText}
+					style={{
+						maxHeight: "calc(100vh - 12rem)",
+					}}
+				/>
 			</div>
 		</Wrapper>
 	);

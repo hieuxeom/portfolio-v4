@@ -5,7 +5,7 @@ import ICON_CONFIG from "../../../configs/icon.config";
 import ROUTE_PATH from "../../../configs/routes.config";
 import useAxios from "../../../hooks/useAxios";
 import API_ROUTE from "../../../configs/api.config";
-import { TProject } from "../../../types/project";
+import { TProjectGroup, TProjectResponse } from "../../../types/project";
 import { IAPIResponse } from "../../../types/general";
 import { useNavigate } from "react-router";
 import TableWrapper from "../../../components/table/table-wrapper";
@@ -14,32 +14,47 @@ import TableCell from "../../../components/table/table-cell";
 import TableBody from "../../../components/table/table-body";
 import TableRow from "../../../components/table/table-row";
 import Button from "../../../components/button";
-import { MdEdit, MdDelete } from "react-icons/md";
+
 import { formatDate } from "../../../utils/convert-datetime";
 import toast from "react-hot-toast";
-import { FaEye } from "react-icons/fa6";
+
 import TableCellAction from "../../../components/table/table-cell-action";
+import useAxiosServer from "../../../hooks/useAxiosServer";
+import Loading from "../../../components/loading";
+import ModalWrapper from "../../../components/modal-wrapper";
+
+import Input from "../../../components/input";
+import Typography from "../../../components/typography";
+import Chip from "../../../components/chip";
 
 interface ProjectProps {}
 
 const Project = (props: ProjectProps) => {
-	const axios = useAxios();
+	const axios = useAxiosServer();
 	const navigate = useNavigate();
-	const [listProjects, setListProjects] = useState<TProject[]>([]);
+	const [listProjects, setListProjects] = useState<TProjectResponse[]>([]);
+	const [listProjectGroups, setListProjectGroups] = useState<TProjectGroup[]>([]);
+	const [isFetching, setIsFetching] = useState<boolean>(true);
+	const [isShowModal, setIsShowModal] = useState<boolean>(false);
+
+	const [newGroupTitle, setNewGroupTitle] = useState<string>("");
 
 	const getListProjects = async () => {
-		const promiseFn = axios
-			.get<IAPIResponse<TProject[]>>(API_ROUTE.PROJECT.GET_ALL)
+		axios
+			.get<IAPIResponse<TProjectResponse[]>>(API_ROUTE.PROJECT.GET_ALL)
 			.then((response) => response.data)
 			.then((response) => {
 				setListProjects(response.results);
 			});
+	};
 
-		toast.promise(promiseFn, {
-			loading: "Loading...",
-			success: "Fetch successfully",
-			error: (error) => error.response.data.message,
-		});
+	const getListProjectGroup = async () => {
+		axios
+			.get<IAPIResponse<TProjectGroup[]>>(API_ROUTE.PROJECT.GET_ALL_GROUP)
+			.then((response) => response.data)
+			.then((response) => {
+				setListProjectGroups(response.results);
+			});
 	};
 
 	const handleDeleteProject = (projectId: string | number) => {
@@ -67,6 +82,10 @@ const Project = (props: ProjectProps) => {
 			title: "Project Name",
 		},
 		{
+			key: "group",
+			title: "Group",
+		},
+		{
 			key: "created_at",
 			title: "Created At",
 		},
@@ -76,14 +95,41 @@ const Project = (props: ProjectProps) => {
 		},
 	];
 
+	const handleCreateNewProjectGroup = () => {
+		const myFn = axios
+			.post<IAPIResponse>(API_ROUTE.PROJECT.NEW_GROUP, {
+				newGroupTitle,
+			})
+			.then((response) => response.data)
+			.then((response) => {
+				if (response.status === "success") {
+					setIsShowModal(false);
+					getListProjectGroup();
+				}
+			});
+
+		toast.promise(myFn, {
+			loading: "Creating...",
+			success: "Successfully created new project group",
+			error: (error) => error.response.data.message,
+		});
+	};
+
 	useEffect(() => {
-		getListProjects();
+		const promiseFn = Promise.all([getListProjects(), getListProjectGroup()])
+			// .then((response) => {})
+			.finally(() => setIsFetching(false));
+		toast.promise(promiseFn, {
+			loading: "Loading...",
+			success: "Fetch successfully",
+			error: (error) => error.response.data.message,
+		});
 	}, []);
 	return (
 		<Wrapper
 			size={"full"}
 			orientation={"vertical"}
-			className={"px-8 py-8"}
+			className={"relative px-8 py-8"}
 			gapSize={"lg"}
 		>
 			<AdminHeader
@@ -96,7 +142,22 @@ const Project = (props: ProjectProps) => {
 					text: "Add new",
 					href: ROUTE_PATH.ADMIN.PROJECT.NEW,
 				}}
+				customElement={
+					<Button
+						startContent={ICON_CONFIG.NEW}
+						size={"xl"}
+						onClick={() => setIsShowModal(true)}
+					>
+						New Group
+					</Button>
+				}
 			/>
+			<div className={"w-full flex items-center gap-2"}>
+				<Typography type={"large"}>Project Groups:</Typography>
+				{listProjectGroups.map((_v) => (
+					<Chip radius={"xl"}>{_v.group_title}</Chip>
+				))}
+			</div>
 			<TableWrapper>
 				<TableHeader>
 					{listColumns.map((column) => (
@@ -109,26 +170,56 @@ const Project = (props: ProjectProps) => {
 					))}
 				</TableHeader>
 				<TableBody>
-					{listProjects.map((project) => (
-						<TableRow>
-							<TableCell>{project.id}</TableCell>
-							<TableCell>{project.project_shortname}</TableCell>
-							<TableCell>{formatDate(project.created_at)}</TableCell>
-							<TableCell>
-								<TableCellAction
-									mode={project.is_deleted === 1}
-									showViewButton
-									onEdit={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
-									onSoftDelete={() => handleDeleteProject(project.id)}
-									onViewDetails={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
-									// handlePermanentDelete={() => handleDeleteProject(project.id)}
-									// handleRecover={() => handleRecover(education.id)}
-								/>
-							</TableCell>
+					{isFetching ? (
+						<TableRow isEmpty>
+							<Loading size={"xl"} />
 						</TableRow>
-					))}
+					) : listProjects.length > 0 ? (
+						listProjects.map((project) => (
+							<TableRow>
+								<TableCell>{project.id}</TableCell>
+								<TableCell>{project.project_shortname}</TableCell>
+								<TableCell>{project.group_title}</TableCell>
+								<TableCell>{formatDate(project.created_at)}</TableCell>
+								<TableCell>
+									<TableCellAction
+										mode={project.is_deleted === 1}
+										showViewButton
+										onEdit={() => navigate(ROUTE_PATH.ADMIN.PROJECT.EDIT(project.id))}
+										onSoftDelete={() => handleDeleteProject(project.id)}
+										onViewDetails={() => window.open(ROUTE_PATH.CLIENT.PROJECT.DETAILS(project.id))}
+									/>
+								</TableCell>
+							</TableRow>
+						))
+					) : (
+						<TableRow isEmpty>No projects have been added yet</TableRow>
+					)}
 				</TableBody>
 			</TableWrapper>
+
+			<ModalWrapper
+				isShowModal={isShowModal}
+				setIsShowModal={setIsShowModal}
+				title={"New Project Group"}
+			>
+				<Input
+					label={"Project group title"}
+					value={newGroupTitle}
+					onChange={(e) => setNewGroupTitle(e.target.value)}
+					name={"group_title"}
+				/>
+				<div className={"flex justify-end"}>
+					<Button
+						startContent={ICON_CONFIG.NEW}
+						size={"lg"}
+						color={"primary"}
+						onClick={handleCreateNewProjectGroup}
+					>
+						Create
+					</Button>
+				</div>
+			</ModalWrapper>
 		</Wrapper>
 	);
 };

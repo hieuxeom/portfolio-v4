@@ -67,6 +67,10 @@
 	background-color: #ffffff;
 }
 
+.ql-align-center {
+	text-align: center;
+}
+
 h2 {
 	@apply scroll-m-20;
 	@apply text-3xl;
@@ -79,4 +83,8 @@ p {
 	@apply text-lg;
 	@apply leading-8;
 	@apply text-justify;
+}
+
+h2 ~ p.ql-align-justify {
+	@apply pl-8;
 }

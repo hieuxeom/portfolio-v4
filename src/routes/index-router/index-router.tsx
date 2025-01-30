@@ -21,6 +21,9 @@ import EditEmployment from "../../pages/admin/employment/edit-employment";
 import SignUp from "../../pages/auth/sign-up";
 import SignIn from "../../pages/auth/sign-in";
 import SignOut from "../../pages/auth/sign-out";
+import NewGroup from "../../pages/admin/project/new-group";
+import MyApps from "../../pages/my-apps";
+import App from "../../pages/admin/app";
 
 interface IndexRouterProps {}
 
@@ -49,6 +52,10 @@ const IndexRouter = (props: IndexRouterProps) => (
 						element={<DetailsProject />}
 					/>
 				</Route>
+				<Route
+					path={"my-apps"}
+					element={<MyApps />}
+				/>
 			</Route>
 			<Route
 				path={"/admin"}
@@ -136,6 +143,10 @@ const IndexRouter = (props: IndexRouterProps) => (
 						/>
 					</Route>
 				</Route>
+				<Route
+					path={"apps"}
+					element={<App />}
+				/>
 			</Route>
 			<Route
 				path={"sign-up"}

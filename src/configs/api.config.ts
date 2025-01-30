@@ -5,6 +5,8 @@ const API_ROUTE = {
 		GET_ALL: "/projects",
 		GET_ONE: (projectId: string | number) => `/projects/${projectId}`,
 		NEW: "/projects",
+		GET_ALL_GROUP: "/projects/groups",
+		NEW_GROUP: "/projects/groups",
 		UPDATE: (projectId: string | number) => `/projects/${projectId}`,
 		DELETE: (projectId: string | number) => `/projects/${projectId}`,
 	},
@@ -41,10 +43,19 @@ const API_ROUTE = {
 		SIGN_UP: "/accounts/sign-up",
 		SIGN_IN: "/accounts/sign-in",
 		RFTK: "/accounts/rftk",
+		ACTIVE_STATUS: (accountId: string | number) => `/accounts/${accountId}/active`,
 		// UPDATE: (accountId: string | number) => `/accounts/${accountId}`,
 		// SOFT_DELETE: (accountId: string | number) => `/accounts/${accountId}/delete`,
 		// RECOVER: (accountId: string | number) => `/accounts/${accountId}/recover`,
 		// PERMANENT_DELETE: (accountId: string | number) => `/accounts/${accountId}`,
+	},
+	APP: {
+		GET_ALL: "/apps",
+		GET_ONE: (appId: string | number) => `/apps/${appId}`,
+		NEW: "/apps",
+		UPDATE_INFO: (appId: string | number) => `/apps/${appId}`,
+		UPDATE_DISPLAY: (appId: string | number) => `/apps/${appId}/display-status`,
+		DELETE: (appId: string | number) => `/apps/${appId}`,
 	},
 };
 

@@ -11,9 +11,10 @@ type BackButtonConfig = {
 interface AdminHeaderProps {
 	title: string;
 	backButton?: BackButtonConfig;
+	customElement?: React.ReactNode;
 }
 
-const AdminHeader = ({ title, backButton }: AdminHeaderProps) => {
+const AdminHeader = ({ title, backButton, customElement }: AdminHeaderProps) => {
 	const navigate = useNavigate();
 
 	return (
@@ -24,17 +25,20 @@ const AdminHeader = ({ title, backButton }: AdminHeaderProps) => {
 			>
 				{title}
 			</Typography>
-			{backButton && (
-				<Button
-					size={backButton.size}
-					color={backButton.color}
-					startContent={backButton.startContent}
-					endContent={backButton.endContent}
-					onClick={() => navigate(backButton.href)}
-				>
-					{backButton.text}
-				</Button>
-			)}
+			<div className={"flex items-center gap-2"}>
+				{customElement}
+				{backButton && (
+					<Button
+						size={backButton.size}
+						color={backButton.color}
+						startContent={backButton.startContent}
+						endContent={backButton.endContent}
+						onClick={() => navigate(backButton.href)}
+					>
+						{backButton.text}
+					</Button>
+				)}
+			</div>
 		</div>
 	);
 };

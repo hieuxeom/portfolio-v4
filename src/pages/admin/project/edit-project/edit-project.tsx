@@ -11,7 +11,7 @@ import ICON_CONFIG from "../../../../configs/icon.config";
 import { modules, formats } from "../../../../configs/quill.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
 import useAxios from "../../../../hooks/useAxios";
-import { TNewProject, TProject, TUpdateProject } from "../../../../types/project";
+import { TNewProject, TProjectGroup, TProjectResponse, TUpdateProject } from "../../../../types/project";
 import Input from "../../../../components/input";
 import { useParams } from "react-router";
 import { IAPIResponse } from "../../../../types/general";
@@ -20,13 +20,15 @@ import toast from "react-hot-toast";
 import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import clsx from "clsx";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
+import Dropdown from "../../../../components/dropdown";
 
 interface EditProjectProps {}
 
 const EditProject = (props: EditProjectProps) => {
 	const { projectId } = useParams();
 
-	const axios = useAxios("multipart/form-data");
+	const axios = useAxiosServer("multipart/form-data");
 
 	const [initArticle, setInitArticle] = useState("");
 	const [convertText, setConvertText] = useState<string>("Something...");
@@ -38,6 +40,7 @@ const EditProject = (props: EditProjectProps) => {
 		project_thumbnail: null,
 		short_description: "",
 		article_body: "",
+		group_id: null,
 	});
 
 	const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -45,6 +48,8 @@ const EditProject = (props: EditProjectProps) => {
 		from: new Date(),
 		to: new Date(),
 	});
+
+	const [listProjectGroups, setListProjectGroups] = useState<TProjectGroup[]>([]);
 
 	const handleDayRangePickerSelect = (value: DateRange | undefined) => {
 		if (!value) {
@@ -69,6 +74,7 @@ const EditProject = (props: EditProjectProps) => {
 
 		const formData = new FormData(e.target as HTMLFormElement);
 		formData.append("article_body", convertText);
+		formData.append("group_id", projectDetails.group_id?.toString() || "null");
 		formData.append("isChangeThumbnail", projectDetails.project_thumbnail ? "true" : "false");
 		formData.append("isChangeArticle", projectDetails.article_body !== initArticle ? "true" : "false");
 
@@ -105,6 +111,14 @@ const EditProject = (props: EditProjectProps) => {
 				});
 			});
 	};
+	const getListProjectGroup = async () => {
+		axios
+			.get<IAPIResponse<TProjectGroup[]>>(API_ROUTE.PROJECT.GET_ALL_GROUP)
+			.then((response) => response.data)
+			.then((response) => {
+				setListProjectGroups(response.results);
+			});
+	};
 
 	useEffect(() => {
 		setProjectDetails((prev) => ({ ...prev, article_body: convertText }));
@@ -115,7 +129,7 @@ const EditProject = (props: EditProjectProps) => {
 			return;
 		}
 
-		getProjectDetails(projectId);
+		Promise.all([getProjectDetails(projectId), getListProjectGroup()]);
 	}, []);
 
 	return (
@@ -212,6 +226,19 @@ const EditProject = (props: EditProjectProps) => {
 										placeholder={""}
 										readOnly={true}
 									/>
+									<Dropdown
+										label={"Select Group"}
+										data={listProjectGroups.map((_v) => ({
+											key: _v.group_id.toString(),
+											value: _v.group_id.toString(),
+											textValue: _v.group_title,
+										}))}
+										value={projectDetails.group_id?.toString() || ""}
+										onValueChange={(value) =>
+											setProjectDetails((prev) => ({ ...prev, group_id: value }))
+										}
+										position={"top"}
+									/>
 								</div>
 								<div className={clsx("flex justify-center items-center", dayPickerWrapperClassnames)}>
 									<DayPicker
@@ -228,10 +255,7 @@ const EditProject = (props: EditProjectProps) => {
 								</div>
 							</div>
 						</div>
-						<div
-							className={"flex justify-end"}
-							// onClick={() => handleSubmit()}
-						>
+						<div className={"flex justify-end"}>
 							<Button
 								size={"lg"}
 								type={"submit"}

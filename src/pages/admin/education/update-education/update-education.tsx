@@ -18,11 +18,12 @@ import { DateFnsMonth, DayPicker, getDefaultClassNames } from "react-day-picker"
 import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
+import useAxiosServer from "../../../../hooks/useAxiosServer";
 
 interface UpdateEducationProps {}
 
 const UpdateEducation = (props: UpdateEducationProps) => {
-	const axios = useAxios();
+	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
 	const { educationId } = useParams();
@@ -253,7 +254,10 @@ const UpdateEducation = (props: UpdateEducationProps) => {
 					<AchievementRow
 						title={educationDetails?.title}
 						organization={educationDetails?.organization}
-						time={`${educationDetails?.time_start} - ${educationDetails?.time_end}`}
+						time={`${formatDate(selectedTimeStart, "onlyMonthYear")} - ${formatDate(
+							selectedTimeEnd,
+							"onlyMonthYear"
+						)}`}
 					/>
 				</div>
 			</div>
