@@ -1,33 +1,30 @@
-import { FaAngleLeft, FaArrowRotateLeft, FaPlus } from "react-icons/fa6";
 import AdminHeader from "../../../components/admin/admin-header";
-import Input from "../../../components/input";
-import Typography from "../../../components/typography";
+
 import Wrapper from "../../../components/wrapper";
 import ICON_CONFIG from "../../../configs/icon.config";
 import ROUTE_PATH from "../../../configs/routes.config";
 import { TEducation } from "../../../types/education";
 import { useEffect, useState } from "react";
-import useAxios from "../../../hooks/useAxios";
+
 import { useNavigate } from "react-router";
 import API_ROUTE from "../../../configs/api.config";
 import { IAPIResponse } from "../../../types/general";
-import Table from "../../../components/table/table";
+
 import TableWrapper from "../../../components/table/table-wrapper";
 import TableHeader from "../../../components/table/table-header";
 import TableCell from "../../../components/table/table-cell";
 import TableBody from "../../../components/table/table-body";
 import TableRow from "../../../components/table/table-row";
 import { formatDate } from "../../../utils/convert-datetime";
-import { MdEdit, MdDelete } from "react-icons/md";
-import Button from "../../../components/button";
+
 import toast from "react-hot-toast";
 import Loading from "../../../components/loading";
 import TableCellAction from "../../../components/table/table-cell-action";
 import useAxiosServer from "../../../hooks/useAxiosServer";
 
-interface EducationProps {}
+// interface EducationProps {}
 
-const Education = (props: EducationProps) => {
+const Education = () => {
 	// const axios = useAxios();
 	const axios = useAxiosServer();
 	const navigate = useNavigate();
@@ -86,7 +83,7 @@ const Education = (props: EducationProps) => {
 		const promiseFn = axios
 			.patch<IAPIResponse>(API_ROUTE.EDUCATION.SOFT_DELETE(educationId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListEducation((prev) =>
 					prev.map((education) => {
 						if (education.id === educationId) {
@@ -108,7 +105,7 @@ const Education = (props: EducationProps) => {
 		const promiseFn = axios
 			.patch<IAPIResponse>(API_ROUTE.EDUCATION.RECOVER(educationId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListEducation((prev) =>
 					prev.map((education) => {
 						if (education.id === educationId) {
@@ -130,7 +127,7 @@ const Education = (props: EducationProps) => {
 		const promiseFn = axios
 			.delete<IAPIResponse>(API_ROUTE.EDUCATION.PERMANENT_DELETE(educationId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListEducation((prev) => prev.filter((education) => education.id !== educationId));
 			});
 

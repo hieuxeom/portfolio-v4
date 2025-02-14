@@ -24,9 +24,9 @@ import SignOut from "../../pages/auth/sign-out";
 import MyApps from "../../pages/my-apps";
 import App from "../../pages/admin/app";
 
-interface IndexRouterProps {}
+// interface IndexRouterProps {}
 
-const IndexRouter = (props: IndexRouterProps) => (
+const IndexRouter = () => (
 	<BrowserRouter>
 		<Routes>
 			<Route

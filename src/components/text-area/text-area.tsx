@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import Typography from "../typography";
 
 interface TextAreaProps {

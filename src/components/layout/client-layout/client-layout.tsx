@@ -3,9 +3,9 @@ import Header from "../../partials/header";
 import Wrapper from "../../wrapper";
 import Sidebar from "../../partials/sidebar";
 
-interface ClientLayoutProps {}
+// interface ClientLayoutProps {}
 
-const ClientLayout = (props: ClientLayoutProps) => {
+const ClientLayout = () => {
 	return (
 		<div className={"relative"}>
 			<Header />

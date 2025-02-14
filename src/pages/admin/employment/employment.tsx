@@ -8,7 +8,7 @@ import Wrapper from "../../../components/wrapper";
 import ICON_CONFIG from "../../../configs/icon.config";
 import ROUTE_PATH from "../../../configs/routes.config";
 import { useNavigate } from "react-router";
-import useAxios from "../../../hooks/useAxios";
+
 import { TEmployment } from "../../../types/employment";
 import TableRow from "../../../components/table/table-row";
 import Loading from "../../../components/loading";
@@ -19,9 +19,9 @@ import { IAPIResponse } from "../../../types/general";
 import toast from "react-hot-toast";
 import useAxiosServer from "../../../hooks/useAxiosServer";
 
-interface EmploymentProps {}
+// interface EmploymentProps {}
 
-const Employment = (props: EmploymentProps) => {
+const Employment = () => {
 	const listColumns = [
 		{
 			key: "id",
@@ -71,7 +71,7 @@ const Employment = (props: EmploymentProps) => {
 		const promiseFn = axios
 			.patch<IAPIResponse>(API_ROUTE.EMPLOYMENT.SOFT_DELETE(employmentId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListEmploymentHistory((prev) =>
 					prev.map((employment) => {
 						if (employment.id === employmentId) {
@@ -93,7 +93,7 @@ const Employment = (props: EmploymentProps) => {
 		const promiseFn = axios
 			.patch<IAPIResponse>(API_ROUTE.EMPLOYMENT.RECOVER(employmentId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListEmploymentHistory((prev) =>
 					prev.map((employment) => {
 						if (employment.id === employmentId) {
@@ -115,7 +115,7 @@ const Employment = (props: EmploymentProps) => {
 		const promiseFn = axios
 			.delete<IAPIResponse>(API_ROUTE.EMPLOYMENT.PERMANENT_DELETE(employmentId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListEmploymentHistory((prev) => prev.filter((employment) => employment.id !== employmentId));
 			});
 

@@ -1,4 +1,4 @@
-import { ClassNames, DeprecatedUI, getDefaultClassNames } from "react-day-picker";
+import { ClassNames, getDefaultClassNames } from "react-day-picker";
 
 export const dayPickerWrapperClassnames = `h-max p-4 border border-dark/10 shadow-xl rounded-xl`;
 

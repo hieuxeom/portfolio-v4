@@ -20,13 +20,13 @@ import { formatDate } from "../../../utils/convert-datetime";
 import UpdateAppModal from "./update-app-modal";
 import Switch from "../../../components/switch";
 
-interface AppProps {}
+// interface AppProps {}
 
-const App = (props: AppProps) => {
+const App = () => {
 	const [isShowNewModal, setIsShowNewModal] = useState<boolean>(false);
 	const [isShowUpdateModal, setIsShowUpdateModal] = useState<boolean>(false);
-	const [isShowDeleteModal, setIsShowDeleteModal] = useState<boolean>(false);
-	const [isShowDisplayStatusModal, setIsShowDisplayStatusModal] = useState<boolean>(false);
+	// const [isShowDeleteModal, setIsShowDeleteModal] = useState<boolean>(false);
+	// const [isShowDisplayStatusModal, setIsShowDisplayStatusModal] = useState<boolean>(false);
 
 	const listColumns = [
 		{
@@ -85,7 +85,7 @@ const App = (props: AppProps) => {
 		const myFn = axios
 			.delete<IAPIResponse>(API_ROUTE.APP.DELETE(appId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				getListApps();
 			});
 
@@ -104,7 +104,7 @@ const App = (props: AppProps) => {
 				new_status: value ? "0" : "1",
 			})
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListApps((prev) =>
 					prev.map((app) => {
 						if (app.app_id === appId) {

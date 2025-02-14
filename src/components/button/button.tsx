@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { TBaseColors, TBaseRadius, TBaseSize, TBaseVariants } from "../../types/general";
-import { useEffect } from "react";
 
 export interface ButtonProps {
 	color?: TBaseColors;

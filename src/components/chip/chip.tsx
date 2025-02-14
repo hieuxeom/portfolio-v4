@@ -39,7 +39,12 @@ const Chip = ({ width = "max-content", radius = "full", size = "md", color = "de
 	};
 
 	return (
-		<span className={clsx(MapSizeClassname[size], MapColorClassname[color], MapRadiusClassname[radius])}>
+		<span
+			className={clsx(MapSizeClassname[size], MapColorClassname[color], MapRadiusClassname[radius], {
+				"w-full": width === "full",
+				"max-content": width === "max-content",
+			})}
+		>
 			{children}
 		</span>
 	);

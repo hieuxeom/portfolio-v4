@@ -1,4 +1,4 @@
-import React, { FormEvent, SetStateAction, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import ModalWrapper from "../../../../components/modal-wrapper";
 import { TNewApp } from "../../../../types/app";
 import Input from "../../../../components/input";
@@ -30,7 +30,7 @@ const NewAppModal = ({ isShowModal, setIsShowModal }: NewAppModalProps) => {
 		const myFn = axios
 			.post(API_ROUTE.APP.NEW, formData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setIsShowModal(false);
 			});
 

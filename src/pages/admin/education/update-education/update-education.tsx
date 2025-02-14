@@ -8,21 +8,21 @@ import Wrapper from "../../../../components/wrapper";
 import API_ROUTE from "../../../../configs/api.config";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
-import useAxios from "../../../../hooks/useAxios";
+
 import { TEducation, TUpdateEducation } from "../../../../types/education";
 import AchievementRow from "../../../introduce/achievement-row";
 import Input from "../../../../components/input";
 import { IAPIResponse } from "../../../../types/general";
 import Loading from "../../../../components/loading";
-import { DateFnsMonth, DayPicker, getDefaultClassNames } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface UpdateEducationProps {}
+// interface UpdateEducationProps {}
 
-const UpdateEducation = (props: UpdateEducationProps) => {
+const UpdateEducation = () => {
 	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const UpdateEducation = (props: UpdateEducationProps) => {
 		const promiseFn = axios
 			.patch(API_ROUTE.EDUCATION.UPDATE(educationId), educationDetails)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				navigate(ROUTE_PATH.ADMIN.EDUCATION.INDEX);
 			});
 

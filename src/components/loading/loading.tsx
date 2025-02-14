@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { TBaseColors } from "../../types/general";
-import Typography from "../typography";
 
 interface LoadingProps {
 	size?: "sm" | "md" | "lg" | "xl";

@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 import ROUTE_PATH from "../../../configs/routes.config";
-import Wrapper from "../../../components/wrapper";
+
 import Loading from "../../../components/loading";
 import toast from "react-hot-toast";
 
-interface SignOutProps {}
+// interface SignOutProps {}
 
-const SignOut = (props: SignOutProps) => {
+const SignOut = () => {
 	const navigate = useNavigate();
-	const [cookies, setCookie, removeCookie] = useCookies(["access_token", "refresh_token"]);
+	const [, , removeCookie] = useCookies(["access_token", "refresh_token"]);
 
 	const handleSignOut = () => {
 		navigate(ROUTE_PATH.AUTH.LOGIN);

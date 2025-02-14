@@ -9,9 +9,9 @@ import Loading from "../../../components/loading";
 import { IAPIResponse } from "../../../types/general";
 import { formatDate } from "../../../utils/convert-datetime";
 
-interface EducationSectionProps {}
+// interface EducationSectionProps {}
 
-const EducationSection = (props: EducationSectionProps) => {
+const EducationSection = () => {
 	const axios = useAxios();
 
 	const [isFetching, setIsFetching] = useState<boolean>(true);

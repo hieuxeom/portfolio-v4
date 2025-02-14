@@ -10,9 +10,9 @@ import useAxios from "../../../hooks/useAxios";
 import API_ROUTE from "../../../configs/api.config";
 import toast from "react-hot-toast";
 
-interface SignUpProps {}
+// interface SignUpProps {}
 
-const SignUp = (props: SignUpProps) => {
+const SignUp = () => {
 	const navigate = useNavigate();
 	const axios = useAxios();
 
@@ -26,7 +26,7 @@ const SignUp = (props: SignUpProps) => {
 		const myFn = axios
 			.post(API_ROUTE.ACCOUNT.SIGN_UP, signUpForm)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				navigate(ROUTE_PATH.AUTH.LOGIN);
 			});
 

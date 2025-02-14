@@ -1,7 +1,7 @@
 import { useState, FormEvent, useEffect } from "react";
 
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import AdminHeader from "../../../../components/admin/admin-header";
 import FileInput from "../../../../components/file-input";
 import Input from "../../../../components/input";
@@ -10,8 +10,6 @@ import Wrapper from "../../../../components/wrapper";
 import API_ROUTE from "../../../../configs/api.config";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
-import useAxios from "../../../../hooks/useAxios";
-
 import { IAPIResponse } from "../../../../types/general";
 import AchievementRow from "../../../introduce/achievement-row";
 import Button from "../../../../components/button";
@@ -22,13 +20,12 @@ import clsx from "clsx";
 import { TUpdateCertification } from "../../../../types/certification";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface CertificationDetailsProps {}
+// interface CertificationDetailsProps {}
 
-const CertificationDetails = (props: CertificationDetailsProps) => {
+const CertificationDetails = () => {
 	const { certId } = useParams();
 
 	const axios = useAxiosServer("multipart/form-data");
-	const navigate = useNavigate();
 
 	const [certDetails, setCertDetails] = useState<TUpdateCertification>({
 		title: "",
@@ -76,7 +73,7 @@ const CertificationDetails = (props: CertificationDetailsProps) => {
 		const myFn = axios
 			.patch<IAPIResponse>(API_ROUTE.CERTIFICATION.UPDATE(certId), formData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				getCertificaitonDetails(certId);
 			});
 

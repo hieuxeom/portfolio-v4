@@ -6,7 +6,6 @@ import TableWrapper from "../../../components/table/table-wrapper";
 import Wrapper from "../../../components/wrapper";
 import API_ROUTE from "../../../configs/api.config";
 import ICON_CONFIG from "../../../configs/icon.config";
-import ROUTE_PATH from "../../../configs/routes.config";
 import useAxiosServer from "../../../hooks/useAxiosServer";
 import { IAPIResponse } from "../../../types/general";
 import { TAccount } from "../../../types/account";
@@ -15,13 +14,12 @@ import toast from "react-hot-toast";
 import TableRow from "../../../components/table/table-row";
 import Loading from "../../../components/loading";
 import { formatDate } from "../../../utils/convert-datetime";
-import TableCellAction from "../../../components/table/table-cell-action";
 import Chip from "../../../components/chip";
 import Button from "../../../components/button";
 
-interface AccountProps {}
+// interface AccountProps {}
 
-const Account = (props: AccountProps) => {
+const Account = () => {
 	const listColumns = [
 		{
 			key: "user_id",
@@ -79,7 +77,7 @@ const Account = (props: AccountProps) => {
 				action: "block",
 			})
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListAccounts((prev) =>
 					prev.map((account) => {
 						if (account.user_id === accountId) {
@@ -102,7 +100,7 @@ const Account = (props: AccountProps) => {
 				action: "unblock",
 			})
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListAccounts((prev) =>
 					prev.map((account) => {
 						if (account.user_id === accountId) {

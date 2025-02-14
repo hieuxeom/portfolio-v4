@@ -10,22 +10,22 @@ import API_ROUTE from "../../../../configs/api.config";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import { modules, formats } from "../../../../configs/quill.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
-import useAxios from "../../../../hooks/useAxios";
-import { TNewProject, TProjectGroup, TProjectResponse, TUpdateProject } from "../../../../types/project";
+
+import { TProjectGroup, TUpdateProject } from "../../../../types/project";
 import Input from "../../../../components/input";
 import { useParams } from "react-router";
 import { IAPIResponse } from "../../../../types/general";
 import { formatDate } from "../../../../utils/convert-datetime";
 import toast from "react-hot-toast";
-import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
+import { DateRange, DayPicker } from "react-day-picker";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import clsx from "clsx";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 import Dropdown from "../../../../components/dropdown";
 
-interface EditProjectProps {}
+// interface EditProjectProps {}
 
-const EditProject = (props: EditProjectProps) => {
+const EditProject = () => {
 	const { projectId } = useParams();
 
 	const axios = useAxiosServer("multipart/form-data");

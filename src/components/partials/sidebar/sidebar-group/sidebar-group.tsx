@@ -2,7 +2,6 @@ import { FaChevronUp } from "react-icons/fa6";
 import Typography from "../../../typography";
 import { useState } from "react";
 import clsx from "clsx";
-import Button from "../../../button";
 import { useNavigate } from "react-router";
 
 export type SidebarGroupItem = {

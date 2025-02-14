@@ -6,9 +6,8 @@ import Wrapper from "../../../../components/wrapper";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
 import AchievementRow from "../../../introduce/achievement-row";
-import { TEmployment, TNewEmployment } from "../../../../types/employment";
+import { TNewEmployment } from "../../../../types/employment";
 import { useState } from "react";
-import useAxios from "../../../../hooks/useAxios";
 import { useNavigate } from "react-router";
 import { IAPIResponse } from "../../../../types/general";
 import toast from "react-hot-toast";
@@ -19,9 +18,9 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import API_ROUTE from "../../../../configs/api.config";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface NewEmploymentProps {}
+// interface NewEmploymentProps {}
 
-const NewEmployment = (props: NewEmploymentProps) => {
+const NewEmployment = () => {
 	const axios = useAxiosServer();
 
 	const navigate = useNavigate();
@@ -43,7 +42,7 @@ const NewEmployment = (props: NewEmploymentProps) => {
 		const myFn = axios
 			.post<IAPIResponse>(API_ROUTE.EMPLOYMENT.NEW, newEmploymentData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				navigate(ROUTE_PATH.ADMIN.EMPLOYMENT.INDEX);
 			});
 

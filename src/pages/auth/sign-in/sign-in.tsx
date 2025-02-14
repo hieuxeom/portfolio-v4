@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../../../components/input";
 import Typography from "../../../components/typography";
 import Wrapper from "../../../components/wrapper";
-import { TSignIn, TSignInResponse, TSignUp } from "../../../types/auth";
+import { TSignIn, TSignInResponse } from "../../../types/auth";
 import Button from "../../../components/button";
 import { useNavigate } from "react-router";
 import ROUTE_PATH from "../../../configs/routes.config";
@@ -12,13 +12,13 @@ import API_ROUTE from "../../../configs/api.config";
 import { useCookies } from "react-cookie";
 import { IAPIResponse } from "../../../types/general";
 
-interface SignInProps {}
+// interface SignInProps {}
 
-const SignIn = (props: SignInProps) => {
+const SignIn = () => {
 	const navigate = useNavigate();
 	const axios = useAxios();
 
-	const [cookies, setCookie, removeCookie] = useCookies(["access_token", "refresh_token"]);
+	const [, setCookie] = useCookies(["access_token", "refresh_token"]);
 
 	const [signInForm, setSignInForm] = useState<TSignIn>({
 		email: "",

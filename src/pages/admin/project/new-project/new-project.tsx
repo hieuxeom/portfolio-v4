@@ -11,7 +11,6 @@ import TextArea from "../../../../components/text-area";
 import FileInput from "../../../../components/file-input";
 import { TNewProject, TProjectGroup } from "../../../../types/project";
 import Button from "../../../../components/button";
-import useAxios from "../../../../hooks/useAxios";
 import API_ROUTE from "../../../../configs/api.config";
 import { formats, modules } from "../../../../configs/quill.config";
 import toast from "react-hot-toast";
@@ -21,13 +20,12 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
-import { FaChevronDown } from "react-icons/fa6";
 import Dropdown from "../../../../components/dropdown";
 import { IAPIResponse } from "../../../../types/general";
 
-interface NewProjectProps {}
+// interface NewProjectProps {}
 
-const NewProject = (props: NewProjectProps) => {
+const NewProject = () => {
 	const axios = useAxiosServer("multipart/form-data");
 	const navigate = useNavigate();
 
@@ -74,7 +72,7 @@ const NewProject = (props: NewProjectProps) => {
 		const promiseFn = axios
 			.post(API_ROUTE.PROJECT.NEW, formData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				navigate(ROUTE_PATH.ADMIN.PROJECT.INDEX);
 			});
 

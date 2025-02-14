@@ -1,13 +1,12 @@
-import React, { FormEvent, SetStateAction, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import ModalWrapper from "../../../../components/modal-wrapper";
-import { TUpdateApp, TNewApp, TApp } from "../../../../types/app";
+import { TUpdateApp, TApp } from "../../../../types/app";
 import Input from "../../../../components/input";
 import FileInput from "../../../../components/file-input";
 import Button from "../../../../components/button";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 import API_ROUTE from "../../../../configs/api.config";
 import toast from "react-hot-toast";
-import { IAPIResponse } from "../../../../types/general";
 import Typography from "../../../../components/typography";
 import clsx from "clsx";
 
@@ -20,7 +19,7 @@ interface UpdateAppModalProps {
 const UpdateAppModal = ({ currentAppDetails, isShowModal, setIsShowModal }: UpdateAppModalProps) => {
 	const axios = useAxiosServer("multipart/form-data");
 
-	const [isFetching, setIsFetching] = useState<boolean>(true);
+	// const [isFetching, setIsFetching] = useState<boolean>(true);
 
 	const [appDetails, setAppDetails] = useState<TUpdateApp>({
 		app_name: "",
@@ -44,7 +43,7 @@ const UpdateAppModal = ({ currentAppDetails, isShowModal, setIsShowModal }: Upda
 		const myFn = axios
 			.patch(API_ROUTE.APP.UPDATE_INFO(currentAppDetails.app_id), formData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setIsShowModal(false);
 			});
 

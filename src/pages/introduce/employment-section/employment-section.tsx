@@ -8,9 +8,9 @@ import { IAPIResponse } from "../../../types/general";
 import API_ROUTE from "../../../configs/api.config";
 import Loading from "../../../components/loading";
 
-interface EmploymentSectionProps {}
+// interface EmploymentSectionProps {}
 
-const EmploymentSection = (props: EmploymentSectionProps) => {
+const EmploymentSection = () => {
 	const axios = useAxios();
 
 	const [isFetching, setIsFetching] = useState<boolean>(true);

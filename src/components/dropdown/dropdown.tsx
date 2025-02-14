@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
-import useScroll from "../../hooks/useScroll";
 
 export type TDropdownData = {
 	key: string;

@@ -1,18 +1,14 @@
 import { Outlet, useNavigate } from "react-router";
 import AdminSidebar from "../../admin/admin-sidebar";
-import Wrapper from "../../wrapper";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import ROUTE_PATH from "../../../configs/routes.config";
 import toast from "react-hot-toast";
-import useAxios from "../../../hooks/useAxios";
-import API_ROUTE from "../../../configs/api.config";
-import { IAPIResponse } from "../../../types/general";
 
-interface AdminLayoutProps {}
+// interface AdminLayoutProps {}
 
-const AdminLayout = (props: AdminLayoutProps) => {
-	const [cookies, setCookie, removeCookie] = useCookies(["access_token", "refresh_token"]);
+const AdminLayout = () => {
+	const [cookies] = useCookies(["access_token", "refresh_token"]);
 	const navigate = useNavigate();
 
 	useEffect(() => {

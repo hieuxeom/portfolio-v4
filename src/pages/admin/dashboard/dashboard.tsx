@@ -1,5 +1,5 @@
-interface DashboardProps {}
+// interface DashboardProps {}
 
-const Dashboard = (props: DashboardProps) => <div className="dashboard-component">{props.foo}</div>;
+const Dashboard = () => <div className="dashboard-component"></div>;
 
 export default Dashboard;

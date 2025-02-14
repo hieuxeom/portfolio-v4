@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface FileInputProps {
 	title?: string;

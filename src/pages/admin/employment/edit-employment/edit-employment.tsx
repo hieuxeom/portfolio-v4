@@ -1,5 +1,5 @@
-interface EditEmploymentProps {}
+// interface EditEmploymentProps {}
 
-const EditEmployment = (props: EditEmploymentProps) => <div className="edit-employment-component">{props.foo}</div>;
+const EditEmployment = () => <div className="edit-employment-component"></div>;
 
 export default EditEmployment;

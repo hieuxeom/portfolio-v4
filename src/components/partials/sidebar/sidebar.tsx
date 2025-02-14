@@ -3,13 +3,12 @@ import API_ROUTE from "../../../configs/api.config";
 import useAxios from "../../../hooks/useAxios";
 import { IAPIResponse } from "../../../types/general";
 import { TProjectResponse, TProjectGroup } from "../../../types/project";
-import Typography from "../../typography";
 import SidebarGroup from "./sidebar-group";
 import ROUTE_PATH from "../../../configs/routes.config";
 
-interface SidebarProps {}
+// interface SidebarProps {}
 
-const Sidebar = (props: SidebarProps) => {
+const Sidebar = () => {
 	const axios = useAxios();
 
 	const [listProjects, setListProjects] = useState<TProjectResponse[]>([]);

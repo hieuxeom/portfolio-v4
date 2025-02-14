@@ -1,4 +1,3 @@
-import { FaPlus } from "react-icons/fa6";
 import AdminHeader from "../../../components/admin/admin-header";
 import Wrapper from "../../../components/wrapper";
 import ICON_CONFIG from "../../../configs/icon.config";
@@ -7,7 +6,6 @@ import TableWrapper from "../../../components/table/table-wrapper";
 import TableHeader from "../../../components/table/table-header";
 import TableCell from "../../../components/table/table-cell";
 import TableBody from "../../../components/table/table-body";
-import useAxios from "../../../hooks/useAxios";
 import { useNavigate } from "react-router";
 import { TCertification } from "../../../types/certification";
 import { useEffect, useState } from "react";
@@ -20,9 +18,9 @@ import { formatDate } from "../../../utils/convert-datetime";
 import TableCellAction from "../../../components/table/table-cell-action";
 import useAxiosServer from "../../../hooks/useAxiosServer";
 
-interface CertificationProps {}
+// interface CertificationProps {}
 
-const Certification = (props: CertificationProps) => {
+const Certification = () => {
 	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
@@ -76,7 +74,7 @@ const Certification = (props: CertificationProps) => {
 		const myFn = axios
 			.patch<IAPIResponse>(API_ROUTE.CERTIFICATION.SOFT_DELETE(certId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListCert((prev) =>
 					prev.map((cert) => {
 						if (cert.id === certId) {
@@ -98,7 +96,7 @@ const Certification = (props: CertificationProps) => {
 		const myFn = axios
 			.patch<IAPIResponse>(API_ROUTE.CERTIFICATION.RECOVER(certId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListCert((prev) =>
 					prev.map((cert) => {
 						if (cert.id === certId) {
@@ -120,7 +118,7 @@ const Certification = (props: CertificationProps) => {
 		const myFn = axios
 			.delete<IAPIResponse>(API_ROUTE.CERTIFICATION.PERMANENT_DELETE(certId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				setListCert((prev) => prev.filter((cert) => cert.id !== certId));
 			});
 

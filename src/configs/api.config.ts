@@ -1,5 +1,3 @@
-const baseURL = import.meta.env.VITE_BASE_URL;
-
 const API_ROUTE = {
 	PROJECT: {
 		GET_ALL: "/projects",

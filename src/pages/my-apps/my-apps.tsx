@@ -1,19 +1,18 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Button from "../../components/button";
-import Typography from "../../components/typography";
+
 import Wrapper from "../../components/wrapper";
 import API_ROUTE from "../../configs/api.config";
-import ICON_CONFIG from "../../configs/icon.config";
+
 import { TApp } from "../../types/app";
 import { IAPIResponse } from "../../types/general";
 import AppBlock from "./app-block";
 import Loading from "../../components/loading";
 import useAxios from "../../hooks/useAxios";
-interface MyAppsProps {}
 
-const MyApps = (props: MyAppsProps) => {
+// interface MyAppsProps {}
+
+const MyApps = () => {
 	const axios = useAxios();
 
 	const [listApps, setListApps] = useState<TApp[]>([]);
@@ -50,7 +49,7 @@ const MyApps = (props: MyAppsProps) => {
 						<Loading size={"xl"} />
 					</div>
 				) : (
-					listApps.map((_, index) => (
+					listApps.map((_) => (
 						<AppBlock
 							appName={_.app_name}
 							appIcon={_.app_icon}

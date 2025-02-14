@@ -8,9 +8,8 @@ import Button from "../../button";
 import ICON_CONFIG from "../../../configs/icon.config";
 
 import { useNavigate } from "react-router";
-interface AdminSidebarProps {}
 
-const AdminSidebar = (props: AdminSidebarProps) => {
+const AdminSidebar = () => {
 	const navigate = useNavigate();
 
 	return (

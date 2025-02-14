@@ -14,9 +14,9 @@ import { formatDate, getLastUpdatedTime } from "../../utils/convert-datetime";
 import BlockQuote from "../../components/block-quote";
 import Loading from "../../components/loading";
 
-interface DetailsProjectProps {}
+// interface DetailsProjectProps {}
 
-const DetailsProject = (props: DetailsProjectProps) => {
+const DetailsProject = () => {
 	const { projectId } = useParams();
 
 	const axios = useAxios();

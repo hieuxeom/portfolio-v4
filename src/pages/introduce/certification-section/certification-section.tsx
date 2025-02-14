@@ -9,9 +9,9 @@ import API_ROUTE from "../../../configs/api.config";
 import Loading from "../../../components/loading";
 import { formatDate } from "../../../utils/convert-datetime";
 
-interface CertificationSectionProps {}
+// interface CertificationSectionProps {}
 
-const CertificationSection = (props: CertificationSectionProps) => {
+const CertificationSection = () => {
 	const axios = useAxios();
 
 	const [isFetching, setIsFetching] = useState<boolean>(true);

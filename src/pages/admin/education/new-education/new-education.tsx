@@ -6,22 +6,21 @@ import { TNewEducation } from "../../../../types/education";
 import AchievementRow from "../../../introduce/achievement-row";
 import Button from "../../../../components/button";
 import AdminHeader from "../../../../components/admin/admin-header";
-import { FaAngleLeft } from "react-icons/fa6";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
-import useAxios from "../../../../hooks/useAxios";
+
 import API_ROUTE from "../../../../configs/api.config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
-import { DayPicker, getDefaultClassNames } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface NewEducationProps {}
+// interface NewEducationProps {}
 
-const NewEducation = (props: NewEducationProps) => {
+const NewEducation = () => {
 	const axios = useAxiosServer();
 	const navigate = useNavigate();
 
@@ -71,7 +70,7 @@ const NewEducation = (props: NewEducationProps) => {
 		const promiseFn = axios
 			.post(API_ROUTE.EDUCATION.NEW, newEduData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				navigate(ROUTE_PATH.ADMIN.EDUCATION.INDEX);
 			});
 

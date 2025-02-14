@@ -9,7 +9,7 @@ interface AppBlockProps {
 	appLink: string;
 }
 
-const AppBlock = ({ appName, appIcon, appLink }: AppBlockProps) => (
+const AppBlock = ({ appName, appIcon }: AppBlockProps) => (
 	<div
 		className={
 			"relative flex justify-center items-center gap-2 w-full min-h-64 bg-white shadow-lg border border-dark/10 rounded-2xl h-max overflow-hidden group p-4"

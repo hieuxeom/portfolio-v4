@@ -1,21 +1,20 @@
 import clsx from "clsx";
 import useScroll from "../../../hooks/useScroll";
 import Button from "../../button";
-import Typography from "../../typography";
 import ICON_CONFIG from "../../../configs/icon.config";
 import { useNavigate } from "react-router";
 import ROUTE_PATH from "../../../configs/routes.config";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 
-interface HeaderProps {}
+// interface HeaderProps {}
 
-const Header = (props: HeaderProps) => {
-	const { scrollDir, scrollPosition } = useScroll();
+const Header = () => {
+	const { scrollPosition } = useScroll();
 
 	const navigate = useNavigate();
 
-	const [cookies, setCookie, removeCookie] = useCookies(["refresh_token"]);
+	const [cookies] = useCookies(["refresh_token"]);
 
 	const headerConfig = [
 		{

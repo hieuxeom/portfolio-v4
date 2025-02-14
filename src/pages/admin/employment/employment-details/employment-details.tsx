@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { DateRange, DayPicker } from "react-day-picker";
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import AdminHeader from "../../../../components/admin/admin-header";
 import Input from "../../../../components/input";
 import Typography from "../../../../components/typography";
@@ -10,7 +10,7 @@ import Wrapper from "../../../../components/wrapper";
 import API_ROUTE from "../../../../configs/api.config";
 import ICON_CONFIG from "../../../../configs/icon.config";
 import ROUTE_PATH from "../../../../configs/routes.config";
-import useAxios from "../../../../hooks/useAxios";
+
 import { TNewEmployment } from "../../../../types/employment";
 import { IAPIResponse } from "../../../../types/general";
 import { formatDate } from "../../../../utils/convert-datetime";
@@ -19,14 +19,14 @@ import AchievementRow from "../../../introduce/achievement-row";
 import Button from "../../../../components/button";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface EmploymentDetailsProps {}
+// interface EmploymentDetailsProps {}
 
-const EmploymentDetails = (props: EmploymentDetailsProps) => {
+const EmploymentDetails = () => {
 	const { employmentId } = useParams();
 
 	const axios = useAxiosServer();
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const [employmentDetails, setEmploymentDetails] = useState<TNewEmployment>({
 		title: "",
@@ -88,7 +88,7 @@ const EmploymentDetails = (props: EmploymentDetailsProps) => {
 		const myFn = axios
 			.patch<IAPIResponse>(API_ROUTE.EMPLOYMENT.UPDATE(employmentId), employmentDetails)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				getEmploymentHistoryDetails(employmentId);
 			});
 

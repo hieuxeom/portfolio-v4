@@ -1,4 +1,3 @@
-import { FaPlus } from "react-icons/fa6";
 import AdminHeader from "../../../../components/admin/admin-header";
 import Wrapper from "../../../../components/wrapper";
 import ICON_CONFIG from "../../../../configs/icon.config";
@@ -10,7 +9,7 @@ import { FormEvent, useState } from "react";
 import { TNewCertification } from "../../../../types/certification";
 import AchievementRow from "../../../introduce/achievement-row";
 import FileInput from "../../../../components/file-input";
-import useAxios from "../../../../hooks/useAxios";
+
 import API_ROUTE from "../../../../configs/api.config";
 import { IAPIResponse } from "../../../../types/general";
 import toast from "react-hot-toast";
@@ -21,9 +20,9 @@ import { dayPickerWrapperClassnames, dayPickerCustomClassnames } from "../../../
 import { formatDate } from "../../../../utils/convert-datetime";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
 
-interface NewCertificationProps {}
+// interface NewCertificationProps {}
 
-const NewCertification = (props: NewCertificationProps) => {
+const NewCertification = () => {
 	const axios = useAxiosServer("multipart/form-data");
 	const navigate = useNavigate();
 
@@ -47,7 +46,7 @@ const NewCertification = (props: NewCertificationProps) => {
 		const myFn = axios
 			.post<IAPIResponse<{ newCertId: string }>>(API_ROUTE.CERTIFICATION.NEW, formData)
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				navigate(ROUTE_PATH.ADMIN.CERTIFICATION.INDEX);
 			});
 

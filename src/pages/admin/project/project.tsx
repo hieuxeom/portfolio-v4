@@ -3,7 +3,6 @@ import AdminHeader from "../../../components/admin/admin-header";
 import Wrapper from "../../../components/wrapper";
 import ICON_CONFIG from "../../../configs/icon.config";
 import ROUTE_PATH from "../../../configs/routes.config";
-import useAxios from "../../../hooks/useAxios";
 import API_ROUTE from "../../../configs/api.config";
 import { TProjectGroup, TProjectResponse } from "../../../types/project";
 import { IAPIResponse } from "../../../types/general";
@@ -27,9 +26,9 @@ import Input from "../../../components/input";
 import Typography from "../../../components/typography";
 import Chip from "../../../components/chip";
 
-interface ProjectProps {}
+// interface ProjectProps {}
 
-const Project = (props: ProjectProps) => {
+const Project = () => {
 	const axios = useAxiosServer();
 	const navigate = useNavigate();
 	const [listProjects, setListProjects] = useState<TProjectResponse[]>([]);
@@ -61,14 +60,14 @@ const Project = (props: ProjectProps) => {
 		const promiseFn = axios
 			.delete<IAPIResponse>(API_ROUTE.PROJECT.DELETE(projectId))
 			.then((response) => response.data)
-			.then((response) => {
+			.then(() => {
 				getListProjects();
 			});
 
 		toast.promise(promiseFn, {
 			loading: "Deleting...",
 			success: "Delete successfully",
-			error: (error) => "Error when fetching",
+			error: "Error when fetching",
 		});
 	};
 
