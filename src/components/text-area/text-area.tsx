@@ -6,7 +6,7 @@ interface TextAreaProps {
 	label: string;
 	value: string | number;
 	name: string;
-	rows: number;
+	rows?: number;
 	placeholder?: string;
 	isInvalid?: boolean;
 	errorMessage?: string;
@@ -19,12 +19,12 @@ const TextArea = ({
 	label,
 	value,
 	name,
-	rows,
+	rows = 3,
 	placeholder,
 	isInvalid,
 	errorMessage,
 	disabled,
-	maxLength,
+	maxLength = 255,
 	onChange,
 }: TextAreaProps) => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -84,11 +84,6 @@ const TextArea = ({
 			</div>
 		</div>
 	);
-};
-
-TextArea.defaultProps = {
-	rows: 3,
-	maxLength: 255,
 };
 
 export default TextArea;

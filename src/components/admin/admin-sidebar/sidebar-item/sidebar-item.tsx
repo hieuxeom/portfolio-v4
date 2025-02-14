@@ -32,6 +32,4 @@ const SidebarItem = ({ icon, title, path }: SidebarItemProps) => {
 	);
 };
 
-SidebarItem.defaultProps = {};
-
 export default SidebarItem;

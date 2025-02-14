@@ -86,8 +86,4 @@ const Header = (props: HeaderProps) => {
 	);
 };
 
-Header.defaultProps = {
-	foo: "bar",
-};
-
 export default Header;

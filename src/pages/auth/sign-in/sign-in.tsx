@@ -110,6 +110,4 @@ const SignIn = (props: SignInProps) => {
 	);
 };
 
-SignIn.defaultProps = {};
-
 export default SignIn;

@@ -32,6 +32,4 @@ const AdminLayout = (props: AdminLayoutProps) => {
 	);
 };
 
-AdminLayout.defaultProps = {};
-
 export default AdminLayout;

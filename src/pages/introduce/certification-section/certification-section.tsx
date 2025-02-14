@@ -9,9 +9,7 @@ import API_ROUTE from "../../../configs/api.config";
 import Loading from "../../../components/loading";
 import { formatDate } from "../../../utils/convert-datetime";
 
-interface CertificationSectionProps {
-	foo: string;
-}
+interface CertificationSectionProps {}
 
 const CertificationSection = (props: CertificationSectionProps) => {
 	const axios = useAxios();
@@ -69,10 +67,6 @@ const CertificationSection = (props: CertificationSectionProps) => {
 			</ul>
 		</Wrapper>
 	);
-};
-
-CertificationSection.defaultProps = {
-	foo: "bar",
 };
 
 export default CertificationSection;

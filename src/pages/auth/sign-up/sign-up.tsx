@@ -101,6 +101,4 @@ const SignUp = (props: SignUpProps) => {
 	);
 };
 
-SignUp.defaultProps = {};
-
 export default SignUp;

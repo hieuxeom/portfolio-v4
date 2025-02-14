@@ -220,6 +220,4 @@ const CertificationDetails = (props: CertificationDetailsProps) => {
 	);
 };
 
-CertificationDetails.defaultProps = {};
-
 export default CertificationDetails;

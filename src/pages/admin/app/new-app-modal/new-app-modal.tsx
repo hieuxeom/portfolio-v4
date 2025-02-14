@@ -84,6 +84,4 @@ const NewAppModal = ({ isShowModal, setIsShowModal }: NewAppModalProps) => {
 	);
 };
 
-NewAppModal.defaultProps = {};
-
 export default NewAppModal;

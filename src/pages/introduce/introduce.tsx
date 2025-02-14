@@ -44,7 +44,7 @@ const Introduce = (props: IntroduceProps) => (
 			<Typography type={"large"}>
 				I am looking for an opportunity for a position as a <strong>Website Developer Intern</strong>{" "}
 			</Typography>
-			<AnimatedQuote />
+			<AnimatedQuote renderText={"Let's think, then plan and do it."} />
 		</Wrapper>
 
 		<Divider />
@@ -79,7 +79,5 @@ const Introduce = (props: IntroduceProps) => (
 		</Wrapper>
 	</Wrapper>
 );
-
-Introduce.defaultProps = {};
 
 export default Introduce;

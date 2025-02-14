@@ -2,17 +2,25 @@ import clsx from "clsx";
 import { TBaseSize } from "../../types/general";
 
 interface WrapperProps {
-	size: TBaseSize;
-	centerX: boolean;
-	centerY: boolean;
-	orientation: "horizontal" | "vertical";
-	gapSize: Extract<TBaseSize, "xs" | "sm" | "md" | "lg" | "xl" | "2xl">;
+	size?: TBaseSize;
+	centerX?: boolean;
+	centerY?: boolean;
+	orientation?: "horizontal" | "vertical";
+	gapSize?: Extract<TBaseSize, "xs" | "sm" | "md" | "lg" | "xl" | "2xl">;
 	className?: string;
 	children?: React.ReactNode;
 }
 
-const Wrapper = ({ size, centerX, centerY, orientation, gapSize, className, children }: WrapperProps) => {
-	const GapSize: Record<WrapperProps["gapSize"], string> = {
+const Wrapper = ({
+	size = "8xl",
+	centerX = false,
+	centerY = false,
+	orientation = "horizontal",
+	gapSize = "md",
+	className,
+	children,
+}: WrapperProps) => {
+	const GapSize: Record<NonNullable<WrapperProps["gapSize"]>, string> = {
 		xs: "gap-1",
 		sm: "gap-2",
 		md: "gap-4",
@@ -49,14 +57,6 @@ const Wrapper = ({ size, centerX, centerY, orientation, gapSize, className, chil
 			{children}
 		</div>
 	);
-};
-
-Wrapper.defaultProps = {
-	size: "8xl",
-	orientation: "horizontal",
-	centerX: false,
-	centerY: false,
-	gapSize: "md",
 };
 
 export default Wrapper;

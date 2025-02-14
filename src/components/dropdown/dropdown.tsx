@@ -10,16 +10,24 @@ export type TDropdownData = {
 };
 
 interface DropdownProps {
-	label: string;
-	placeholder: string;
-	position: "top" | "bottom";
-	inputPlaceholder: string;
+	label?: string;
+	placeholder?: string;
+	position?: "top" | "bottom";
+	inputPlaceholder?: string;
 	value: string;
 	onValueChange: (value: string | null) => void;
 	data: TDropdownData[];
 }
 
-const Dropdown = ({ label, placeholder, position, inputPlaceholder, data, value, onValueChange }: DropdownProps) => {
+const Dropdown = ({
+	label = "Selectionbox",
+	placeholder = "Select",
+	position = "bottom",
+	inputPlaceholder = "Search data...",
+	data,
+	value,
+	onValueChange,
+}: DropdownProps) => {
 	const [isShowList, setIsShowList] = useState<boolean>(false);
 	const [isFocus, setIsFocus] = useState<boolean>(false);
 
@@ -136,13 +144,6 @@ const Dropdown = ({ label, placeholder, position, inputPlaceholder, data, value,
 			</div>
 		</div>
 	);
-};
-
-Dropdown.defaultProps = {
-	label: "Selectionbox",
-	placeholder: "Select",
-	inputPlaceholder: "Search data...",
-	position: "bottom",
 };
 
 export default Dropdown;

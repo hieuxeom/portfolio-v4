@@ -209,6 +209,4 @@ const NewEducation = (props: NewEducationProps) => {
 	);
 };
 
-NewEducation.defaultProps = {};
-
 export default NewEducation;

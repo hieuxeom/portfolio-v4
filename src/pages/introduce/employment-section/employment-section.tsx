@@ -63,6 +63,4 @@ const EmploymentSection = (props: EmploymentSectionProps) => {
 	);
 };
 
-EmploymentSection.defaultProps = {};
-
 export default EmploymentSection;

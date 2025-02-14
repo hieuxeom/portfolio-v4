@@ -30,6 +30,4 @@ const SignOut = (props: SignOutProps) => {
 	);
 };
 
-SignOut.defaultProps = {};
-
 export default SignOut;

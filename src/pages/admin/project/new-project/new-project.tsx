@@ -250,6 +250,4 @@ const NewProject = (props: NewProjectProps) => {
 	);
 };
 
-NewProject.defaultProps = {};
-
 export default NewProject;

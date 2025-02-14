@@ -3,12 +3,12 @@ import { TBaseColors } from "../../types/general";
 import Typography from "../typography";
 
 interface LoadingProps {
-	size: "sm" | "md" | "lg" | "xl";
-	color: TBaseColors;
+	size?: "sm" | "md" | "lg" | "xl";
+	color?: TBaseColors;
 }
 
-const Loading = ({ size, color }: LoadingProps) => {
-	const MapLoadingColor: Record<LoadingProps["color"], string> = {
+const Loading = ({ size = "lg", color = "default" }: LoadingProps) => {
+	const MapLoadingColor: Record<NonNullable<LoadingProps["color"]>, string> = {
 		default: "fill-dark",
 		primary: "fill-primary",
 		secondary: "fill-secondary",
@@ -103,11 +103,6 @@ const Loading = ({ size, color }: LoadingProps) => {
 				</div>
 			);
 	}
-};
-
-Loading.defaultProps = {
-	size: "lg",
-	color: "default",
 };
 
 export default Loading;

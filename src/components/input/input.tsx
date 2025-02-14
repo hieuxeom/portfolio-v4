@@ -3,7 +3,7 @@ import Typography from "../typography";
 import clsx from "clsx";
 
 interface InputProps {
-	type: "text" | "number" | "email" | "password";
+	type?: "text" | "number" | "email" | "password";
 	label: string;
 	value: string | number;
 	name: string;
@@ -17,7 +17,7 @@ interface InputProps {
 }
 
 const Input = ({
-	type,
+	type = "text",
 	label,
 	value,
 	name,
@@ -71,10 +71,6 @@ const Input = ({
 			)}
 		</div>
 	);
-};
-
-Input.defaultProps = {
-	type: "text",
 };
 
 export default Input;

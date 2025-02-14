@@ -19,9 +19,7 @@ import TableCellAction from "../../../components/table/table-cell-action";
 import Chip from "../../../components/chip";
 import Button from "../../../components/button";
 
-interface AccountProps {
-	foo: string;
-}
+interface AccountProps {}
 
 const Account = (props: AccountProps) => {
 	const listColumns = [
@@ -221,10 +219,6 @@ const Account = (props: AccountProps) => {
 			</TableWrapper>
 		</Wrapper>
 	);
-};
-
-Account.defaultProps = {
-	foo: "bar",
 };
 
 export default Account;

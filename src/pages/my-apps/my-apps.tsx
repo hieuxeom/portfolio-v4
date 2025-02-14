@@ -11,9 +11,7 @@ import { IAPIResponse } from "../../types/general";
 import AppBlock from "./app-block";
 import Loading from "../../components/loading";
 import useAxios from "../../hooks/useAxios";
-interface MyAppsProps {
-	foo: string;
-}
+interface MyAppsProps {}
 
 const MyApps = (props: MyAppsProps) => {
 	const axios = useAxios();
@@ -64,10 +62,6 @@ const MyApps = (props: MyAppsProps) => {
 			</div>
 		</Wrapper>
 	);
-};
-
-MyApps.defaultProps = {
-	foo: "bar",
 };
 
 export default MyApps;

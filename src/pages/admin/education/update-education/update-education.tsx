@@ -265,6 +265,4 @@ const UpdateEducation = (props: UpdateEducationProps) => {
 	);
 };
 
-UpdateEducation.defaultProps = {};
-
 export default UpdateEducation;

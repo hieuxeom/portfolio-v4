@@ -1,10 +1,10 @@
 interface TableCellProps {
-	isHeader: boolean;
-	colSpan: number;
+	isHeader?: boolean;
+	colSpan?: number;
 	children: React.ReactNode;
 }
 
-const TableCell = ({ isHeader, colSpan, children }: TableCellProps) => {
+const TableCell = ({ isHeader = false, colSpan = 1, children }: TableCellProps) => {
 	if (isHeader) {
 		return (
 			<th
@@ -25,11 +25,6 @@ const TableCell = ({ isHeader, colSpan, children }: TableCellProps) => {
 			{children}
 		</td>
 	);
-};
-
-TableCell.defaultProps = {
-	isHeader: false,
-	colSpan: 1,
 };
 
 export default TableCell;

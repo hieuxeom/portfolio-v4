@@ -101,6 +101,4 @@ const DetailsProject = (props: DetailsProjectProps) => {
 	);
 };
 
-DetailsProject.defaultProps = {};
-
 export default DetailsProject;

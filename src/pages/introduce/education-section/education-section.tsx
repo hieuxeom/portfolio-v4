@@ -73,6 +73,4 @@ const EducationSection = (props: EducationSectionProps) => {
 	);
 };
 
-EducationSection.defaultProps = {};
-
 export default EducationSection;

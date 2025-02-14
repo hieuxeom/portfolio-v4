@@ -208,6 +208,4 @@ const Education = (props: EducationProps) => {
 	);
 };
 
-Education.defaultProps = {};
-
 export default Education;

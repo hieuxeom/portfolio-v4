@@ -223,6 +223,5 @@ const Project = (props: ProjectProps) => {
 		</Wrapper>
 	);
 };
-Project.defaultProps = {};
 
 export default Project;

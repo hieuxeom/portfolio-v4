@@ -43,6 +43,4 @@ const AdminHeader = ({ title, backButton, customElement }: AdminHeaderProps) => 
 	);
 };
 
-AdminHeader.defaultProps = {};
-
 export default AdminHeader;

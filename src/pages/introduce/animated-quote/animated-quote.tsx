@@ -29,8 +29,4 @@ const AnimatedQuote = ({ renderText }: AnimatedQuoteProps) => {
 	);
 };
 
-AnimatedQuote.defaultProps = {
-	renderText: "Let's think, then plan and do it.",
-};
-
 export default AnimatedQuote;

@@ -70,6 +70,4 @@ const AdminSidebar = (props: AdminSidebarProps) => {
 	);
 };
 
-AdminSidebar.defaultProps = {};
-
 export default AdminSidebar;

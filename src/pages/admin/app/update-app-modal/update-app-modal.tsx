@@ -141,6 +141,4 @@ const UpdateAppModal = ({ currentAppDetails, isShowModal, setIsShowModal }: Upda
 	);
 };
 
-UpdateAppModal.defaultProps = {};
-
 export default UpdateAppModal;

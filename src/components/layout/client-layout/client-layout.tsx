@@ -22,6 +22,4 @@ const ClientLayout = (props: ClientLayoutProps) => {
 	);
 };
 
-ClientLayout.defaultProps = {};
-
 export default ClientLayout;

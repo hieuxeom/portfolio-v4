@@ -21,7 +21,6 @@ import EditEmployment from "../../pages/admin/employment/edit-employment";
 import SignUp from "../../pages/auth/sign-up";
 import SignIn from "../../pages/auth/sign-in";
 import SignOut from "../../pages/auth/sign-out";
-import NewGroup from "../../pages/admin/project/new-group";
 import MyApps from "../../pages/my-apps";
 import App from "../../pages/admin/app";
 
@@ -163,7 +162,5 @@ const IndexRouter = (props: IndexRouterProps) => (
 		</Routes>
 	</BrowserRouter>
 );
-
-IndexRouter.defaultProps = {};
 
 export default IndexRouter;

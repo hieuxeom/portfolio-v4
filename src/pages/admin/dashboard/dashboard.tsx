@@ -1,11 +1,5 @@
-interface DashboardProps {
-	foo: string;
-}
+interface DashboardProps {}
 
 const Dashboard = (props: DashboardProps) => <div className="dashboard-component">{props.foo}</div>;
-
-Dashboard.defaultProps = {
-	foo: "bar",
-};
 
 export default Dashboard;

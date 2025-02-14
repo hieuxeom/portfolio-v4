@@ -3,36 +3,36 @@ import { TBaseColors, TBaseRadius, TBaseSize, TBaseVariants } from "../../types/
 import { useEffect } from "react";
 
 export interface ButtonProps {
-	color: TBaseColors;
-	variant: TBaseVariants;
-	size: Extract<TBaseSize, "2xl" | "xl" | "lg" | "md" | "sm">;
+	color?: TBaseColors;
+	variant?: TBaseVariants;
+	size?: Extract<TBaseSize, "2xl" | "xl" | "lg" | "md" | "sm">;
 	radius?: TBaseRadius;
 	className?: string;
 	startContent?: React.ReactNode | string;
 	endContent?: React.ReactNode | string;
-	isShowBackground: boolean;
-	type: "button" | "submit" | "reset";
-	isIconOnly: boolean;
+	isShowBackground?: boolean;
+	type?: "button" | "submit" | "reset";
+	isIconOnly?: boolean;
 	onClick?: () => void;
 	onKeyDown?: (e: KeyboardEvent) => void;
 	children: React.ReactNode;
 }
 
 const Button = ({
-	color,
-	variant,
-	size,
+	color = "default",
+	variant = "solid",
+	size = "md",
 	radius,
 	className,
 	startContent,
 	endContent,
-	isShowBackground,
-	type,
-	isIconOnly,
+	isShowBackground = false,
+	type = "button",
+	isIconOnly = false,
 	onClick,
 	children,
 }: ButtonProps) => {
-	const MapSolidButtonColor: Record<ButtonProps["color"], string> = {
+	const MapSolidButtonColor: Record<NonNullable<ButtonProps["color"]>, string> = {
 		default:
 			"border border-default bg-default text-default-foreground hover:bg-default-400 hover:border-default-400",
 		primary:
@@ -46,7 +46,7 @@ const Button = ({
 			"border border-warning bg-warning text-warning-foreground hover:bg-warning-400 hover:border-warning-400",
 	};
 
-	const MapBorderedButtonColor: Record<ButtonProps["color"], string> = {
+	const MapBorderedButtonColor: Record<NonNullable<ButtonProps["color"]>, string> = {
 		default: "border-2 border-default bg-transparent text-default hover:bg-default hover:text-default-foreground",
 		primary: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
 		secondary:
@@ -56,7 +56,7 @@ const Button = ({
 		warning: "border-2 border-warning bg-transparent text-warning hover:bg-warning hover:text-warning-foreground",
 	};
 
-	const MapLightButtonColor: Record<ButtonProps["color"], string> = {
+	const MapLightButtonColor: Record<NonNullable<ButtonProps["color"]>, string> = {
 		default: "bg-transparent text-default hover:text-default-300",
 		primary: "bg-transparent text-primary hover:text-primary-300",
 		secondary: "bg-transparent text-secondary hover:text-secondary-300",
@@ -65,7 +65,7 @@ const Button = ({
 		warning: "bg-transparent text-warning hover:text-warning-300",
 	};
 
-	const MapLightButtonBackground: Record<ButtonProps["color"], string> = {
+	const MapLightButtonBackground: Record<NonNullable<ButtonProps["color"]>, string> = {
 		default: "hover:bg-default-100 hover:!text-default",
 		primary: "hover:bg-primary-100 hover:!text-primary",
 		secondary: "hover:bg-secondary-100 hover:!text-secondary",
@@ -74,7 +74,7 @@ const Button = ({
 		warning: "hover:bg-warning-100 hover:!text-warning",
 	};
 
-	const MapButtonSize: Record<ButtonProps["size"], string> = {
+	const MapButtonSize: Record<NonNullable<ButtonProps["size"]>, string> = {
 		sm: clsx("rounded-lg", {
 			"py-1 px-2": !isIconOnly,
 			"p-1": isIconOnly,
@@ -97,7 +97,7 @@ const Button = ({
 		}),
 	};
 
-	const MapButtonTextSize: Record<ButtonProps["size"], string> = {
+	const MapButtonTextSize: Record<NonNullable<ButtonProps["size"]>, string> = {
 		sm: "text-sm",
 		md: "tex-base",
 		lg: "text-lg",
@@ -153,15 +153,6 @@ const Button = ({
 			{endContent}
 		</button>
 	);
-};
-
-Button.defaultProps = {
-	color: "default",
-	variant: "solid",
-	size: "md",
-	isShowBackground: false,
-	type: "button",
-	isIconOnly: false,
 };
 
 export default Button;

@@ -279,6 +279,4 @@ const EditProject = (props: EditProjectProps) => {
 	);
 };
 
-EditProject.defaultProps = {};
-
 export default EditProject;

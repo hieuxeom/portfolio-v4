@@ -12,6 +12,4 @@ const TableWrapper = ({ children }: TableWrapperProps) => (
 	</div>
 );
 
-TableWrapper.defaultProps = {};
-
 export default TableWrapper;

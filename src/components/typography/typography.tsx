@@ -1,16 +1,16 @@
 import clsx from "clsx";
 
 interface TypographyProps {
-	type: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "small" | "large" | "muted" | "tiny";
+	type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "small" | "large" | "muted" | "tiny";
+	isParagraph?: boolean;
 	className?: string;
-	isParagraph: boolean;
 	children: React.ReactNode;
 }
 
-const Typography = ({ type, className, isParagraph, children }: TypographyProps) => {
+const Typography = ({ type = "p", isParagraph = false, className, children }: TypographyProps) => {
 	const TypoType = type !== "large" && type !== "muted" && type !== "tiny" ? type : "p";
 
-	const MapClassNames: Record<TypographyProps["type"], string> = {
+	const MapClassNames: Record<NonNullable<TypographyProps["type"]>, string> = {
 		h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
 		h2: "scroll-m-20 text-3xl font-semibold tracking-tight p-0",
 		h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
@@ -23,7 +23,7 @@ const Typography = ({ type, className, isParagraph, children }: TypographyProps)
 		muted: "text-muted-base text-sm",
 		tiny: "text-[12px] leading-none",
 	};
-	const MapParagraphClassNames: Record<TypographyProps["type"], string> = {
+	const MapParagraphClassNames: Record<NonNullable<TypographyProps["type"]>, string> = {
 		h1: "!leading-tight",
 		h2: "pb-4",
 		h3: "",
@@ -42,11 +42,6 @@ const Typography = ({ type, className, isParagraph, children }: TypographyProps)
 			{children}
 		</TypoType>
 	);
-};
-
-Typography.defaultProps = {
-	type: "p",
-	isParagraph: false,
 };
 
 export default Typography;

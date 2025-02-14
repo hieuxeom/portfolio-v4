@@ -1,12 +1,16 @@
 import Typography from "../../../components/typography";
 
 interface AchievementRowProps {
-	title: string;
-	organization: string;
-	time: string;
+	title?: string;
+	organization?: string;
+	time?: string;
 }
 
-const AchievementRow = ({ title, organization, time }: AchievementRowProps) => (
+const AchievementRow = ({
+	title = "Title of the achievement",
+	organization = "Organization",
+	time = "12/24",
+}: AchievementRowProps) => (
 	<div className={"flex flex-col gap-1 ml-12"}>
 		<div
 			className={
@@ -22,11 +26,5 @@ const AchievementRow = ({ title, organization, time }: AchievementRowProps) => (
 		</div>
 	</div>
 );
-
-AchievementRow.defaultProps = {
-	title: "Title of the achievement",
-	organization: "Organization",
-	time: "12/24",
-};
 
 export default AchievementRow;

@@ -2,12 +2,12 @@ import Typography from "../../typography";
 import TableCell from "../table-cell";
 
 interface TableRowProps {
-	isEmpty: boolean;
+	isEmpty?: boolean;
 	onClick?: () => void;
 	children: React.ReactNode;
 }
 
-const TableRow = ({ isEmpty, onClick, children }: TableRowProps) => {
+const TableRow = ({ isEmpty = false, onClick, children }: TableRowProps) => {
 	if (isEmpty) {
 		return (
 			<tr>
@@ -31,10 +31,6 @@ const TableRow = ({ isEmpty, onClick, children }: TableRowProps) => {
 			{children}
 		</tr>
 	);
-};
-
-TableRow.defaultProps = {
-	isEmpty: false,
 };
 
 export default TableRow;

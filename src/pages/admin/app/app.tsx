@@ -20,9 +20,7 @@ import { formatDate } from "../../../utils/convert-datetime";
 import UpdateAppModal from "./update-app-modal";
 import Switch from "../../../components/switch";
 
-interface AppProps {
-	foo: string;
-}
+interface AppProps {}
 
 const App = (props: AppProps) => {
 	const [isShowNewModal, setIsShowNewModal] = useState<boolean>(false);
@@ -245,10 +243,6 @@ const App = (props: AppProps) => {
 			)}
 		</Wrapper>
 	);
-};
-
-App.defaultProps = {
-	foo: "bar",
 };
 
 export default App;

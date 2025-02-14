@@ -174,6 +174,4 @@ const NewEmployment = (props: NewEmploymentProps) => {
 	);
 };
 
-NewEmployment.defaultProps = {};
-
 export default NewEmployment;

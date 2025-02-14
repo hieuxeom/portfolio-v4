@@ -4,6 +4,4 @@ interface TableBodyProps {
 
 const TableBody = ({ children }: TableBodyProps) => <tbody>{children}</tbody>;
 
-TableBody.defaultProps = {};
-
 export default TableBody;

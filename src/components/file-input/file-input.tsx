@@ -2,15 +2,15 @@ import clsx from "clsx";
 import { ChangeEvent, useEffect, useState } from "react";
 
 interface FileInputProps {
-	title: string;
-	value: FileList | null;
+	title?: string;
+	value?: FileList | null;
 	name: string;
 	helperText?: string;
-	isMultiple: boolean;
+	isMultiple?: boolean;
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FileInput = ({ title, value, name, helperText, isMultiple, onChange }: FileInputProps) => {
+const FileInput = ({ title = "", value = null, name, helperText, isMultiple = false, onChange }: FileInputProps) => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
 
 	return (
@@ -78,12 +78,6 @@ const FileInput = ({ title, value, name, helperText, isMultiple, onChange }: Fil
 			)}
 		</div>
 	);
-};
-
-FileInput.defaultProps = {
-	title: "",
-	value: "",
-	isMultiple: false,
 };
 
 export default FileInput;

@@ -183,6 +183,4 @@ const NewCertification = (props: NewCertificationProps) => {
 	);
 };
 
-NewCertification.defaultProps = {};
-
 export default NewCertification;

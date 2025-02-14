@@ -195,6 +195,4 @@ const Certification = (props: CertificationProps) => {
 	);
 };
 
-Certification.defaultProps = {};
-
 export default Certification;

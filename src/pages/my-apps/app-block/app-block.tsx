@@ -56,8 +56,4 @@ const AppBlock = ({ appName, appIcon, appLink }: AppBlockProps) => (
 	</div>
 );
 
-AppBlock.defaultProps = {
-	foo: "bar",
-};
-
 export default AppBlock;

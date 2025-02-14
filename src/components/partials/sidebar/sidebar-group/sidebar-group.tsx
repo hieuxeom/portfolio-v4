@@ -58,8 +58,4 @@ const SidebarGroup = ({ title, groupItems, isCloseDefault }: SidebarGroupProps) 
 	);
 };
 
-SidebarGroup.defaultProps = {
-	isOpenDefault: false,
-};
-
 export default SidebarGroup;

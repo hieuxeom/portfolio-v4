@@ -12,7 +12,7 @@ interface ModalWrapperProps {
 	children: React.ReactNode;
 }
 
-const ModalWrapper = ({ title, isShowModal, setIsShowModal, children }: ModalWrapperProps) => {
+const ModalWrapper = ({ title, isShowModal = false, setIsShowModal, children }: ModalWrapperProps) => {
 	return (
 		<>
 			<div
@@ -49,10 +49,6 @@ const ModalWrapper = ({ title, isShowModal, setIsShowModal, children }: ModalWra
 			</div>
 		</>
 	);
-};
-
-ModalWrapper.defaultProps = {
-	isShowModal: false,
 };
 
 export default ModalWrapper;

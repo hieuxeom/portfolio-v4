@@ -3,7 +3,7 @@ import Button from "../../button";
 
 interface TableCellActionProps {
 	mode: boolean;
-	showViewButton: boolean;
+	showViewButton?: boolean;
 	onRecover?: () => void;
 	onPermanentDelete?: () => void;
 	onSoftDelete?: () => void;
@@ -13,7 +13,7 @@ interface TableCellActionProps {
 
 const TableCellAction = ({
 	mode,
-	showViewButton,
+	showViewButton = false,
 	onRecover,
 	onSoftDelete,
 	onPermanentDelete,
@@ -74,9 +74,5 @@ const TableCellAction = ({
 		)}
 	</div>
 );
-
-TableCellAction.defaultProps = {
-	showViewButton: false,
-};
 
 export default TableCellAction;
