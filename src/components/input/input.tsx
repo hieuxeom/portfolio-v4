@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 interface InputProps {
 	type?: "text" | "number" | "email" | "password";
-	label: string;
+	label?: string;
 	value: string | number;
 	name: string;
 	placeholder?: string;
@@ -12,6 +12,10 @@ interface InputProps {
 	errorMessage?: string;
 	disabled?: boolean;
 	readOnly?: boolean;
+	classNames?: {
+		input?: string;
+		label?: string;
+	};
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
@@ -26,6 +30,7 @@ const Input = ({
 	errorMessage,
 	disabled,
 	readOnly,
+	classNames,
 	onChange,
 	onKeyDown,
 }: InputProps) => {
@@ -34,26 +39,34 @@ const Input = ({
 	return (
 		<div className="flex flex-col gap-1">
 			<label
-				className={clsx("uppercase font-bold text-sm transition-all duration-300", {
-					"text-dark": value !== "" || isFocus,
-					"text-dark/25": value === "" && !isFocus,
-				})}
-				htmlFor={label}
+				className={clsx(
+					"uppercase font-bold text-sm transition-all duration-300",
+					classNames && classNames.label,
+					{
+						"text-dark": value !== "" || isFocus,
+						"text-dark/25": value === "" && !isFocus,
+					}
+				)}
+				htmlFor={name}
 			>
 				{label}
 			</label>
 			<input
-				className={clsx("min-w-64 border-2 rounded-xl px-4 py-2 outline-none transition-all duration-300", {
-					"text-dark border-dark": value !== "" || isFocus,
-					"text-dark/25 border-dark/25": value === "" && !isFocus,
-					"bg-dark/20 border-dark/10 text-dark/50": disabled,
-					"bg-dark/5 cursor-default": readOnly,
-				})}
+				className={clsx(
+					"w-full border-2 rounded-xl px-4 py-2 outline-none transition-all duration-300",
+					classNames && classNames.input,
+					{
+						"text-dark border-dark": value !== "" || isFocus,
+						"text-dark/25 border-dark/25": value === "" && !isFocus,
+						"bg-dark/20 border-dark/10 text-dark/50": disabled,
+						"bg-dark/5 cursor-default": readOnly,
+					}
+				)}
 				onFocus={() => setIsFocus(true)}
 				onBlur={() => setIsFocus(false)}
 				onKeyDown={onKeyDown}
 				type={type}
-				id={label}
+				id={name}
 				value={value}
 				name={name}
 				placeholder={placeholder}

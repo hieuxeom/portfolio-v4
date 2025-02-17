@@ -20,6 +20,9 @@ export type TProjectResponse = TProject &
 export type TProjectGroup = {
 	group_id: string | number;
 	group_title: string;
+	created_at: string;
+	updated_at: string;
+	is_deleted: number;
 };
 
 export type TNewProject = Pick<

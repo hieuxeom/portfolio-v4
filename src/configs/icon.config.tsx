@@ -5,6 +5,7 @@ import {
 	FaArrowRotateLeft,
 	FaBan,
 	FaEye,
+	FaFloppyDisk,
 	FaLockOpen,
 	FaPlus,
 	FaUserShield,
@@ -28,6 +29,7 @@ const ICON_CONFIG = {
 	BLOCK: <FaBan />,
 	UNBLOCK: <FaLockOpen />,
 	CLOSE: <FaXmark />,
+	SAVE: <FaFloppyDisk />,
 };
 
 export default ICON_CONFIG;

@@ -79,7 +79,7 @@ const EditProject = () => {
 		formData.append("isChangeArticle", projectDetails.article_body !== initArticle ? "true" : "false");
 
 		const promiseFn = axios
-			.patch(API_ROUTE.PROJECT.UPDATE(projectId), formData)
+			.patch(API_ROUTE.PROJECT.UPDATE_PROJECT(projectId), formData)
 			.then((response) => response.data)
 			.then((response) => {
 				console.log(response);
