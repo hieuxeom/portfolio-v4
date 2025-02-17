@@ -8,73 +8,61 @@ import EducationSection from "./education-section";
 
 import CertificationSection from "./certification-section";
 import EmploymentSection from "./employment-section";
+import SkillSection from "./skill-section";
 
 // interface IntroduceProps {}
 
-const Introduce = () => (
-	<Wrapper
-		size={"full"}
-		className={"p-8"}
-		orientation={"vertical"}
-		gapSize={"md"}
-	>
+const Introduce = () => {
+	return (
 		<Wrapper
 			size={"full"}
+			className={"p-8"}
 			orientation={"vertical"}
+			gapSize={"md"}
 		>
-			<Typography
-				type={"h2"}
-				isParagraph
+			<Wrapper
+				size={"full"}
+				orientation={"vertical"}
 			>
-				👋 Hey there!
-			</Typography>
-			<Typography
-				type={"large"}
-				className={"text-justify"}
-			>
-				My name is Tran Ngoc Hieu,
-			</Typography>
-			<Typography type={"large"}>
-				I have just graduated with a{" "}
-				<strong>Bachelor's degree in Information Technology - majoring in Website Development</strong>
-			</Typography>
-			<Typography type={"large"}>
-				I am looking for an opportunity for a position as a <strong>Website Developer Intern</strong>{" "}
-			</Typography>
-			<AnimatedQuote renderText={"Let's think, then plan and do it."} />
+				<Typography
+					type={"h2"}
+					isParagraph
+				>
+					👋 Hey there!
+				</Typography>
+				<Typography
+					type={"large"}
+					className={"text-justify"}
+				>
+					My name is Tran Ngoc Hieu,
+				</Typography>
+				<Typography type={"large"}>
+					I have just graduated with a{" "}
+					<strong>Bachelor's degree in Information Technology - majoring in Website Development</strong>
+				</Typography>
+				<Typography type={"large"}>
+					I am looking for an opportunity for a position as a <strong>Website Developer Intern</strong>{" "}
+				</Typography>
+				<AnimatedQuote renderText={"Let's think, then plan and do it."} />
+			</Wrapper>
+
+			<Divider />
+
+			<EducationSection />
+
+			<Divider />
+
+			<CertificationSection />
+
+			<Divider />
+
+			<EmploymentSection />
+
+			<Divider />
+
+			<SkillSection />
 		</Wrapper>
-
-		<Divider />
-
-		<EducationSection />
-
-		<Divider />
-
-		<CertificationSection />
-
-		<Divider />
-
-		<EmploymentSection />
-
-		<Divider />
-
-		<Wrapper
-			size={"full"}
-			orientation={"vertical"}
-		>
-			<Typography
-				type={"h2"}
-				isParagraph
-			>
-				🤹🏼 Technical Skills
-			</Typography>
-			{/* <ul className={"flex flex-col gap-8 list-disc"}>
-				{Array.from({ length: 3 }).map((_, index) => (
-					<AchievementRow key={index} />
-				))}
-			</ul> */}
-		</Wrapper>
-	</Wrapper>
-);
+	);
+};
 
 export default Introduce;
