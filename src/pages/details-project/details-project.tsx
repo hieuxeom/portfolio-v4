@@ -38,7 +38,7 @@ const DetailsProject = () => {
 		}
 
 		getProjectDetails(projectId);
-	}, []);
+	}, [projectId]);
 
 	return (
 		<Wrapper
