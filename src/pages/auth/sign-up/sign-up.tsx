@@ -70,12 +70,14 @@ const SignUp = () => {
 				<Input
 					label={"Password"}
 					name={"password"}
+					type={"password"}
 					value={signUpForm.password}
 					onChange={(e) => setSignUpForm((prev) => ({ ...prev, password: e.target.value }))}
 				/>
 				<Input
 					label={"Confirm password"}
 					name={"confirm_password"}
+					type={"password"}
 					value={signUpForm.confirm_password}
 					onChange={(e) => setSignUpForm((prev) => ({ ...prev, confirm_password: e.target.value }))}
 				/>
@@ -84,7 +86,7 @@ const SignUp = () => {
 					color={"primary"}
 					onClick={handleSignUp}
 				>
-					Create an account
+					Sign up
 				</Button>
 				<Typography>
 					Already have an account?{" "}

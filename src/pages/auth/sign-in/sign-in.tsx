@@ -75,6 +75,7 @@ const SignIn = () => {
 				<Input
 					label={"Password"}
 					name={"password"}
+					type={"password"}
 					value={signInForm.password}
 					onChange={(e) => setSignInForm((prev) => ({ ...prev, password: e.target.value }))}
 					onKeyDown={(e) => {
