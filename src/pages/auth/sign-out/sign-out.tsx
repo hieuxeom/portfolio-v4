@@ -10,12 +10,13 @@ import toast from "react-hot-toast";
 
 const SignOut = () => {
 	const navigate = useNavigate();
-	const [, , removeCookie] = useCookies(["access_token", "refresh_token"]);
+	const [, , removeCookie] = useCookies(["access_token", "refresh_token", "role"]);
 
 	const handleSignOut = () => {
 		navigate(ROUTE_PATH.AUTH.LOGIN);
 		removeCookie("access_token");
 		removeCookie("refresh_token");
+		removeCookie("role");
 		toast.success("Signed out successfully");
 	};
 

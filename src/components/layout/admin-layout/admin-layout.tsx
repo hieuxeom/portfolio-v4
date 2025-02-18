@@ -8,12 +8,16 @@ import toast from "react-hot-toast";
 // interface AdminLayoutProps {}
 
 const AdminLayout = () => {
-	const [cookies] = useCookies(["access_token", "refresh_token"]);
+	const [cookies] = useCookies(["access_token", "refresh_token", "role"]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!cookies.refresh_token) {
 			navigate(ROUTE_PATH.AUTH.LOGIN);
+			toast.error("You don't have permission to access this page");
+		}
+		if (cookies.role !== 1) {
+			navigate(ROUTE_PATH.CLIENT.INDEX);
 			toast.error("You don't have permission to access this page");
 		}
 	}, [cookies]);

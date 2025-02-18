@@ -9,4 +9,5 @@ export type TSignIn = Omit<TSignUp, "confirm_password">;
 export type TSignInResponse = {
 	access_token: string;
 	refresh_token: string;
+	role: number;
 };

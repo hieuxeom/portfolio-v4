@@ -18,7 +18,7 @@ const SignIn = () => {
 	const navigate = useNavigate();
 	const axios = useAxios();
 
-	const [, setCookie] = useCookies(["access_token", "refresh_token"]);
+	const [, setCookie] = useCookies(["access_token", "refresh_token", "role"]);
 
 	const [signInForm, setSignInForm] = useState<TSignIn>({
 		email: "",
@@ -30,8 +30,10 @@ const SignIn = () => {
 			.post<IAPIResponse<TSignInResponse>>(API_ROUTE.ACCOUNT.SIGN_IN, signInForm)
 			.then((response) => response.data)
 			.then((response) => {
-				setCookie("access_token", response.results.access_token, { maxAge: 10 });
-				setCookie("refresh_token", response.results.refresh_token, { maxAge: 60 * 60 * 24 });
+				// log;
+				setCookie("access_token", response.results.access_token, { maxAge: 10, path: "/" });
+				setCookie("refresh_token", response.results.refresh_token, { maxAge: 60 * 60 * 24, path: "/" });
+				setCookie("role", response.results.role, { maxAge: 60 * 60 * 24, path: "/" });
 				navigate(ROUTE_PATH.CLIENT.INDEX);
 			});
 
