@@ -39,14 +39,16 @@ jobs:
                       eval $(ssh-agent -s)
                       ssh-add ~/.ssh/id_ed25519
                       cd /root/portfolio-v4
-                      # Cài đặt Yarn nếu chưa có
-                      if ! command -v yarn &> /dev/null; then
-                          npm install -g yarn
-                      fi  
-                      # Cài đặt PM2 nếu chưa có
-                      if ! command -v pm2 &> /dev/null; then
-                          npm install -g pm2
-                      fi
+
+                      echo "Node.js chưa được cài, tiến hành cài đặt..."
+                      curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+                      export NVM_DIR="$HOME/.nvm"
+                      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                      nvm install --lts
+                      nvm use --lts  
+                      npm install -g yarn
+                      npm install -g pm2
+
                       git pull origin release
                       yarn install --frozen-lockfile
                       NODE_OPTIONS="--max-old-space-size=4096" yarn build
