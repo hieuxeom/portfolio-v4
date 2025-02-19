@@ -73,7 +73,7 @@ const Header = () => {
 						size={"lg"}
 						className={"px-4"}
 					>
-						hieuxeom@hieutn.xyz
+						hieuxeom@hieutn.xy
 					</Button>
 
 					<Button
