@@ -90,11 +90,6 @@ const SignIn = () => {
 					size={"xl"}
 					color={"primary"}
 					onClick={handleSignIn}
-					onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							handleSignIn();
-						}
-					}}
 				>
 					Sign in
 				</Button>
