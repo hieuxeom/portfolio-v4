@@ -1,8 +1,9 @@
+import clsx from "clsx";
 import Typography from "../../../components/typography";
 import Wrapper from "../../../components/wrapper";
 
 const SkillIconBlock = ({ iconPath }: { iconPath: string }) => (
-	<div className={"xl:w-14 xl:h-14 lg:w-12 lg:h-12"}>
+	<div className={clsx("h-10 w-10", "xl:w-14 xl:h-14", "lg:w-12 lg:h-12", "")}>
 		<img src={iconPath} />
 	</div>
 );
@@ -60,7 +61,7 @@ const SkillSection = () => {
 						<Typography type={"h4"}>Techstacks</Typography>
 					</div>
 
-					<div className={"flex items-center gap-8"}>
+					<div className={"flex flex-wrap items-center gap-8"}>
 						{listTechStacks.map((_v) => (
 							<SkillIconBlock iconPath={_v} />
 						))}
@@ -75,7 +76,7 @@ const SkillSection = () => {
 						<Typography type={"h4"}>Development Tools</Typography>
 					</div>
 
-					<div className={"flex items-center gap-8"}>
+					<div className={"flex flex-wrap items-center gap-8"}>
 						{listTools.map((_v) => (
 							<SkillIconBlock iconPath={_v} />
 						))}
@@ -90,7 +91,7 @@ const SkillSection = () => {
 						<Typography type={"h4"}>Office & Design Tools</Typography>
 					</div>
 
-					<div className={"flex items-center gap-8"}>
+					<div className={"flex flex-wrap items-center gap-8"}>
 						{listDesignTools.map((_v) => (
 							<SkillIconBlock iconPath={_v} />
 						))}
