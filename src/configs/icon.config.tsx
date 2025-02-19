@@ -9,6 +9,7 @@ import {
 	FaFloppyDisk,
 	FaLockOpen,
 	FaPlus,
+	FaPowerOff,
 	FaUserShield,
 	FaXmark,
 } from "react-icons/fa6";
@@ -27,7 +28,8 @@ const ICON_CONFIG = {
 	RECOVER: <FaArrowRotateLeft />,
 	AUTH: <FaUserShield />,
 	UNAUTH: <BsShieldLockFill />,
-	LOG_OUT: <FaArrowRightFromBracket className={"-scale-x-100"} />,
+	// LOG_OUT: <FaArrowRightFromBracket className={"-scale-x-100"} />,
+	LOG_OUT: <FaPowerOff />,
 	BLOCK: <FaBan />,
 	UNBLOCK: <FaLockOpen />,
 	CLOSE: <FaXmark />,

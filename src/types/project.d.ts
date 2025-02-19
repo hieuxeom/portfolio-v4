@@ -10,6 +10,8 @@ export type TProject = {
 	created_at: string;
 	updated_at: string;
 	is_deleted: number;
+	github_link: string;
+	demo_link: string;
 };
 
 export type TProjectResponse = TProject &
@@ -34,6 +36,8 @@ export type TNewProject = Pick<
 	| "short_description"
 	| "article_body"
 	| "group_id"
+	| "github_link"
+	| "demo_link"
 > & {
 	project_thumbnail: FileList | null;
 };

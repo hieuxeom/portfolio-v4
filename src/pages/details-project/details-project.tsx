@@ -86,18 +86,24 @@ const DetailsProject = () => {
 					<Divider />
 					<div className={"w-full flex justify-between"}>
 						<div className={"flex items-center gap-4"}>
-							<Button
-								size={"xl"}
-								startContent={<FaGithub />}
-							>
-								Github
-							</Button>
-							<Button
-								size={"xl"}
-								startContent={<FaGlobeAsia />}
-							>
-								Website
-							</Button>
+							{projectDetails.github_link && (
+								<Button
+									size={"xl"}
+									startContent={<FaGithub />}
+									onClick={() => window.open(projectDetails.github_link, "_blank")}
+								>
+									Github
+								</Button>
+							)}
+							{projectDetails.demo_link && (
+								<Button
+									size={"xl"}
+									startContent={<FaGlobeAsia />}
+									onClick={() => window.open(projectDetails.demo_link, "_blank")}
+								>
+									Demo
+								</Button>
+							)}
 						</div>
 					</div>
 				</>

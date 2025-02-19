@@ -75,6 +75,7 @@ const Header = () => {
 					>
 						hello@hieutn.dev
 					</Button>
+
 					<Button
 						size={"xl"}
 						variant={"light"}
@@ -85,6 +86,17 @@ const Header = () => {
 					>
 						{cookies.refresh_token ? ICON_CONFIG.AUTH : ICON_CONFIG.UNAUTH}
 					</Button>
+					{cookies.refresh_token && (
+						<Button
+							size={"xl"}
+							variant={"light"}
+							color={"danger"}
+							isIconOnly
+							onClick={() => navigate(ROUTE_PATH.AUTH.SIGN_OUT)}
+						>
+							{ICON_CONFIG.LOG_OUT}
+						</Button>
+					)}
 				</div>
 				<div
 					className={clsx("mobile-up lg:hidden", {

@@ -39,6 +39,8 @@ const NewProject = () => {
 		short_description: "",
 		article_body: "",
 		group_id: null,
+		github_link: "",
+		demo_link: "",
 	});
 
 	const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -173,6 +175,30 @@ const NewProject = () => {
 										}
 									/>
 								</div>
+								<Input
+									label={"Github"}
+									type={"text"}
+									value={newProjectData.github_link || ""}
+									name={"github_link"}
+									onChange={(e) =>
+										setNewProjectData((prev) => ({
+											...prev,
+											github_link: e.target.value,
+										}))
+									}
+								/>
+								<Input
+									label={"Demo"}
+									type={"text"}
+									value={newProjectData.demo_link || ""}
+									name={"demo_link"}
+									onChange={(e) =>
+										setNewProjectData((prev) => ({
+											...prev,
+											demo_link: e.target.value,
+										}))
+									}
+								/>
 								<div className={"flex flex-col gap-4"}>
 									<Input
 										label={"start date"}
@@ -183,6 +209,7 @@ const NewProject = () => {
 										onChange={(e) =>
 											setNewProjectData((prev) => ({ ...prev, start_date: e.target.value }))
 										}
+										readOnly
 									/>
 									<Input
 										label={"end date"}
@@ -193,6 +220,7 @@ const NewProject = () => {
 										onChange={(e) =>
 											setNewProjectData((prev) => ({ ...prev, end_date: e.target.value }))
 										}
+										readOnly
 									/>
 
 									<Dropdown
