@@ -87,13 +87,13 @@ const DetailsProject = () => {
 					<div className={"w-full flex justify-between"}>
 						<div className={"flex items-center gap-4"}>
 							<Button
-								size={"2xl"}
+								size={"xl"}
 								startContent={<FaGithub />}
 							>
 								Github
 							</Button>
 							<Button
-								size={"2xl"}
+								size={"xl"}
 								startContent={<FaGlobeAsia />}
 							>
 								Website

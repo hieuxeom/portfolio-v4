@@ -43,7 +43,7 @@ const MyApps = () => {
 	}, []);
 	return (
 		<Wrapper size={"full"}>
-			<div className={"w-full grid lg:grid-cols-2 grid-cols-1 gap-4 px-4"}>
+			<div className={"z-0 w-full grid lg:grid-cols-2 grid-cols-1 gap-4 px-4"}>
 				{isFetching ? (
 					<div className={"col-span-2 w-full flex justify-center itemsc-center"}>
 						<Loading size={"xl"} />

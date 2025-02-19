@@ -48,7 +48,7 @@ const Sidebar = () => {
 	}, [listProjectGroups]);
 
 	return (
-		<div className={"lg:w-max lg:relative absolute w-full"}>
+		<div className={"lg:w-max lg:relative absolute w-full z-10"}>
 			<div className={"mobile-up lg:hidden fixed top-16 px-2 w-full"}>
 				<div
 					className={clsx("w-full p-2 rounded-b-2xl transition-all duration-300 ease-in-out", {
