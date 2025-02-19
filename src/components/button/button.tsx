@@ -13,7 +13,7 @@ export interface ButtonProps {
 	type?: "button" | "submit" | "reset";
 	isIconOnly?: boolean;
 	onClick?: () => void;
-	onKeyDown?: (e: KeyboardEvent) => void;
+	isDisabled?: boolean;
 	children: React.ReactNode;
 }
 
@@ -29,6 +29,7 @@ const Button = ({
 	type = "button",
 	isIconOnly = false,
 	onClick,
+	isDisabled,
 	children,
 }: ButtonProps) => {
 	const MapSolidButtonColor: Record<NonNullable<ButtonProps["color"]>, string> = {
@@ -137,6 +138,7 @@ const Button = ({
 		<button
 			className={clsx(
 				"inline-flex items-center justify-center gap-2 transition-all duration-300",
+				"disabled:opacity-50 disabled:cursor-not-allowed",
 				ButtonClasses[color],
 				MapButtonSize[size],
 				MapButtonTextSize[size],
@@ -146,6 +148,7 @@ const Button = ({
 			)}
 			onClick={onClick}
 			type={type}
+			disabled={isDisabled}
 		>
 			{startContent}
 			{children}

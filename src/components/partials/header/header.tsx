@@ -117,17 +117,32 @@ const Header = () => {
 							{item.label}
 						</Button>
 					))}
-					<Button
-						size={"xl"}
-						variant={"light"}
-						isIconOnly
-						onClick={() => {
-							setIsOpenMiniHeader(false);
-							navigate(cookies.refresh_token ? ROUTE_PATH.ADMIN.ACCOUNT.INDEX : ROUTE_PATH.AUTH.LOGIN);
-						}}
-					>
-						{cookies.refresh_token ? ICON_CONFIG.AUTH : ICON_CONFIG.UNAUTH}
-					</Button>
+					<div className={"flex flex-col"}>
+						<Button
+							size={"xl"}
+							variant={"light"}
+							isIconOnly
+							onClick={() => {
+								setIsOpenMiniHeader(false);
+								navigate(
+									cookies.refresh_token ? ROUTE_PATH.ADMIN.ACCOUNT.INDEX : ROUTE_PATH.AUTH.LOGIN
+								);
+							}}
+						>
+							{cookies.refresh_token ? ICON_CONFIG.AUTH : ICON_CONFIG.UNAUTH}
+						</Button>
+						{cookies.refresh_token && (
+							<Button
+								size={"xl"}
+								variant={"light"}
+								color={"danger"}
+								isIconOnly
+								onClick={() => navigate(ROUTE_PATH.AUTH.SIGN_OUT)}
+							>
+								{ICON_CONFIG.LOG_OUT}
+							</Button>
+						)}
+					</div>
 				</div>
 				<Button
 					size={"md"}

@@ -45,7 +45,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className={"bg-light w-screen h-screen flex flex-col justify-center items-center gap-8"}>
+		<div className={"bg-light w-screen h-screen flex flex-col justify-center items-center gap-8 px-4"}>
 			<div
 				className={"w-96"}
 				onClick={() => navigate(ROUTE_PATH.CLIENT.INDEX)}
