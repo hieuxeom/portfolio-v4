@@ -81,6 +81,14 @@ const NewEducation = () => {
 		});
 	};
 
+	const validNewEducationData = () => {
+		if (!newEduData.title || !newEduData.organization || !newEduData.time_start || !newEduData.time_end) {
+			return false;
+		}
+
+		return true;
+	};
+
 	return (
 		<Wrapper
 			size={"full"}
@@ -130,7 +138,8 @@ const NewEducation = () => {
 							name={"time_start"}
 							value={newEduData.time_start}
 							onChange={(e) => setNewEduData((prev) => ({ ...prev, time_start: e.target.value }))}
-							placeholder={"Start from..."}
+							placeholder={"YYYY-MM-DD"}
+							readOnly
 						/>
 						<Input
 							type={"text"}
@@ -138,7 +147,8 @@ const NewEducation = () => {
 							name={"time_end"}
 							value={newEduData.time_end}
 							onChange={(e) => setNewEduData((prev) => ({ ...prev, time_end: e.target.value }))}
-							placeholder={"to..."}
+							placeholder={"YYYY-MM-DD"}
+							readOnly
 						/>
 						<div className={clsx("flex justify-center", dayPickerWrapperClassnames)}>
 							<DayPicker
@@ -182,6 +192,7 @@ const NewEducation = () => {
 							size={"lg"}
 							color={"primary"}
 							onClick={handleAddNewEducation}
+							isDisabled={!validNewEducationData()}
 						>
 							Submit
 						</Button>

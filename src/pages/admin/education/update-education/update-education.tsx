@@ -116,6 +116,19 @@ const UpdateEducation = () => {
 		});
 	};
 
+	const validEducationData = () => {
+		if (
+			!educationDetails.title ||
+			!educationDetails.organization ||
+			!educationDetails.time_start ||
+			!educationDetails.time_end
+		) {
+			return false;
+		}
+
+		return true;
+	};
+
 	useEffect(() => {
 		if (!educationId) {
 			return;
@@ -239,6 +252,7 @@ const UpdateEducation = () => {
 							size={"lg"}
 							color={"primary"}
 							onClick={handleUpdateEducation}
+							isDisabled={!validEducationData()}
 						>
 							Submit
 						</Button>

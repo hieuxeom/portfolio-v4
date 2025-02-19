@@ -39,14 +39,10 @@ const Input = ({
 	return (
 		<div className="flex flex-col gap-1">
 			<label
-				className={clsx(
-					"uppercase font-bold text-sm transition-all duration-300",
-					classNames && classNames.label,
-					{
-						"text-dark": value !== "" || isFocus,
-						"text-dark/25": value === "" && !isFocus,
-					}
-				)}
+				className={clsx("font-semibold transition-all duration-300", classNames && classNames.label, {
+					"text-dark": value !== "" || isFocus,
+					"text-dark/25": value === "" && !isFocus,
+				})}
 				htmlFor={name}
 			>
 				{label}
