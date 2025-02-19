@@ -1,7 +1,6 @@
 import {
 	FaAngleLeft,
 	FaAngleRight,
-	FaArrowRightFromBracket,
 	FaArrowRotateLeft,
 	FaBan,
 	FaBars,
