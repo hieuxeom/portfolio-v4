@@ -12,24 +12,33 @@ interface SidebarGroupProps {
 	title: string;
 	groupItems: SidebarGroupItem[];
 	isCloseDefault: boolean;
+	onItemClick?: () => void;
 }
 
-const SidebarGroup = ({ title, groupItems, isCloseDefault }: SidebarGroupProps) => {
+const SidebarGroup = ({ title, groupItems, isCloseDefault, onItemClick }: SidebarGroupProps) => {
 	const navigate = useNavigate();
 	const [isFold, setIsFold] = useState<boolean>(isCloseDefault);
 
 	return (
 		<div className={"flex flex-col gap-4"}>
 			<div
-				className={"flex items-center justify-between cursor-pointer"}
+				className={"flex items-center justify-between cursor-pointer gap-4"}
 				onClick={() => setIsFold(!isFold)}
 			>
-				<Typography
-					type={"h3"}
-					className={"transition-all duration-300"}
-				>
-					📁 {title}
-				</Typography>
+				<div className={"flex items-center gap-1"}>
+					<Typography
+						type={"h3"}
+						className={"transition-all duration-300 lg:hidden xl:visible"}
+					>
+						📁
+					</Typography>
+					<Typography
+						type={"h3"}
+						className={"transition-all duration-300"}
+					>
+						{title}
+					</Typography>
+				</div>
 				<FaChevronUp
 					className={clsx("text-lg transition-all duration-300", {
 						"rotate-180": !isFold,
@@ -41,6 +50,7 @@ const SidebarGroup = ({ title, groupItems, isCloseDefault }: SidebarGroupProps) 
 					"opacity-0 max-h-0": isFold,
 					"opacity-100 max-h-64": !isFold,
 				})}
+				onClick={onItemClick}
 			>
 				{groupItems.map((item) => (
 					<div

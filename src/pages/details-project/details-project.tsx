@@ -13,6 +13,7 @@ import Divider from "../../components/divider";
 import { formatDate, getLastUpdatedTime } from "../../utils/convert-datetime";
 import BlockQuote from "../../components/block-quote";
 import Loading from "../../components/loading";
+import CustomImage from "../../components/custom-image";
 
 // interface DetailsProjectProps {}
 
@@ -65,10 +66,14 @@ const DetailsProject = () => {
 							? ` - Updated ${getLastUpdatedTime(projectDetails.updated_at)}`
 							: ""}
 					</BlockQuote>
-					<img
+					{/* <img
 						src={projectDetails.project_thumbnail}
 						alt=""
-					/>
+						width={1920}
+						height={1080}
+					/> */}
+
+					<CustomImage src={projectDetails.project_thumbnail} />
 
 					<Wrapper
 						size={"full"}

@@ -25,7 +25,7 @@ const AppBlock = ({ appName, appIcon, appLink }: AppBlockProps) => (
 		</div>
 		<div
 			className={
-				"absolute w-full h-full -bottom-96 group-hover:bottom-0 bg-dark/75 transition-all duration-300 ease-in-out"
+				"absolute w-full h-full -bottom-96 group-hover:bottom-0 bg-white/75 transition-all duration-300 ease-in-out"
 			}
 		></div>
 		<div
@@ -41,7 +41,7 @@ const AppBlock = ({ appName, appIcon, appLink }: AppBlockProps) => (
 			/>
 			<Typography
 				type={"h2"}
-				className={"text-light"}
+				className={"text"}
 			>
 				{appName}
 			</Typography>

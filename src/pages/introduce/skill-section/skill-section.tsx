@@ -1,6 +1,12 @@
 import Typography from "../../../components/typography";
 import Wrapper from "../../../components/wrapper";
 
+const SkillIconBlock = ({ iconPath }: { iconPath: string }) => (
+	<div className={"xl:w-14 xl:h-14 lg:w-12 lg:h-12"}>
+		<img src={iconPath} />
+	</div>
+);
+
 const SkillSection = () => {
 	const listTechStacks = [
 		"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
@@ -56,11 +62,7 @@ const SkillSection = () => {
 
 					<div className={"flex items-center gap-8"}>
 						{listTechStacks.map((_v) => (
-							<img
-								height="60"
-								width="60"
-								src={_v}
-							/>
+							<SkillIconBlock iconPath={_v} />
 						))}
 					</div>
 				</div>
@@ -75,11 +77,7 @@ const SkillSection = () => {
 
 					<div className={"flex items-center gap-8"}>
 						{listTools.map((_v) => (
-							<img
-								height="60"
-								width="60"
-								src={_v}
-							/>
+							<SkillIconBlock iconPath={_v} />
 						))}
 					</div>
 				</div>
@@ -94,11 +92,7 @@ const SkillSection = () => {
 
 					<div className={"flex items-center gap-8"}>
 						{listDesignTools.map((_v) => (
-							<img
-								height="60"
-								width="60"
-								src={_v}
-							/>
+							<SkillIconBlock iconPath={_v} />
 						))}
 					</div>
 				</div>

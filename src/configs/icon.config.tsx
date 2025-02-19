@@ -4,6 +4,7 @@ import {
 	FaArrowRightFromBracket,
 	FaArrowRotateLeft,
 	FaBan,
+	FaBars,
 	FaEye,
 	FaFloppyDisk,
 	FaLockOpen,
@@ -15,6 +16,7 @@ import { MdDelete, MdDeleteForever, MdEdit } from "react-icons/md";
 import { BsShieldLockFill } from "react-icons/bs";
 
 const ICON_CONFIG = {
+	MENU: <FaBars />,
 	BACK: <FaAngleLeft />,
 	NEXT: <FaAngleRight />,
 	NEW: <FaPlus />,
