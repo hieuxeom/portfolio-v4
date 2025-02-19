@@ -23,6 +23,7 @@ import SignIn from "../../pages/auth/sign-in";
 import SignOut from "../../pages/auth/sign-out";
 import MyApps from "../../pages/my-apps";
 import App from "../../pages/admin/app";
+import Redirect from "../redirect";
 
 // interface IndexRouterProps {}
 
@@ -158,6 +159,10 @@ const IndexRouter = () => (
 			<Route
 				path={"sign-out"}
 				element={<SignOut />}
+			/>
+			<Route
+				path={"*"}
+				element={<Redirect to={"/"} />}
 			/>
 		</Routes>
 	</BrowserRouter>
