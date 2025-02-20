@@ -40,7 +40,6 @@ jobs:
                       ssh-add ~/.ssh/id_ed25519
                       cd /root/portfolio-v4
 
-                      echo "Node.js chưa được cài, tiến hành cài đặt..."
                       curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
                       export NVM_DIR="$HOME/.nvm"
                       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import ROUTE_PATH from "../../../configs/routes.config";
 import toast from "react-hot-toast";
+import CustomHelmet from "../../custom-helmet";
 
 // interface AdminLayoutProps {}
 
@@ -23,12 +24,19 @@ const AdminLayout = () => {
 	}, [cookies]);
 
 	return (
-		<div className={"relative w-screen min-h-screen h-max bg-light flex items-start"}>
-			<AdminSidebar />
-			<div className={"w-5/6"}>
-				<Outlet />
+		<>
+			<CustomHelmet
+				title={"hieutndev | Admin"}
+				description={"Admin page"}
+				keywords={["hieutndev", "admin", "admin page", "admin hieutndev"]}
+			/>
+			<div className={"relative w-screen min-h-screen h-max bg-light flex items-start"}>
+				<AdminSidebar />
+				<div className={"w-5/6"}>
+					<Outlet />
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

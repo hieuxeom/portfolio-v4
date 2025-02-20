@@ -5,47 +5,51 @@ import "./index.css";
 import "react-day-picker/style.css";
 import IndexRouter from "./routes/index-router/index-router.tsx";
 import { Toaster } from "react-hot-toast";
+import { HelmetProvider } from "react-helmet-async";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<Toaster
-			position="top-center"
-			reverseOrder={false}
-			gutter={8}
-			toastOptions={{
-				duration: 2000,
-				style: {
-					color: "#1f2937",
-				},
-				loading: {
-					duration: 5000,
+		<HelmetProvider>
+			<Toaster
+				position="top-center"
+				reverseOrder={false}
+				gutter={8}
+				toastOptions={{
+					duration: 2000,
 					style: {
-						backgroundColor: "#406D96",
-						color: "#FCFAFA",
+						color: "#1f2937",
 					},
-				},
-				success: {
-					iconTheme: {
-						primary: "#ffffff",
-						secondary: "#53DD6C",
+					loading: {
+						duration: 5000,
+						style: {
+							backgroundColor: "#406D96",
+							color: "#FCFAFA",
+						},
 					},
-					style: {
-						backgroundColor: "#53DD6C",
-						color: "#FCFAFA",
+					success: {
+						iconTheme: {
+							primary: "#ffffff",
+							secondary: "#53DD6C",
+						},
+						style: {
+							backgroundColor: "#53DD6C",
+							color: "#FCFAFA",
+						},
 					},
-				},
-				error: {
-					iconTheme: {
-						primary: "#ffffff",
-						secondary: "#C1292E",
+					error: {
+						iconTheme: {
+							primary: "#ffffff",
+							secondary: "#C1292E",
+						},
+						style: {
+							backgroundColor: "#C1292E",
+							color: "#FCFAFA",
+						},
 					},
-					style: {
-						backgroundColor: "#C1292E",
-						color: "#FCFAFA",
-					},
-				},
-			}}
-		/>
-		<IndexRouter />
+				}}
+			/>
+
+			<IndexRouter />
+		</HelmetProvider>
 	</StrictMode>
 );

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import useAxios from "../../../hooks/useAxios";
 import API_ROUTE from "../../../configs/api.config";
 import toast from "react-hot-toast";
+import CustomHelmet from "../../../components/custom-helmet";
 
 // interface SignUpProps {}
 
@@ -38,68 +39,83 @@ const SignUp = () => {
 	};
 
 	return (
-		<div className={"bg-light w-screen h-screen flex flex-col justify-center items-center gap-8"}>
-			<div
-				className={"w-96"}
-				onClick={() => navigate(ROUTE_PATH.CLIENT.INDEX)}
-			>
-				<img
-					src="/logow_b.png"
-					alt=""
-					className={"drop-shadow-2xl"}
-				/>
-			</div>
+		<>
+			<CustomHelmet
+				title={"Sign Up"}
+				description={"Sign up for a new account"}
+				keywords={[
+					"hieutnxyz",
+					"hieutn",
+					"hieutnxyz sign up",
+					"sign up",
+					"sign up hieutnxyz",
+					"sign up hieutn",
+					"create new account",
+				]}
+			/>
+			<div className={"bg-light w-screen h-screen flex flex-col justify-center items-center gap-8"}>
+				<div
+					className={"w-96"}
+					onClick={() => navigate(ROUTE_PATH.CLIENT.INDEX)}
+				>
+					<img
+						src="/logow_b.png"
+						alt=""
+						className={"drop-shadow-2xl"}
+					/>
+				</div>
 
-			<Wrapper
-				size={"2xl"}
-				className={"bg-white p-8 rounded-3xl shadow-lg h-max"}
-				orientation={"vertical"}
-			>
-				<Typography
-					type={"h2"}
-					className={"text-primary"}
+				<Wrapper
+					size={"2xl"}
+					className={"bg-white p-8 rounded-3xl shadow-lg h-max"}
+					orientation={"vertical"}
 				>
-					Create an account
-				</Typography>
-				<Input
-					label={"Your email"}
-					name={"email"}
-					value={signUpForm.email}
-					onChange={(e) => setSignUpForm((prev) => ({ ...prev, email: e.target.value }))}
-				/>
-				<Input
-					label={"Password"}
-					name={"password"}
-					type={"password"}
-					value={signUpForm.password}
-					onChange={(e) => setSignUpForm((prev) => ({ ...prev, password: e.target.value }))}
-				/>
-				<Input
-					label={"Confirm password"}
-					name={"confirm_password"}
-					type={"password"}
-					value={signUpForm.confirm_password}
-					onChange={(e) => setSignUpForm((prev) => ({ ...prev, confirm_password: e.target.value }))}
-				/>
-				<Button
-					size={"xl"}
-					color={"primary"}
-					onClick={handleSignUp}
-				>
-					Sign up
-				</Button>
-				<Typography>
-					Already have an account?{" "}
-					<Button
-						variant={"light"}
-						color={"primary"}
-						onClick={() => navigate(ROUTE_PATH.AUTH.LOGIN)}
+					<Typography
+						type={"h2"}
+						className={"text-primary"}
 					>
-						Login here
+						Create an account
+					</Typography>
+					<Input
+						label={"Your email"}
+						name={"email"}
+						value={signUpForm.email}
+						onChange={(e) => setSignUpForm((prev) => ({ ...prev, email: e.target.value }))}
+					/>
+					<Input
+						label={"Password"}
+						name={"password"}
+						type={"password"}
+						value={signUpForm.password}
+						onChange={(e) => setSignUpForm((prev) => ({ ...prev, password: e.target.value }))}
+					/>
+					<Input
+						label={"Confirm password"}
+						name={"confirm_password"}
+						type={"password"}
+						value={signUpForm.confirm_password}
+						onChange={(e) => setSignUpForm((prev) => ({ ...prev, confirm_password: e.target.value }))}
+					/>
+					<Button
+						size={"xl"}
+						color={"primary"}
+						onClick={handleSignUp}
+					>
+						Sign up
 					</Button>
-				</Typography>
-			</Wrapper>
-		</div>
+					<Typography>
+						Already have an account?{" "}
+						<Button
+							variant={"light"}
+							color={"primary"}
+							onClick={() => navigate(ROUTE_PATH.AUTH.LOGIN)}
+						>
+							Login here
+						</Button>
+					</Typography>
+				</Wrapper>
+			</div>
+		</>
 	);
 };
 

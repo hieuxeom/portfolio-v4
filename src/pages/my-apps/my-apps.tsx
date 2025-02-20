@@ -9,6 +9,7 @@ import { IAPIResponse } from "../../types/general";
 import AppBlock from "./app-block";
 import Loading from "../../components/loading";
 import useAxios from "../../hooks/useAxios";
+import CustomHelmet from "../../components/custom-helmet";
 
 // interface MyAppsProps {}
 
@@ -42,24 +43,32 @@ const MyApps = () => {
 		getListApps();
 	}, []);
 	return (
-		<Wrapper size={"full"}>
-			<div className={"z-0 w-full grid lg:grid-cols-2 grid-cols-1 gap-4 px-4"}>
-				{isFetching ? (
-					<div className={"col-span-2 w-full flex justify-center itemsc-center"}>
-						<Loading size={"xl"} />
-					</div>
-				) : (
-					listApps.map((_) => (
-						<AppBlock
-							appName={_.app_name}
-							appIcon={_.app_icon}
-							key={_.app_id}
-							appLink={_.app_link}
-						/>
-					))
-				)}
-			</div>
-		</Wrapper>
+		<>
+			<CustomHelmet
+				title={"My Apps"}
+				description={"List of apps that I have developed"}
+				keywords={["hieutnxyz", "hieutn apps", "apps", "hieutn", "hieu tran ngoc", "hieutnxyz apps"]}
+			/>
+
+			<Wrapper size={"full"}>
+				<div className={"z-0 w-full grid lg:grid-cols-2 grid-cols-1 gap-4 px-4"}>
+					{isFetching ? (
+						<div className={"col-span-2 w-full flex justify-center itemsc-center"}>
+							<Loading size={"xl"} />
+						</div>
+					) : (
+						listApps.map((_) => (
+							<AppBlock
+								appName={_.app_name}
+								appIcon={_.app_icon}
+								key={_.app_id}
+								appLink={_.app_link}
+							/>
+						))
+					)}
+				</div>
+			</Wrapper>
+		</>
 	);
 };
 

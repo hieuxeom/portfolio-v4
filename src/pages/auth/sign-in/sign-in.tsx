@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import API_ROUTE from "../../../configs/api.config";
 import { useCookies } from "react-cookie";
 import { IAPIResponse } from "../../../types/general";
+import CustomHelmet from "../../../components/custom-helmet";
 
 // interface SignInProps {}
 
@@ -45,66 +46,80 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className={"bg-light w-screen h-screen flex flex-col justify-center items-center gap-8 px-4"}>
-			<div
-				className={"w-96"}
-				onClick={() => navigate(ROUTE_PATH.CLIENT.INDEX)}
-			>
-				<img
-					src="/logow_b.png"
-					alt=""
-					className={"drop-shadow-2xl"}
-				/>
-			</div>
+		<>
+			<CustomHelmet
+				title={"Sign In"}
+				description={"Sign in to your account"}
+				keywords={[
+					"hieutnxyz",
+					"hieutn",
+					"hieutnxyz sign in",
+					"sign in",
+					"sign in hieutnxyz",
+					"sign in hieutn",
+				]}
+			/>
+			<div className={"bg-light w-screen h-screen flex flex-col justify-center items-center gap-8 px-4"}>
+				<div
+					className={"w-96"}
+					onClick={() => navigate(ROUTE_PATH.CLIENT.INDEX)}
+				>
+					<img
+						src="/logow_b.png"
+						alt=""
+						className={"drop-shadow-2xl"}
+					/>
+				</div>
 
-			<Wrapper
-				size={"2xl"}
-				className={"bg-white p-8 rounded-3xl shadow-lg"}
-				orientation={"vertical"}
-			>
-				<Typography
-					type={"h2"}
-					className={"text-primary"}
+				<Wrapper
+					size={"2xl"}
+					className={"bg-white p-8 rounded-3xl shadow-lg"}
+					orientation={"vertical"}
 				>
-					Sign in to your account
-				</Typography>
-				<Input
-					label={"Your email"}
-					name={"email"}
-					value={signInForm.email}
-					onChange={(e) => setSignInForm((prev) => ({ ...prev, email: e.target.value }))}
-				/>
-				<Input
-					label={"Password"}
-					name={"password"}
-					type={"password"}
-					value={signInForm.password}
-					onChange={(e) => setSignInForm((prev) => ({ ...prev, password: e.target.value }))}
-					onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							handleSignIn();
-						}
-					}}
-				/>
-				<Button
-					size={"xl"}
-					color={"primary"}
-					onClick={handleSignIn}
-				>
-					Sign in
-				</Button>
-				<Typography>
-					Don't have an account yet?{" "}
-					<Button
-						variant={"light"}
-						color={"primary"}
-						onClick={() => navigate(ROUTE_PATH.AUTH.SIGN_UP)}
+					<Typography
+						type={"h2"}
+						className={"text-primary"}
 					>
-						Sign up
+						Sign in to your account
+					</Typography>
+					<Input
+						label={"Your email"}
+						name={"email"}
+						value={signInForm.email}
+						onChange={(e) => setSignInForm((prev) => ({ ...prev, email: e.target.value }))}
+					/>
+					<Input
+						label={"Password"}
+						name={"password"}
+						type={"password"}
+						value={signInForm.password}
+						onChange={(e) => setSignInForm((prev) => ({ ...prev, password: e.target.value }))}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								handleSignIn();
+							}
+						}}
+					/>
+					<Button
+						size={"xl"}
+						color={"primary"}
+						onClick={handleSignIn}
+					>
+						Sign in
 					</Button>
-				</Typography>
-			</Wrapper>
-		</div>
+					<Typography>
+						Don't have an account yet?{" "}
+						<Button
+							variant={"light"}
+							color={"primary"}
+							onClick={() => navigate(ROUTE_PATH.AUTH.SIGN_UP)}
+						>
+							Sign up
+						</Button>
+					</Typography>
+				</Wrapper>
+			</div>
+		</>
 	);
 };
 
