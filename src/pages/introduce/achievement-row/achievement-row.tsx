@@ -20,7 +20,7 @@ const AchievementRow = ({
 		>
 			<Typography type={"h4"}>{title}</Typography>
 		</div>
-		<div className={clsx("flex gap-2", "lg:items-center", "flex-col items-start")}>
+		<div className={clsx("flex gap-2", "lg:items-center lg:flex-row", "flex-col items-start")}>
 			<Typography>{organization}</Typography>
 			<Typography className={"lg:block hidden"}>|</Typography>
 			<Typography className={"italic"}>{time}</Typography>
