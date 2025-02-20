@@ -9,15 +9,22 @@ import Button from "../../button";
 import ICON_CONFIG from "../../../configs/icon.config";
 import clsx from "clsx";
 import useScroll from "../../../hooks/useScroll";
+import Loading from "../../loading";
+import useScreenSize from "../../../../../live-score-v2/src/hooks/useScreenSize";
+import { BREAK_POINT } from "../../../../../live-score-v2/src/configs/break-points.config";
 
 // interface SidebarProps {}
 
 const Sidebar = () => {
 	const axios = useAxios();
 
+	const { width } = useScreenSize();
+
 	const [listProjects, setListProjects] = useState<TProjectResponse[]>([]);
 	const [listProjectGroups, setListProjectGroups] = useState<TProjectGroup[]>([]);
 	const [isOpenMiniHeader, setIsOpenMiniHeader] = useState<boolean>(false);
+
+	const [isFetching, setIsFetching] = useState<boolean>(true);
 
 	const getListProject = () => {
 		axios
@@ -40,7 +47,7 @@ const Sidebar = () => {
 	const { scrollPosition } = useScroll();
 
 	useEffect(() => {
-		Promise.all([getListProject(), getListProjectGroup()]).finally(() => {});
+		Promise.all([getListProject(), getListProjectGroup()]).finally(() => setIsFetching(false));
 	}, []);
 
 	useEffect(() => {
@@ -94,26 +101,39 @@ const Sidebar = () => {
 						))}
 				</div>
 			</div>
-
 			<div
-				className={
-					"tablet-up xl:w-1/4 lg:min-w-max lg:flex lg:flex-col lg:gap-8 hidden py-8 2xl:pr-8 lg:pr-4 sticky top-44 h-screen border-r border-r-dark/10 "
-				}
+				className={clsx(
+					"tablet-up hidden py-8 sticky top-44 h-screen border-r border-r-dark/10",
+					"2xl:pr-8",
+					"xl:w-1/4",
+					"lg:min-w-56 lg:flex lg:flex-col lg:gap-8 lg:pr-4"
+				)}
 			>
-				{listProjectGroups
-					.filter((item) => listProjects.filter((v) => v.group_id === item.group_id).length > 0)
-					.map((group) => (
-						<SidebarGroup
-							title={group.group_title}
-							isCloseDefault={listProjects.filter((item) => item.group_id === group.group_id).length <= 0}
-							groupItems={listProjects
-								.filter((item) => item.group_id === group.group_id)
-								.map((_v) => ({
-									title: _v.project_shortname,
-									href: ROUTE_PATH.CLIENT.PROJECT.DETAILS(_v.id),
-								}))}
-						/>
-					))}
+				{isFetching ? (
+					<SidebarGroup
+						title={"Loading..."}
+						isCloseDefault={false}
+						groupItems={[]}
+					/>
+				) : (
+					listProjectGroups
+						.filter((item) => listProjects.filter((v) => v.group_id === item.group_id).length > 0)
+						.map((group, index) => (
+							<SidebarGroup
+								key={index}
+								title={group.group_title}
+								isCloseDefault={
+									listProjects.filter((item) => item.group_id === group.group_id).length <= 0
+								}
+								groupItems={listProjects
+									.filter((item) => item.group_id === group.group_id)
+									.map((_v) => ({
+										title: _v.project_shortname,
+										href: ROUTE_PATH.CLIENT.PROJECT.DETAILS(_v.id),
+									}))}
+							/>
+						))
+				)}
 			</div>
 		</div>
 	);
