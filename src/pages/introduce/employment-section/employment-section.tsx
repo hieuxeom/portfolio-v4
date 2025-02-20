@@ -7,6 +7,7 @@ import { TEmployment } from "../../../types/employment";
 import { IAPIResponse } from "../../../types/general";
 import API_ROUTE from "../../../configs/api.config";
 import Loading from "../../../components/loading";
+import { formatDate } from "../../../utils/convert-datetime";
 
 // interface EmploymentSectionProps {}
 
@@ -49,7 +50,17 @@ const EmploymentSection = () => {
 						<Loading size={"md"} />
 					</div>
 				) : listEmployment.length > 0 ? (
-					listEmployment.map((_, index) => <AchievementRow key={index} />)
+					listEmployment.map((_, index) => (
+						<AchievementRow
+							key={index}
+							title={_.title}
+							organization={_.organization}
+							time={`${formatDate(_.time_start, "onlyMonthYear")} - ${formatDate(
+								_.time_end,
+								"onlyMonthYear"
+							)}`}
+						/>
+					))
 				) : (
 					<Typography
 						type={"p"}
