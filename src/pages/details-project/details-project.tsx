@@ -42,10 +42,6 @@ const DetailsProject = () => {
 		getProjectDetails(projectId);
 	}, [projectId]);
 
-	function sliceText(short_description: string, arg1: number): string {
-		throw new Error("Function not implemented.");
-	}
-
 	return (
 		<>
 			{projectDetails && (

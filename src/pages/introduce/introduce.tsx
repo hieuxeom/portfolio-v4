@@ -6,11 +6,10 @@ import AnimatedQuote from "./animated-quote";
 
 import EducationSection from "./education-section";
 
+import CustomHelmet from "../../components/custom-helmet";
 import CertificationSection from "./certification-section";
 import EmploymentSection from "./employment-section";
 import SkillSection from "./skill-section";
-import { useEffect } from "react";
-import CustomHelmet from "../../components/custom-helmet";
 
 // interface IntroduceProps {}
 
