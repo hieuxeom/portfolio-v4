@@ -30,9 +30,9 @@ const AdminLayout = () => {
 				description={"Admin page"}
 				keywords={["hieutndev", "admin", "admin page", "admin hieutndev"]}
 			/>
-			<div className={"relative w-screen min-h-screen h-max bg-light flex items-start"}>
+			<div className={"relative w-full min-h-screen h-max bg-light flex items-start"}>
 				<AdminSidebar />
-				<div className={"w-5/6"}>
+				<div className={"ml-[20rem] w-[calc(100vw-20rem-1rem)]"}>
 					<Outlet />
 				</div>
 			</div>

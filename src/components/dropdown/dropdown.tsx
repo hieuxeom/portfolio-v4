@@ -66,7 +66,7 @@ const Dropdown = ({
 		<div className={"flex items-center justify-center rounded-xl bg-white"}>
 			<div className="relative w-full">
 				<label
-					className={clsx("uppercase font-bold text-sm transition-all duration-300", {
+					className={clsx("font-bold text-base transition-all duration-300", {
 						"text-dark": isFocus || isShowList || currentValue !== "",
 						"text-dark/25": !isFocus && !isShowList && currentValue === "",
 					})}

@@ -17,6 +17,7 @@ export type TProject = {
 export type TProjectResponse = TProject &
 	Pick<TProjectGroup, "group_title"> & {
 		group_id: string | number | null;
+		project_images: TProjectImage[];
 	};
 
 export type TProjectGroup = {
@@ -25,6 +26,13 @@ export type TProjectGroup = {
 	created_at: string;
 	updated_at: string;
 	is_deleted: number;
+};
+
+export type TProjectImage = {
+	image_id: string;
+	project_id: string;
+	image_name: string;
+	image_url: string;
 };
 
 export type TNewProject = Pick<
@@ -40,6 +48,7 @@ export type TNewProject = Pick<
 	| "demo_link"
 > & {
 	project_thumbnail: FileList | null;
+	project_images: FileList | null;
 };
 
 export type TUpdateProject = TNewProject;

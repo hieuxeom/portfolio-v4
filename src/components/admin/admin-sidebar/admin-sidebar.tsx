@@ -13,7 +13,7 @@ const AdminSidebar = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="w-1/6 min-h-screen bg-white shadow-xl rounded-e-3xl flex flex-col gap-8 items-center px-2 py-8">
+		<div className="w-[20rem] fixed min-h-screen bg-white shadow-xl rounded-e-3xl flex flex-col gap-8 items-center px-2 py-8">
 			<div className={"w-3/4"}>
 				<img src={"/logow_b.png"} />
 			</div>

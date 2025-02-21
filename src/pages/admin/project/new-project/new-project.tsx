@@ -41,6 +41,7 @@ const NewProject = () => {
 		group_id: null,
 		github_link: "",
 		demo_link: "",
+		project_images: null,
 	});
 
 	const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -120,9 +121,9 @@ const NewProject = () => {
 					href: ROUTE_PATH.ADMIN.PROJECT.INDEX,
 				}}
 			/>
-			<div className={"w-full grid grid-cols-2 gap-4"}>
+			<div className={"w-full"}>
 				<form
-					className={"col-span-1 w-full flex flex-col gap-4"}
+					className={"w-full flex flex-col gap-4"}
 					onSubmit={handleSubmit}
 				>
 					<div className={"w-full bg-white rounded-2xl shadow-lg p-4 flex flex-col gap-4"}>
@@ -132,7 +133,7 @@ const NewProject = () => {
 						>
 							Project Information
 						</Typography>
-						<div className={"flex flex-col gap-4"}>
+						<div className={"grid grid-cols-3 gap-4"}>
 							<Input
 								label={"Full project name"}
 								type={"text"}
@@ -143,38 +144,88 @@ const NewProject = () => {
 									setNewProjectData((prev) => ({ ...prev, project_fullname: e.target.value }))
 								}
 							/>
-							<div className={"grid grid-cols-2 gap-4"}>
-								<Input
-									label={"Short project name"}
-									type={"text"}
-									value={newProjectData.project_shortname}
-									name={"project_shortname"}
+
+							<Input
+								label={"Short project name"}
+								type={"text"}
+								value={newProjectData.project_shortname}
+								name={"project_shortname"}
+								placeholder={""}
+								onChange={(e) =>
+									setNewProjectData((prev) => ({ ...prev, project_shortname: e.target.value }))
+								}
+							/>
+							<Dropdown
+								data={listProjectGroups.map((_v) => ({
+									key: _v.group_id.toString(),
+									value: _v.group_id.toString(),
+									textValue: _v.group_title,
+								}))}
+								position={"top"}
+								label={"Select Group"}
+								value={newProjectData.group_id?.toString() || ""}
+								onValueChange={(value) => {
+									setNewProjectData((prev) => ({ ...prev, group_id: value }));
+								}}
+							/>
+							<div className={"w-full col-span-3"}>
+								<TextArea
+									label={"Description"}
+									value={newProjectData.short_description}
+									name={"short_description"}
 									placeholder={""}
 									onChange={(e) =>
-										setNewProjectData((prev) => ({ ...prev, project_shortname: e.target.value }))
+										setNewProjectData((prev) => ({
+											...prev,
+											short_description: e.target.value,
+										}))
 									}
 								/>
+							</div>
+							<div className={"flex flex-col gap-4"}>
+								<Input
+									label={"Start date"}
+									type={"text"}
+									value={newProjectData.start_date}
+									name={"start_date"}
+									placeholder={""}
+									onChange={(e) =>
+										setNewProjectData((prev) => ({ ...prev, start_date: e.target.value }))
+									}
+									readOnly
+								/>
+								<Input
+									label={"End date"}
+									type={"text"}
+									value={newProjectData.end_date}
+									name={"end_date"}
+									placeholder={""}
+									onChange={(e) =>
+										setNewProjectData((prev) => ({ ...prev, end_date: e.target.value }))
+									}
+									readOnly
+								/>
+							</div>
+							<div className={"flex flex-col gap-4"}>
 								<FileInput
+									title={"Project Thumbnail"}
 									name={"project_thumbnail"}
 									value={newProjectData.project_thumbnail}
 									onChange={(e) => {
 										setNewProjectData((prev) => ({ ...prev, project_thumbnail: e.target.files }));
 									}}
 								/>
-								<div className={"col-span-2"}>
-									<TextArea
-										label={"Description"}
-										value={newProjectData.short_description}
-										name={"short_description"}
-										placeholder={""}
-										onChange={(e) =>
-											setNewProjectData((prev) => ({
-												...prev,
-												short_description: e.target.value,
-											}))
-										}
-									/>
-								</div>
+								<FileInput
+									title={"List Project Images"}
+									name={"project_images"}
+									value={newProjectData.project_images}
+									isMultiple
+									onChange={(e) => {
+										setNewProjectData((prev) => ({ ...prev, project_images: e.target.files }));
+									}}
+								/>
+							</div>
+							<div className={"flex flex-col gap-4"}>
 								<Input
 									label={"Github"}
 									type={"text"}
@@ -199,45 +250,9 @@ const NewProject = () => {
 										}))
 									}
 								/>
-								<div className={"flex flex-col gap-4"}>
-									<Input
-										label={"start date"}
-										type={"text"}
-										value={newProjectData.start_date}
-										name={"start_date"}
-										placeholder={""}
-										onChange={(e) =>
-											setNewProjectData((prev) => ({ ...prev, start_date: e.target.value }))
-										}
-										readOnly
-									/>
-									<Input
-										label={"end date"}
-										type={"text"}
-										value={newProjectData.end_date}
-										name={"end_date"}
-										placeholder={""}
-										onChange={(e) =>
-											setNewProjectData((prev) => ({ ...prev, end_date: e.target.value }))
-										}
-										readOnly
-									/>
-
-									<Dropdown
-										data={listProjectGroups.map((_v) => ({
-											key: _v.group_id.toString(),
-											value: _v.group_id.toString(),
-											textValue: _v.group_title,
-										}))}
-										position={"top"}
-										label={"Select Group"}
-										value={newProjectData.group_id?.toString() || ""}
-										onValueChange={(value) => {
-											setNewProjectData((prev) => ({ ...prev, group_id: value }));
-										}}
-									/>
-								</div>
-								<div className={clsx("flex justify-center h-max", dayPickerWrapperClassnames)}>
+							</div>
+							<div className={"flex justify-center"}>
+								<div className={clsx("flex justify-center w-max h-max", dayPickerWrapperClassnames)}>
 									<DayPicker
 										captionLayout="dropdown"
 										classNames={dayPickerCustomClassnames}
@@ -251,26 +266,24 @@ const NewProject = () => {
 									/>
 								</div>
 							</div>
+							<div className="col-span-2 w-full">
+								<ReactQuill
+									modules={modules}
+									formats={formats}
+									value={convertText}
+									onChange={setConvertText}
+									className={"h-[calc(100%-2.5rem)]"}
+								/>
+							</div>
 						</div>
-						<div className={"flex justify-end"}>
-							<Button
-								size={"lg"}
-								type={"submit"}
-							>
-								Submit
-							</Button>
-						</div>
+						<Button
+							size={"lg"}
+							type={"submit"}
+						>
+							Submit
+						</Button>
 					</div>
 				</form>
-				<ReactQuill
-					modules={modules}
-					formats={formats}
-					value={convertText}
-					onChange={setConvertText}
-					style={{
-						maxHeight: "calc(100vh - 12rem)",
-					}}
-				/>
 			</div>
 		</Wrapper>
 	);

@@ -48,9 +48,6 @@
 .ql-toolbar {
 	@apply rounded-ss-2xl;
 	@apply rounded-se-2xl;
-	@apply !border-t-0;
-	@apply !border-l-0;
-	@apply !border-r-0;
 	@apply !border-b;
 	@apply !border-b-dark/25;
 }
@@ -58,7 +55,6 @@
 .ql-container {
 	@apply rounded-es-2xl;
 	@apply rounded-ee-2xl;
-	@apply !border-none;
 	@apply !text-base;
 }
 

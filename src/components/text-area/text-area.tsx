@@ -32,7 +32,7 @@ const TextArea = ({
 	return (
 		<div className="flex flex-col gap-1">
 			<label
-				className={clsx("uppercase font-bold text-sm transition-all duration-300", {
+				className={clsx("font-bold text-base transition-all duration-300", {
 					"text-dark": value !== "" || isFocus,
 					"text-dark/25": value === "" && !isFocus,
 				})}

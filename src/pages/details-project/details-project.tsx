@@ -96,6 +96,21 @@ const DetailsProject = () => {
 							<Divider />
 							<div dangerouslySetInnerHTML={{ __html: projectDetails.article_body }}></div>
 						</Wrapper>
+						{projectDetails.project_images.length > 0 && (
+							<>
+								<Divider />
+								<Typography type={"h2"}>List Project Images</Typography>
+								<div className={"w-full grid grid-cols-3 gap-4"}>
+									{projectDetails.project_images.map((image) => (
+										<img
+											alt={image.image_name}
+											src={image.image_url}
+											className={"shadow-lg"}
+										/>
+									))}
+								</div>
+							</>
+						)}
 						<Divider />
 						<div className={"w-full flex justify-between"}>
 							<div className={"flex items-center gap-4"}>

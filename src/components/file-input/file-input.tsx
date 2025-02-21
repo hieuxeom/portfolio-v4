@@ -21,7 +21,7 @@ const FileInput = ({ title = "", value = null, name, helperText, isMultiple = fa
 		>
 			<label
 				htmlFor={name}
-				className={clsx("uppercase font-bold text-sm transition-all duration-300 cursor-pointer", {
+				className={clsx("font-bold text-base transition-all duration-300 cursor-pointer", {
 					"text-dark": (value && value.length > 0) || isFocus,
 					"text-dark/25": !value && !isFocus,
 				})}
