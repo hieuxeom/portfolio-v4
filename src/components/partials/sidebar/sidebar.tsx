@@ -1,24 +1,19 @@
-import { useState, useEffect } from "react";
-import API_ROUTE from "../../../configs/api.config";
-import useAxios from "../../../hooks/useAxios";
-import { IAPIResponse } from "../../../types/general";
-import { TProjectResponse, TProjectGroup } from "../../../types/project";
-import SidebarGroup from "./sidebar-group";
-import ROUTE_PATH from "../../../configs/routes.config";
-import Button from "../../button";
-import ICON_CONFIG from "../../../configs/icon.config";
 import clsx from "clsx";
+import { useEffect, useState } from "react";
+import API_ROUTE from "../../../configs/api.config";
+import ICON_CONFIG from "../../../configs/icon.config";
+import ROUTE_PATH from "../../../configs/routes.config";
+import useAxios from "../../../hooks/useAxios";
 import useScroll from "../../../hooks/useScroll";
-import Loading from "../../loading";
-import useScreenSize from "../../../../../live-score-v2/src/hooks/useScreenSize";
-import { BREAK_POINT } from "../../../../../live-score-v2/src/configs/break-points.config";
+import { IAPIResponse } from "../../../types/general";
+import { TProjectGroup, TProjectResponse } from "../../../types/project";
+import Button from "../../button";
+import SidebarGroup from "./sidebar-group";
 
 // interface SidebarProps {}
 
 const Sidebar = () => {
 	const axios = useAxios();
-
-	const { width } = useScreenSize();
 
 	const [listProjects, setListProjects] = useState<TProjectResponse[]>([]);
 	const [listProjectGroups, setListProjectGroups] = useState<TProjectGroup[]>([]);
