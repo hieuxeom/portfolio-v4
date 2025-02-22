@@ -24,5 +24,8 @@ dist-ssr
 *.sw?
 
 
+# folder
+/public/screenshots
+
 #misc
 .env

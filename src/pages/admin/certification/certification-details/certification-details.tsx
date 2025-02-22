@@ -46,7 +46,6 @@ const CertificationDetails = () => {
 				setCertDetails(() => ({
 					...response.results,
 					cert_image: null,
-					isChangeCertImage: false,
 					issued_date: formatDate(new Date(response.results.issued_date), "onlyDateReverse"),
 				}));
 				setSelectedDay(new Date(response.results.issued_date));
@@ -68,7 +67,7 @@ const CertificationDetails = () => {
 
 		const formData = new FormData(e.target as HTMLFormElement);
 
-		formData.append("isChangeCertImage", certDetails.cert_image ? "true" : "false");
+		formData.append("is_change_image", certDetails.cert_image ? "true" : "false");
 
 		const myFn = axios
 			.patch<IAPIResponse>(API_ROUTE.CERTIFICATION.UPDATE(certId), formData)

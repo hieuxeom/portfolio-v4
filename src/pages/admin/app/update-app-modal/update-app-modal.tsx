@@ -92,7 +92,6 @@ const UpdateAppModal = ({ currentAppDetails, isShowModal, setIsShowModal }: Upda
 								value={appDetails.app_icon}
 								title={"App icon"}
 								onChange={(e) => {
-									console.log(e);
 									setAppDetails((prev) => ({ ...prev, app_icon: e.target.files }));
 								}}
 							/>

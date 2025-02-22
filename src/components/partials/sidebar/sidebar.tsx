@@ -45,10 +45,6 @@ const Sidebar = () => {
 		Promise.all([getListProject(), getListProjectGroup()]).finally(() => setIsFetching(false));
 	}, []);
 
-	useEffect(() => {
-		console.log(listProjectGroups);
-	}, [listProjectGroups]);
-
 	return (
 		<div className={"lg:w-max lg:relative absolute w-full z-10"}>
 			<div className={"mobile-up lg:hidden fixed top-16 px-2 w-full"}>

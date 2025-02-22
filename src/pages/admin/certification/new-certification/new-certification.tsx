@@ -39,8 +39,6 @@ const NewCertification = () => {
 	const handleSubmitNewCertification = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		console.log(e.target);
-
 		const formData = new FormData(e.target as HTMLFormElement);
 
 		const myFn = axios

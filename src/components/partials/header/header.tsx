@@ -29,10 +29,6 @@ const Header = () => {
 
 	const [isOpenMiniHeader, setIsOpenMiniHeader] = useState<boolean>(false);
 
-	useEffect(() => {
-		console.log(cookies);
-	}, [cookies]);
-
 	return (
 		<div
 			className={clsx(

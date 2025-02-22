@@ -97,8 +97,6 @@ const App = () => {
 	};
 
 	const handleUpdateStatus = (value: boolean, appId: string | number) => {
-		// console.log(value, appId);
-
 		const myFn = axios
 			.patch<IAPIResponse>(API_ROUTE.APP.UPDATE_DISPLAY(appId), {
 				new_status: value ? "0" : "1",
@@ -131,7 +129,7 @@ const App = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!isShowNewModal) {
+		if (!isShowNewModal && !isFetching) {
 			getListApps();
 		}
 	}, [isShowNewModal, isShowUpdateModal]);
