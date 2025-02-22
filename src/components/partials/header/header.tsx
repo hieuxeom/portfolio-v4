@@ -1,11 +1,11 @@
 import clsx from "clsx";
+import { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router";
+import ICON_CONFIG from "../../../configs/icon.config";
+import ROUTE_PATH from "../../../configs/routes.config";
 import useScroll from "../../../hooks/useScroll";
 import Button from "../../button";
-import ICON_CONFIG from "../../../configs/icon.config";
-import { useNavigate } from "react-router";
-import ROUTE_PATH from "../../../configs/routes.config";
-import { useCookies } from "react-cookie";
-import { useEffect, useState } from "react";
 
 // interface HeaderProps {}
 
