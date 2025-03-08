@@ -62,6 +62,7 @@ const ProjectGroupsSide = ({ triggerUpdate }: ProjectGroupsSideProps) => {
 			.then((response) => {
 				if (response.status === "success") {
 					setIsShowModal(false);
+					setNewGroupTitle("");
 					getListProjectGroup();
 				}
 			});
@@ -140,8 +141,8 @@ const ProjectGroupsSide = ({ triggerUpdate }: ProjectGroupsSideProps) => {
 			});
 
 		toast.promise(myFn, {
-			loading: "Recovering...",
-			success: "Recover group successfully",
+			loading: "Deleting...",
+			success: "Deleted group successfully",
 			error: (error) => error.response.data.message,
 		});
 	};

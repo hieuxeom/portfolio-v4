@@ -16,6 +16,7 @@ interface InputProps {
 		input?: string;
 		label?: string;
 	};
+	isRequired?: boolean;
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
@@ -31,6 +32,7 @@ const Input = ({
 	disabled,
 	readOnly,
 	classNames,
+	isRequired = false,
 	onChange,
 	onKeyDown,
 }: InputProps) => {
@@ -45,8 +47,9 @@ const Input = ({
 				})}
 				htmlFor={name}
 			>
-				{label}
+				{label} {isRequired && <span className="text-danger">*</span>}
 			</label>
+
 			<input
 				className={clsx(
 					"w-full border-2 rounded-xl px-4 py-2 outline-none transition-all duration-300",
