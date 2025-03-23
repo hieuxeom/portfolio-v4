@@ -54,10 +54,9 @@ const EducationSection = () => {
 							key={index}
 							title={_.title}
 							organization={_.organization}
-							time={`${formatDate(_.time_start, "onlyMonthYear")} - ${formatDate(
-								_.time_end,
-								"onlyMonthYear"
-							)}`}
+							time={`${formatDate(_.time_start, "onlyMonthYear")} - ${
+								_.time_end ? formatDate(_.time_end, "onlyMonthYear") : "Present"
+							}`}
 						/>
 					))
 				) : (
