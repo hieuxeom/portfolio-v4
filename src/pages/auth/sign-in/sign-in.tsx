@@ -100,23 +100,26 @@ const SignIn = () => {
 							}
 						}}
 					/>
-					<Button
-						size={"xl"}
-						color={"primary"}
-						onClick={handleSignIn}
-					>
-						Sign in
-					</Button>
-					<Typography>
-						Don't have an account yet?{" "}
+					<div className={"flex items-center justify-between"}>
+						<Typography>
+							Don't have an account yet?{" "}
+							<Button
+								variant={"light"}
+								color={"primary"}
+								onClick={() => navigate(ROUTE_PATH.AUTH.SIGN_UP)}
+							>
+								Sign up
+							</Button>
+						</Typography>
 						<Button
-							variant={"light"}
-							color={"primary"}
-							onClick={() => navigate(ROUTE_PATH.AUTH.SIGN_UP)}
+							size={"xl"}
+							color={"default"}
+							radius={"2xl"}
+							onClick={handleSignIn}
 						>
-							Sign up
+							Sign in
 						</Button>
-					</Typography>
+					</div>
 				</Wrapper>
 			</div>
 		</>

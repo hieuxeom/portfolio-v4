@@ -19,6 +19,7 @@ import { formatDate } from "../../../../utils/convert-datetime";
 import clsx from "clsx";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
+import Checkbox from "../../../../components/checkbox";
 
 // interface UpdateEducationProps {}
 
@@ -39,6 +40,8 @@ const UpdateEducation = () => {
 		start: new Date(),
 		end: new Date(),
 	});
+
+	const [isCurrent, setIsCurrent] = useState<boolean>(false);
 
 	const [selectedTimeStart, setSelectTimeStart] = useState<Date>(new Date());
 	const [selectedTimeEnd, setSelectTimeEnd] = useState<Date>(new Date());
@@ -97,8 +100,12 @@ const UpdateEducation = () => {
 				setEducationDetails(() => ({
 					...response.results,
 					time_start: formatDate(response.results.time_start, "onlyDateReverse"),
-					time_end: formatDate(response.results.time_end, "onlyDateReverse"),
+					time_end: response.results.time_end
+						? formatDate(response.results.time_end, "onlyDateReverse")
+						: null,
 				}));
+
+				setIsCurrent(!response.results.time_end);
 
 				setSelectTimeStart(new Date(response.results.time_start));
 				setSelectTimeEnd(new Date(response.results.time_end));
@@ -136,6 +143,15 @@ const UpdateEducation = () => {
 
 		getEducationDetails(educationId);
 	}, []);
+
+	useEffect(() => {
+		if (isCurrent) {
+			setEducationDetails((prev) => ({
+				...prev,
+				time_end: null,
+			}));
+		}
+	}, [isCurrent]);
 
 	return (
 		<Wrapper
@@ -197,7 +213,7 @@ const UpdateEducation = () => {
 								type={"text"}
 								label={"To"}
 								name={"time_end"}
-								value={educationDetails.time_end}
+								value={educationDetails.time_end ?? ""}
 								readOnly={true}
 								placeholder={"to..."}
 							/>
@@ -219,23 +235,35 @@ const UpdateEducation = () => {
 									showOutsideDays
 								/>
 							</div>
-							<div className={clsx("flex justify-center", dayPickerWrapperClassnames)}>
-								<DayPicker
-									captionLayout="dropdown"
-									classNames={dayPickerCustomClassnames}
-									required={false}
-									month={currentMonth.end}
-									onMonthChange={(e) =>
-										setCurrentMonth((prev) => ({
-											...prev,
-											end: new Date(e),
-										}))
-									}
-									mode="single"
-									selected={selectedTimeEnd}
-									onSelect={(e) => handleDayRangePickerSelect(e, "end")}
-									showOutsideDays
-								/>
+							<div className={clsx("flex flex-col items-center gap-4", dayPickerWrapperClassnames)}>
+								<div className={clsx("flex justify-center")}>
+									<DayPicker
+										captionLayout="dropdown"
+										classNames={dayPickerCustomClassnames}
+										required={false}
+										month={currentMonth.end}
+										onMonthChange={(e) =>
+											setCurrentMonth((prev) => ({
+												...prev,
+												end: new Date(e),
+											}))
+										}
+										mode="single"
+										selected={selectedTimeEnd}
+										onSelect={(e) => handleDayRangePickerSelect(e, "end")}
+										showOutsideDays
+										disabled={isCurrent}
+									/>
+								</div>
+								<div className={"w-full flex justify-end"}>
+									<Checkbox
+										value={isCurrent}
+										onChange={(e) => setIsCurrent(e.target.checked)}
+										name={"isCurrent"}
+									>
+										Current?
+									</Checkbox>
+								</div>
 							</div>
 						</div>
 					) : (
@@ -268,10 +296,9 @@ const UpdateEducation = () => {
 					<AchievementRow
 						title={educationDetails?.title}
 						organization={educationDetails?.organization}
-						time={`${formatDate(selectedTimeStart, "onlyMonthYear")} - ${formatDate(
-							selectedTimeEnd,
-							"onlyMonthYear"
-						)}`}
+						time={`${formatDate(selectedTimeStart, "onlyMonthYear")} - ${
+							isCurrent ? "Present" : formatDate(selectedTimeEnd, "onlyMonthYear")
+						}`}
 					/>
 				</div>
 			</div>

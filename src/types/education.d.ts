@@ -9,5 +9,7 @@ export type TEducation = {
 	is_deleted: number;
 };
 
-export type TNewEducation = Pick<TEducation, "title" | "organization" | "time_start" | "time_end">;
+export type TNewEducation = Pick<TEducation, "title" | "organization" | "time_start"> & {
+	time_end: string | null;
+};
 export type TUpdateEducation = TNewEducation;

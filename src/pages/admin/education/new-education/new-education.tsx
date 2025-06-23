@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../../../components/input";
 import Typography from "../../../../components/typography";
 import Wrapper from "../../../../components/wrapper";
@@ -17,6 +17,7 @@ import clsx from "clsx";
 import { DayPicker } from "react-day-picker";
 import { dayPickerCustomClassnames, dayPickerWrapperClassnames } from "../../../../utils/day-picker.classnames";
 import useAxiosServer from "../../../../hooks/useAxiosServer";
+import Checkbox from "../../../../components/checkbox";
 
 // interface NewEducationProps {}
 
@@ -28,13 +29,15 @@ const NewEducation = () => {
 		title: "",
 		organization: "",
 		time_start: "",
-		time_end: "",
+		time_end: null,
 	});
 
 	const [currentMonth, setCurrentMonth] = useState<{ start: Date; end: Date }>({
 		start: new Date(),
 		end: new Date(),
 	});
+
+	const [isCurrent, setIsCurrent] = useState<boolean>(false);
 
 	const [selectedTimeStart, setSelectTimeStart] = useState<Date>(new Date());
 	const [selectedTimeEnd, setSelectTimeEnd] = useState<Date>(new Date());
@@ -68,7 +71,10 @@ const NewEducation = () => {
 
 	const handleAddNewEducation = () => {
 		const promiseFn = axios
-			.post(API_ROUTE.EDUCATION.NEW, newEduData)
+			.post(API_ROUTE.EDUCATION.NEW, {
+				...newEduData,
+				time_end: isCurrent ? null : newEduData.time_end,
+			})
 			.then((response) => response.data)
 			.then(() => {
 				navigate(ROUTE_PATH.ADMIN.EDUCATION.INDEX);
@@ -82,12 +88,26 @@ const NewEducation = () => {
 	};
 
 	const validNewEducationData = () => {
-		if (!newEduData.title || !newEduData.organization || !newEduData.time_start || !newEduData.time_end) {
+		if (
+			!newEduData.title ||
+			!newEduData.organization ||
+			!newEduData.time_start ||
+			(!isCurrent && !newEduData.time_end)
+		) {
 			return false;
 		}
 
 		return true;
 	};
+
+	useEffect(() => {
+		if (isCurrent) {
+			setNewEduData((prev) => ({
+				...prev,
+				time_end: null,
+			}));
+		}
+	}, [isCurrent]);
 
 	return (
 		<Wrapper
@@ -145,7 +165,7 @@ const NewEducation = () => {
 							type={"text"}
 							label={"To"}
 							name={"time_end"}
-							value={newEduData.time_end}
+							value={newEduData.time_end ?? ""}
 							onChange={(e) => setNewEduData((prev) => ({ ...prev, time_end: e.target.value }))}
 							placeholder={"YYYY-MM-DD"}
 							readOnly
@@ -168,23 +188,35 @@ const NewEducation = () => {
 								showOutsideDays
 							/>
 						</div>
-						<div className={clsx("flex justify-center", dayPickerWrapperClassnames)}>
-							<DayPicker
-								captionLayout="dropdown"
-								classNames={dayPickerCustomClassnames}
-								required={false}
-								month={currentMonth.end}
-								onMonthChange={(e) =>
-									setCurrentMonth((prev) => ({
-										...prev,
-										end: new Date(e),
-									}))
-								}
-								mode="single"
-								selected={selectedTimeEnd}
-								onSelect={(e) => handleDayRangePickerSelect(e, "end")}
-								showOutsideDays
-							/>
+						<div className={clsx("flex flex-col items-center gap-4", dayPickerWrapperClassnames)}>
+							<div className={clsx("flex justify-center")}>
+								<DayPicker
+									captionLayout="dropdown"
+									classNames={dayPickerCustomClassnames}
+									required={false}
+									month={currentMonth.end}
+									onMonthChange={(e) =>
+										setCurrentMonth((prev) => ({
+											...prev,
+											end: new Date(e),
+										}))
+									}
+									mode="single"
+									selected={selectedTimeEnd}
+									onSelect={(e) => handleDayRangePickerSelect(e, "end")}
+									showOutsideDays
+									disabled={isCurrent}
+								/>
+							</div>
+							<div className={"w-full flex justify-end"}>
+								<Checkbox
+									value={isCurrent}
+									onChange={(e) => setIsCurrent(e.target.checked)}
+									name={"isCurrent"}
+								>
+									Current?
+								</Checkbox>
+							</div>
 						</div>
 					</div>
 					<div className={"flex justify-end"}>
@@ -208,10 +240,9 @@ const NewEducation = () => {
 					<AchievementRow
 						title={newEduData.title}
 						organization={newEduData.organization}
-						time={`${formatDate(selectedTimeStart, "onlyMonthYear")} - ${formatDate(
-							selectedTimeEnd,
-							"onlyMonthYear"
-						)}`}
+						time={`${formatDate(selectedTimeStart, "onlyMonthYear")} - ${
+							isCurrent ? "Present" : formatDate(selectedTimeEnd, "onlyMonthYear")
+						}`}
 					/>
 				</div>
 			</div>

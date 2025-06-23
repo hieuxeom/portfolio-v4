@@ -183,7 +183,9 @@ const Education = () => {
 								<TableCell>{education.title}</TableCell>
 								<TableCell>{education.organization}</TableCell>
 								<TableCell>{formatDate(education.time_start, "onlyDate")}</TableCell>
-								<TableCell>{formatDate(education.time_end, "onlyDate")}</TableCell>
+								<TableCell>
+									{education.time_end ? formatDate(education.time_end, "onlyDate") : "Present"}
+								</TableCell>
 								<TableCell>{formatDate(education.created_at)}</TableCell>
 								<TableCell>
 									<TableCellAction

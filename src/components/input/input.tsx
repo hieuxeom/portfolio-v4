@@ -41,7 +41,7 @@ const Input = ({
 	return (
 		<div className="flex flex-col gap-1">
 			<label
-				className={clsx("font-semibold transition-all duration-300", classNames && classNames.label, {
+				className={clsx("font-medium transition-all duration-300", classNames && classNames.label, {
 					"text-dark": value !== "" || isFocus,
 					"text-dark/25": value === "" && !isFocus,
 				})}
@@ -52,7 +52,7 @@ const Input = ({
 
 			<input
 				className={clsx(
-					"w-full border-2 rounded-xl px-4 py-2 outline-none transition-all duration-300",
+					"w-full border rounded-xl px-4 py-2 outline-none transition-all duration-300",
 					classNames && classNames.input,
 					{
 						"text-dark border-dark": value !== "" || isFocus,
