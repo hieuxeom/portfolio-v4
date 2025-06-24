@@ -74,7 +74,7 @@ jobs:
                       NODE_OPTIONS="--max-old-space-size=4096" yarn build
 
                       # Start the application
-                      pm2 start --name portfolio-v4 "yarn start"
+                      pm2 start --name portfolio-v4 "yarn preview"
                       pm2 save
 
             - name: Update deployment Status (success)
