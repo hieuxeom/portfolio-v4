@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout Repository
-              uses: "actions/checkout@v2"
+              uses: "actions/checkout@v4"
               with:
                   ref: release
                   token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
@@ -24,8 +24,7 @@ jobs:
                   environment-url: ${{ vars.MY_APP }}
                   environment: production
             - name: Set up SSH Key and Deploy my App on Server
-              # run: |
-              uses: appleboy/ssh-action@master
+              uses: appleboy/ssh-action@v0.1.7
               env:
                   GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
               with:
@@ -36,22 +35,47 @@ jobs:
                   password: ${{ secrets.SSH_PASSWORD }}
                   port: 22
                   script: |
-                      eval $(ssh-agent -s)
-                      ssh-add ~/.ssh/id_ed25519
+                      # Set up environment
+                      export NVM_DIR="$HOME/.nvm"
+
+                      # Install NVM if not exists
+                      if [ ! -d "$NVM_DIR" ]; then
+                          curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+                      fi
+
+                      # Load NVM
+                      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+                      # Install and use Node.js LTS
+                      nvm install --lts
+                      nvm use --lts
+
+                      # Install global packages if not exists
+                      if ! command -v yarn &> /dev/null; then
+                          npm install -g yarn
+                      fi
+                      if ! command -v pm2 &> /dev/null; then
+                          npm install -g pm2
+                      fi
+
+                      # Navigate to project directory
                       cd /root/portfolio-v4
 
-                      curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
-                      export NVM_DIR="$HOME/.nvm"
-                      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-                      nvm install --lts
-                      nvm use --lts  
-                      npm install -g yarn
-                      npm install -g pm2
+                      # Stop the application
+                      pm2 stop portfolio-v4 || true
+                      pm2 delete portfolio-v4 || true
 
+                      # Pull latest code
                       git pull origin release
+
+                      # Install dependencies and build
                       yarn install --frozen-lockfile
                       NODE_OPTIONS="--max-old-space-size=4096" yarn build
-                      pm2 restart 1 --update-env
+
+                      # Start the application
+                      pm2 start --name portfolio-v4 "yarn start"
+                      pm2 save
 
             - name: Update deployment Status (success)
               if: success()
