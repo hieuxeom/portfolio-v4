@@ -30,8 +30,8 @@ jobs:
               with:
                   host: ${{ secrets.VPS_IP }}
                   username: ${{ secrets.VPS_USERNAME }}
-                  key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  passphrase: ${{ secrets.SSH_PASSPHRASE }}
+                  #   key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  #   passphrase: ${{ secrets.SSH_PASSPHRASE }}
                   password: ${{ secrets.SSH_PASSWORD }}
                   port: 22
                   script: |
