@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import ReactQuill from "react-quill";
 import AdminHeader from "../../../../components/admin/admin-header";
 import Button from "../../../../components/button";
@@ -151,6 +151,7 @@ const EditProject = () => {
 
 		Promise.all([getProjectDetails(projectId), getListProjectGroup()]);
 	}, []);
+
 
 	return (
 		<Wrapper
